@@ -1,0 +1,1042 @@
+import { validateSiteContent, type SiteContent, type SiteContentIssue } from "./siteContent.ts"
+
+export const DRAFT_PREVIEW_LABEL = "DRAFT PREVIEW — NOT PUBLISHED"
+
+export const GITHUB_SETUP_STEPS = [
+  "Create a fine-grained personal access token. Do not create a classic personal access token.",
+  "In GitHub, open Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.",
+  "Resource owner: the account that owns stellaroskens/LHSBC. Repository access: Only select repositories → LHSBC.",
+  "Repository permission: Contents → Read and write. Leave every other permission at No access. Metadata stays Read-only because GitHub requires it.",
+  "In Netlify, open Project configuration → Environment variables → Add a variable. Key: GITHUB_CONTENT_TOKEN. Mark it secret. Scope it to Functions for production and deploy previews.",
+  "Do not paste the token into this page, into chat, or into frontend code. Redeploy the site so the function can read the variable.",
+] as const
+
+export type EditorCoverage = "full" | "partial" | "unavailable"
+
+export type EditorPage = {
+  id: string
+  label: string
+  route: string
+  coverage: EditorCoverage
+  coverageLabel: string
+  summary: string
+}
+
+export type EditorField = {
+  path: string
+  label: string
+  kind: "text" | "textarea" | "internal" | "https" | "optional-https" | "optional-text" | "email" | "number" | "lines"
+  help?: string
+  required: boolean
+}
+
+export type EditorSection = {
+  id: string
+  pageIds: string[]
+  label: string
+  help: string
+  fields: EditorField[]
+  lockedReason?: string
+  custom?: "bowler-profiles" | "faq" | "resources" | "sponsors" | "donation-faq"
+}
+
+const page = (
+  id: string,
+  label: string,
+  route: string,
+  coverage: EditorCoverage,
+  coverageLabel: string,
+  summary: string,
+): EditorPage => ({ id, label, route, coverage, coverageLabel, summary })
+
+export const EDITOR_PAGES: EditorPage[] = [
+  page("home", "Home", "/", "full", "Content editable", "Headings, buttons, cards, the registration notice, and the Lakeshore thank-you."),
+  page("our-club", "Our Club", "/our-club", "full", "Content editable", "Club introduction, team bowling, volunteers, college links, and the help banner."),
+  page(
+    "meet-the-bowlers",
+    "Meet the Bowlers",
+    "/meet-the-bowlers",
+    "full",
+    "Content editable",
+    "Public introductions for the eight placeholder cards. Real student profiles cannot be published from this file.",
+  ),
+  page("coaches", "Coach profiles", "/our-club#coaches", "full", "Content editable", "Public names, roles, and biographies. This does not change who can sign in."),
+  page("team-gear", "Team Gear", "/team-gear", "full", "Content editable", "Shop wording and the BSN SPORTS links."),
+  page("practices", "Practices", "/practices", "full", "Content editable", "Introduction, instructions, location, and search text. The schedule stays empty until dates are posted."),
+  page("tournaments", "Tournaments", "/tournaments", "full", "Content editable", "Dates, venues, etiquette, and the spectator article."),
+  page("sponsors", "Sponsors", "/sponsors", "full", "Content editable", "Public headings, recognition copy, and community sponsor listings. A listing stays off the public page until it is marked approved and visible. Logos must already be files on this site. Payment setup stays on Payment Connections."),
+  page("donate", "Donate", "/donate", "full", "Content editable", "Public headings, suggested amounts, questions, and calls to action. Checkout stays off. Turning payments on stays on Donations and Payment Connections."),
+  page("fundraisers", "Fundraisers", "/fundraisers", "full", "Content editable", "Campaign records, the donate banner, and the public participation instructions. Checkout stays off."),
+  page("bowl-a-thon", "Bowl-a-thon", "/bowl-a-thon", "full", "Content editable", "Public instructions and form labels. The form still does not collect a pledge or a payment."),
+  page("resources", "Bowling Resources", "/resources", "full", "Content editable", "Directory listings, descriptions, and links."),
+  page("volunteer", "Volunteer Opportunities", "/volunteer", "full", "Content editable", "Public volunteer copy and Sterling Volunteers links. Screening results are not stored."),
+  page("faq", "FAQ", "/faq", "full", "Content editable", "Questions, answers, order, and the ask-a-question labels. The form opens the visitor's email app and does not deliver mail."),
+  page("contact", "Contact", "/contact", "full", "Content editable", "Page copy and form labels. The form does not send a message."),
+  page("sponsor-qr", "Sponsorship QR", "/sponsor-qr", "partial", "Limited content editing", "Page wording is editable. The QR destination stays on Payment Connections until it is verified. Editing the wording does not turn payments on."),
+  page("sign-in", "Sign in", "/sign-in", "unavailable", "Not a content page", "Account access stays on the sign-in page. It is not website copy."),
+  page("family", "Family", "/family", "unavailable", "Not a content page", "Family access is closed. This page is not website copy."),
+]
+
+function field(
+  path: string,
+  label: string,
+  kind: EditorField["kind"] = "text",
+  help?: string,
+  required?: boolean,
+): EditorField {
+  const optional = kind === "optional-https" || kind === "optional-text" || path.endsWith("imageAlt")
+  return { path, label, kind, help, required: required ?? !optional }
+}
+
+function seo(pageId: string, pageKey: string): EditorSection {
+  return {
+    id: `seo-${pageId}`,
+    pageIds: [pageId],
+    label: "Search title and description",
+    help: "Shown as the browser title and the short description for this page.",
+    fields: [
+      field(`pages.${pageKey}.title`, "Page title"),
+      field(`pages.${pageKey}.description`, "Description", "textarea"),
+    ],
+  }
+}
+
+function locked(id: string, pageIds: string[], label: string, reason: string): EditorSection {
+  return { id, pageIds, label, help: reason, fields: [], lockedReason: reason }
+}
+
+const registration: EditorSection = {
+  id: "registration",
+  pageIds: ["home", "our-club", "practices", "tournaments", "volunteer", "contact", "meet-the-bowlers"],
+  label: "Registration closed notice",
+  help: "The same notice is shown on every page that uses it. Saving here updates all of those pages. It does not open student registration.",
+  fields: [
+    field("seasonRegistrationClosed.heading", "Heading"),
+    field("seasonRegistrationClosed.description", "Paragraph", "textarea"),
+    field("seasonRegistrationClosed.volunteerSecondary", "Volunteer sentence", "textarea"),
+    field("seasonRegistrationClosed.volunteerCtaLabel", "Button label"),
+    field("seasonRegistrationClosed.volunteerCtaTo", "Button destination", "internal", "Use a path on this site, such as /volunteer."),
+  ],
+}
+
+const practiceLocation: EditorSection = {
+  id: "practice-location",
+  pageIds: ["home", "practices", "sponsors"],
+  label: "Lakeshore Lanes location",
+  help: "This address is shared by the homepage thank-you, Practices, and Sponsors. The logo file cannot be replaced here.",
+  fields: [
+    field("practiceLocation.name", "Place name"),
+    field("practiceLocation.street", "Street"),
+    field("practiceLocation.locality", "City and ZIP"),
+    field("practiceLocation.address", "Full address"),
+    field("practiceLocation.phone", "Phone"),
+    field("practiceLocation.phoneHref", "Phone link", "text", "Use tel:+ and digits, such as tel:+15419264631."),
+    field("practiceLocation.website", "Website", "https"),
+    field("practiceLocation.directions", "Directions link", "https"),
+    field("practiceLocation.detail", "Note", "textarea"),
+  ],
+}
+
+export const EDITOR_SECTIONS: EditorSection[] = [
+  seo("home", "home"),
+  seo("meet-the-bowlers", "bowlers"),
+  {
+    id: "bowlers-intro",
+    pageIds: ["meet-the-bowlers"],
+    label: "Page introduction",
+    help: "The public heading and the sentence shown when no approved profile is visible.",
+    fields: [
+      field("pageBodies.bowlers.eyebrow", "Small label"),
+      field("pageBodies.bowlers.title", "Heading"),
+      field("pageBodies.bowlers.intro", "Introduction", "textarea"),
+      field("pageBodies.bowlers.privacy", "Photo privacy note", "textarea"),
+      field("pageBodies.bowlers.empty", "Empty-state sentence", "textarea"),
+    ],
+  },
+  {
+    id: "bowler-profiles",
+    pageIds: ["meet-the-bowlers"],
+    label: "Bowler profiles",
+    help: "Add, edit, hide, reorder, or remove profiles. Publishing a profile here only updates this draft until you publish the content file.",
+    fields: [],
+    custom: "bowler-profiles",
+  },
+  registration,
+  {
+    id: "home-hero",
+    pageIds: ["home"],
+    label: "Hero",
+    help: "The top headline and the donate button. The same button label is used in the homepage header.",
+    fields: [
+      field("pageBodies.home.hero.imageAlt", "Image description", "text", "Leave blank if the picture is decorative."),
+      field("pageBodies.home.hero.heading", "Heading"),
+      field("pageBodies.home.hero.description", "Paragraph", "textarea"),
+      field("pageBodies.home.hero.buttonLabel", "Button label"),
+      field("pageBodies.home.hero.buttonTo", "Button destination", "internal"),
+    ],
+  },
+  {
+    id: "home-club",
+    pageIds: ["home"],
+    label: "Club introduction",
+    help: "The navy and red headline under the hero. The website logo in this section is not a student photo and is not replaced here.",
+    fields: [
+      field("pageBodies.home.club.eyebrow", "Small label"),
+      field("pageBodies.home.club.headingNavy", "Navy heading"),
+      field("pageBodies.home.club.headingRed", "Red heading"),
+      field("pageBodies.home.club.description", "Paragraph", "textarea"),
+      field("pageBodies.home.club.primaryLabel", "First button"),
+      field("pageBodies.home.club.primaryTo", "First button destination", "internal"),
+      field("pageBodies.home.club.secondaryLabel", "Second button"),
+      field("pageBodies.home.club.secondaryTo", "Second button destination", "internal"),
+    ],
+  },
+  {
+    id: "home-cards",
+    pageIds: ["home"],
+    label: "Practices, gear, and tournaments cards",
+    help: "Three cards only. The pictures stay the approved artwork already on the page.",
+    fields: [
+      field("pageBodies.home.cards.0.heading", "Practices heading"),
+      field("pageBodies.home.cards.0.description", "Practices paragraph", "textarea"),
+      field("pageBodies.home.cards.0.linkLabel", "Practices link"),
+      field("pageBodies.home.cards.0.linkTo", "Practices destination", "internal"),
+      field("pageBodies.home.cards.0.imageAlt", "Practices image description"),
+      field("pageBodies.home.cards.1.heading", "Team gear heading"),
+      field("pageBodies.home.cards.1.description", "Team gear paragraph", "textarea"),
+      field("pageBodies.home.cards.1.linkLabel", "Team gear link"),
+      field("pageBodies.home.cards.1.linkTo", "Team gear destination", "internal"),
+      field("pageBodies.home.cards.1.imageAlt", "Team gear image description"),
+      field("pageBodies.home.cards.2.heading", "Tournaments heading"),
+      field("pageBodies.home.cards.2.description", "Tournaments paragraph", "textarea"),
+      field("pageBodies.home.cards.2.linkLabel", "Tournaments link"),
+      field("pageBodies.home.cards.2.linkTo", "Tournaments destination", "internal"),
+      field("pageBodies.home.cards.2.imageAlt", "Tournaments image description"),
+    ],
+  },
+  {
+    id: "home-fundraisers",
+    pageIds: ["home"],
+    label: "Fundraiser heading",
+    help: "The campaign cards themselves are edited with the fundraiser records, not in this section.",
+    fields: [
+      field("pageBodies.home.fundraisersHeading", "Section heading"),
+      field("pageBodies.home.fundraiserLinkLabel", "Card link label"),
+    ],
+  },
+  {
+    id: "home-thanks",
+    pageIds: ["home"],
+    label: "Lakeshore thank-you",
+    help: "The address and phone come from the Lakeshore Lanes location section.",
+    fields: [
+      field("pageBodies.home.thanks.heading", "Heading"),
+      field("pageBodies.home.thanks.description", "Paragraph", "textarea"),
+      field("pageBodies.home.thanks.directionsLabel", "Directions button"),
+      field("pageBodies.home.thanks.websiteLabel", "Website button"),
+    ],
+  },
+  {
+    id: "home-footer",
+    pageIds: ["home"],
+    label: "Homepage footer title",
+    help: "The footer links stay in the page layout.",
+    fields: [
+      field("pageBodies.home.footerTitle", "Title"),
+      field("pageBodies.home.footerEventLabel", "Event name"),
+    ],
+  },
+  {
+    id: "navigation",
+    pageIds: ["home"],
+    label: "Navigation labels and destinations",
+    help: "These labels and paths are used in the header, mobile menu, and footer. Saving a draft does not change the live menu.",
+    fields: [
+      field("nav.0.label", "Home label"),
+      field("nav.0.to", "Home destination", "internal"),
+      field("nav.1.label", "Our Club label"),
+      field("nav.1.to", "Our Club destination", "internal"),
+      field("nav.2.label", "Practices label"),
+      field("nav.2.to", "Practices destination", "internal"),
+      field("nav.3.label", "Tournaments label"),
+      field("nav.3.to", "Tournaments destination", "internal"),
+      field("nav.4.label", "Meet the Bowlers label"),
+      field("nav.4.to", "Meet the Bowlers destination", "internal"),
+      field("nav.5.label", "Team Gear label"),
+      field("nav.5.to", "Team Gear destination", "internal"),
+      field("nav.6.label", "Sponsors label"),
+      field("nav.6.to", "Sponsors destination", "internal"),
+      field("nav.7.label", "Fundraisers label"),
+      field("nav.7.to", "Fundraisers destination", "internal"),
+      field("nav.8.label", "Bowling Resources label"),
+      field("nav.8.to", "Bowling Resources destination", "internal"),
+      field("nav.9.label", "Volunteer Opportunities label"),
+      field("nav.9.to", "Volunteer destination", "internal"),
+      field("nav.10.label", "FAQ label"),
+      field("nav.10.to", "FAQ destination", "internal"),
+      field("nav.11.label", "Contact Us label"),
+      field("nav.11.to", "Contact destination", "internal"),
+    ],
+  },
+  practiceLocation,
+  seo("our-club", "club"),
+  {
+    id: "club-intro",
+    pageIds: ["our-club"],
+    label: "Introduction",
+    help: "One paragraph per line. The registration notice below it is the shared notice.",
+    fields: [
+      field("pageBodies.club.heroTitle", "Page heading"),
+      field("pageBodies.club.coachesButtonLabel", "Coaches button"),
+      field("pageBodies.club.intro", "Paragraphs", "lines"),
+    ],
+  },
+  {
+    id: "coach-cliff",
+    pageIds: ["our-club", "coaches"],
+    label: "Cliff Meredith",
+    help: "Public biography only. The portrait and the sign-in account stay as they are.",
+    fields: [
+      field("coaches#cliff-meredith.name", "Display name"),
+      field("coaches#cliff-meredith.role", "Role shown on the page"),
+      field("coaches#cliff-meredith.summary", "Biography", "textarea"),
+    ],
+  },
+  {
+    id: "coach-chris",
+    pageIds: ["our-club", "coaches"],
+    label: "Chris Breshears",
+    help: "Public biography only. The portrait and the sign-in account stay as they are.",
+    fields: [
+      field("coaches#chris-breshears.name", "Display name"),
+      field("coaches#chris-breshears.role", "Role shown on the page"),
+      field("coaches#chris-breshears.summary", "Biography", "textarea"),
+    ],
+  },
+  {
+    id: "club-admin",
+    pageIds: ["our-club", "coaches"],
+    label: "Club administrator display",
+    help: "This is the name shown on Our Club. Typing a name here does not grant dashboard access.",
+    fields: [
+      field("pageBodies.club.administratorTitle", "Title"),
+      field("pageBodies.club.administratorName", "Display name"),
+      field("pageBodies.club.coachesHeading", "Coaches section heading"),
+      field("pageBodies.club.coachesNote", "Coaches note", "textarea"),
+    ],
+  },
+  {
+    id: "club-team",
+    pageIds: ["our-club"],
+    label: "Team bowling",
+    help: "One paragraph or bullet per line. The five Baker rows stay five rows.",
+    fields: [
+      field("pageBodies.club.teamSport.heading", "Heading"),
+      field("pageBodies.club.teamSport.paragraphs", "Paragraphs", "lines"),
+      field("pageBodies.club.teamSport.bullets", "Bullet points", "lines"),
+      field("pageBodies.club.bakerFrames.0.bowler", "Bowler 1 label"),
+      field("pageBodies.club.bakerFrames.0.frames", "Bowler 1 frames"),
+      field("pageBodies.club.bakerFrames.1.bowler", "Bowler 2 label"),
+      field("pageBodies.club.bakerFrames.1.frames", "Bowler 2 frames"),
+      field("pageBodies.club.bakerFrames.2.bowler", "Bowler 3 label"),
+      field("pageBodies.club.bakerFrames.2.frames", "Bowler 3 frames"),
+      field("pageBodies.club.bakerFrames.3.bowler", "Bowler 4 label"),
+      field("pageBodies.club.bakerFrames.3.frames", "Bowler 4 frames"),
+      field("pageBodies.club.bakerFrames.4.bowler", "Bowler 5 label"),
+      field("pageBodies.club.bakerFrames.4.frames", "Bowler 5 frames"),
+      field("pageBodies.club.teamSport.lineupNote", "Lineup note", "textarea"),
+      field("pageBodies.club.teamSport.buttonLabel", "Button label"),
+      field("pageBodies.club.teamSport.buttonTo", "Button destination", "internal"),
+    ],
+  },
+  {
+    id: "club-volunteers",
+    pageIds: ["our-club"],
+    label: "Volunteers on Our Club",
+    help: "Public description only. Do not enter screening results or private contact lists.",
+    fields: [
+      field("pageBodies.club.volunteers.heading", "Heading"),
+      field("pageBodies.club.volunteers.paragraphs", "Paragraphs", "lines"),
+      field("pageBodies.club.volunteers.bullets", "Bullet points", "lines"),
+    ],
+  },
+  {
+    id: "club-college",
+    pageIds: ["our-club"],
+    label: "College bowling",
+    help: "Keep the three approved USBC links. Use https addresses only.",
+    fields: [
+      field("pageBodies.club.college.heading", "Heading"),
+      field("pageBodies.club.college.intro", "Introduction", "textarea"),
+      field("pageBodies.club.college.bullets", "Bullet points", "lines"),
+      field("pageBodies.club.college.disclaimer", "Link note", "textarea"),
+      field("pageBodies.club.college.links.0.label", "First link label"),
+      field("pageBodies.club.college.links.0.href", "First link address", "https"),
+      field("pageBodies.club.college.links.1.label", "Second link label"),
+      field("pageBodies.club.college.links.1.href", "Second link address", "https"),
+      field("pageBodies.club.college.links.2.label", "Third link label"),
+      field("pageBodies.club.college.links.2.href", "Third link address", "https"),
+      field("pageBodies.club.college.buttonLabel", "Button label"),
+      field("pageBodies.club.college.buttonTo", "Button destination", "internal"),
+    ],
+  },
+  {
+    id: "club-help",
+    pageIds: ["our-club"],
+    label: "Help banner",
+    help: "The closing band at the bottom of Our Club.",
+    fields: [
+      field("pageBodies.club.help.heading", "Heading"),
+      field("pageBodies.club.help.description", "Paragraph", "textarea"),
+      field("pageBodies.club.help.buttonLabel", "Button label"),
+      field("pageBodies.club.help.buttonTo", "Button destination", "internal"),
+    ],
+  },
+  seo("team-gear", "teamGear"),
+  {
+    id: "gear-shop",
+    pageIds: ["team-gear"],
+    label: "Shop link",
+    help: "Leave the team store link empty until the club has a real storefront address. An empty link does not turn on checkout.",
+    fields: [
+      field("teamGearShop.name", "Shop name"),
+      field("teamGearShop.url", "Shop website", "https"),
+      field("teamGearShop.teamStoreUrl", "Team store link", "optional-https", "Optional. Use https, or leave blank."),
+    ],
+  },
+  {
+    id: "gear-copy",
+    pageIds: ["team-gear"],
+    label: "Team Gear wording",
+    help: "The shop name from the section above is added at the end of the lead sentence and the button.",
+    fields: [
+      field("pageBodies.teamGear.eyebrow", "Small label"),
+      field("pageBodies.teamGear.title", "Page heading"),
+      field("pageBodies.teamGear.heading", "Card heading"),
+      field("pageBodies.teamGear.leadBeforeShopName", "Sentence before the shop name", "textarea"),
+      field("pageBodies.teamGear.buttonBeforeShopName", "Button text before the shop name"),
+      field("pageBodies.teamGear.missingStorefrontNote", "Note when no team store link is set", "textarea"),
+    ],
+  },
+  seo("practices", "practices"),
+  seo("tournaments", "tournaments"),
+  {
+    id: "venues",
+    pageIds: ["tournaments"],
+    label: "Venues",
+    help: "These are the published bowling centers. Venue ids stay fixed so tournament dates do not lose their location.",
+    fields: [0, 1, 2, 3, 4].flatMap((index) => [
+      field(`venues.${index}.name`, `Venue ${index + 1} name`),
+      field(`venues.${index}.address`, `Venue ${index + 1} address`),
+      field(`venues.${index}.phone`, `Venue ${index + 1} phone`),
+      field(`venues.${index}.email`, `Venue ${index + 1} email`, "email", "Leave blank if no public email is approved.", false),
+      field(`venues.${index}.website`, `Venue ${index + 1} website`, "https"),
+      field(`venues.${index}.contactUrl`, `Venue ${index + 1} contact page`, "optional-https"),
+    ]),
+  },
+  {
+    id: "tournament-dates",
+    pageIds: ["tournaments", "practices"],
+    label: "Practice tournament dates",
+    help: "Leave both times empty until the club confirms them. Do not enter a start time without an end time. Venue id must match a venue above.",
+    fields: [0, 1, 2, 3, 4].flatMap((index) => [
+      field(`practiceTournaments.${index}.name`, `Event ${index + 1} name`),
+      field(`practiceTournaments.${index}.month`, `Event ${index + 1} month`, "number"),
+      field(`practiceTournaments.${index}.day`, `Event ${index + 1} day`, "number"),
+      field(`practiceTournaments.${index}.year`, `Event ${index + 1} year`, "number", "Leave blank only if the year is not confirmed."),
+      field(`practiceTournaments.${index}.venueId`, `Event ${index + 1} venue id`),
+      field(`practiceTournaments.${index}.startTime`, `Event ${index + 1} start`, "optional-text", "24-hour HH:MM, or blank."),
+      field(`practiceTournaments.${index}.endTime`, `Event ${index + 1} end`, "optional-text", "24-hour HH:MM, or blank."),
+      field(`practiceTournaments.${index}.arrivalNote`, `Event ${index + 1} arrival note`, "optional-text"),
+    ]),
+  },
+  seo("sponsors", "sponsors"),
+  seo("donate", "donate"),
+  seo("fundraisers", "fundraisers"),
+  {
+    id: "fundraiser-records",
+    pageIds: ["fundraisers", "home"],
+    label: "Fundraiser cards",
+    help: "Burgerville is the only public fundraiser. The ended Panda Express event is not edited or shown here.",
+    fields: [
+      field("fundraisers.0.business", "First business"),
+      field("fundraisers.0.place", "First place"),
+      field("fundraisers.0.when", "First date"),
+      field("fundraisers.0.time", "First time"),
+      field("fundraisers.0.image", "First flyer image", "text", "Use a path such as /flyers/example.webp."),
+      field("fundraisers.0.flyer", "First flyer PDF", "text", "Use a path such as /flyers/example.pdf."),
+      field("fundraiserContact.name", "Public contact name"),
+      field("fundraiserContact.email", "Public contact email", "email"),
+    ],
+  },
+  seo("bowl-a-thon", "bowlathon"),
+  seo("resources", "resources"),
+  seo("volunteer", "volunteer"),
+  {
+    id: "volunteer-copy",
+    pageIds: ["volunteer"],
+    label: "Volunteer information",
+    help: "Public descriptions only. Do not enter screening results, license numbers, or private contact lists.",
+    fields: [
+      field("pageBodies.volunteer.eyebrow", "Small label"),
+      field("pageBodies.volunteer.title", "Page heading"),
+      field("pageBodies.volunteer.intro", "Introduction", "lines"),
+      field("pageBodies.volunteer.waysHeading", "Ways to help heading"),
+      field("pageBodies.volunteer.waysIntro", "Ways to help introduction", "textarea"),
+      field("pageBodies.volunteer.opportunities", "Ways to help", "lines"),
+      field("pageBodies.volunteer.waysButtonLabel", "Contact button"),
+      field("pageBodies.volunteer.waysButtonTo", "Contact button destination", "internal"),
+      field("pageBodies.volunteer.screeningHeading", "Screening heading"),
+      field("pageBodies.volunteer.screeningParagraphs", "Screening paragraphs", "lines"),
+      field("pageBodies.volunteer.screeningNotice", "Screening notice", "textarea"),
+      field("pageBodies.volunteer.screeningMissing", "Text when no invitation link is set", "textarea"),
+      field("pageBodies.volunteer.screeningReady", "Text when an invitation link is set", "textarea"),
+      field("pageBodies.volunteer.screeningAskLabel", "Ask-first button"),
+      field("sterlingVolunteersInfoUrl", "Sterling Volunteers information link", "https"),
+      field(
+        "sterlingVolunteerInvitationUrl",
+        "Sterling Volunteers invitation link",
+        "optional-https",
+        "Leave blank until the club publishes an invitation link. A link does not approve a volunteer.",
+      ),
+      field("pageBodies.volunteer.transportHeading", "Transportation heading"),
+      field("pageBodies.volunteer.transportParagraphs", "Transportation paragraphs", "lines"),
+      field("pageBodies.volunteer.transportListIntro", "Requirements introduction"),
+      field("pageBodies.volunteer.transportItems", "Possible requirements", "lines"),
+      field("pageBodies.volunteer.transportClosing", "Closing note", "textarea"),
+      field("pageBodies.volunteer.transportButtonLabel", "Transportation button"),
+    ],
+  },
+  {
+    id: "contribution-options",
+    pageIds: ["sponsors", "donate", "bowl-a-thon"],
+    label: "Ways to contribute",
+    help: "The shared explanation that payment links are not connected. Editing this does not add a bank account or turn checkout on.",
+    fields: [
+      field("library.contributionOptions.heading", "Heading"),
+      field("library.contributionOptions.intro", "Introduction", "textarea"),
+      field("library.contributionOptions.options", "Option names", "lines"),
+      field("library.contributionOptions.unavailable", "Unavailable note"),
+      field("library.contributionOptions.warning", "Safety warning", "textarea"),
+      field("library.contributionOptions.sponsorshipNote", "Sponsorship note", "textarea"),
+      field("library.contributionOptions.pledgeNote", "Pledge note", "textarea"),
+      field("library.contributionOptions.contactLabel", "Contact button"),
+      field("library.contributionOptions.contactTo", "Contact destination", "internal"),
+    ],
+  },
+  seo("faq", "faq"),
+  seo("contact", "contact"),
+  {
+    id: "practices-body",
+    pageIds: ["practices"],
+    label: "Practice introduction",
+    help: "The introduction and instructions at the top of the public Practices page. This does not post a practice schedule.",
+    fields: [
+      field("library.practices.hero", "Introduction", "textarea"),
+      field("library.practices.scheduleTitle", "Empty schedule title"),
+      field("library.practices.scheduleBody", "Empty schedule explanation", "textarea"),
+      field("library.practices.bringItems", "What to bring", "lines"),
+      field("library.practices.bringNote", "Equipment note", "textarea"),
+      field("library.practices.rosterNote", "Roster note", "textarea"),
+      field("library.practices.faqHeading", "Practice FAQ heading"),
+      field("library.practices.faqIntro", "Practice FAQ introduction", "textarea"),
+    ],
+  },
+  {
+    id: "sponsors-intro",
+    pageIds: ["sponsors"],
+    label: "Sponsor page introduction",
+    help: "The public headings and buttons on the Sponsors page. These do not take a payment.",
+    fields: [
+      field("library.sponsorPage.heroTitle", "Hero title"),
+      field("library.sponsorPage.heroSubtitle", "Hero subtitle"),
+      field("library.sponsorPage.heroBody", "Introduction", "textarea"),
+      field("library.sponsorPage.teamHeading", "Team card heading"),
+      field("library.sponsorPage.teamBody", "Team card text"),
+      field("library.sponsorPage.teamButton", "Team button"),
+      field("library.sponsorPage.bowlerHeading", "Bowler card heading"),
+      field("library.sponsorPage.bowlerBody", "Bowler card text"),
+      field("library.sponsorPage.bowlerButton", "Bowler button"),
+      field("library.sponsorPage.qrLabel", "QR link label"),
+      field("library.sponsorPage.qrTo", "QR link destination", "internal"),
+      field("library.sponsorPage.qrBody", "QR explanation", "textarea"),
+      field("library.sponsorPage.qrTail", "Sentence after the donate link"),
+      field("library.sponsorPage.formHeading", "Form heading"),
+    ],
+  },
+  {
+    id: "sponsors-recognition",
+    pageIds: ["sponsors"],
+    label: "Recognition copy",
+    help: "Public explanation of private support, shirt recognition, and homepage recognition. Publishing this copy does not approve a sponsor.",
+    fields: [
+      field("library.sponsorPage.recognitionHeading", "Heading"),
+      field("library.sponsorPage.recognitionIntro", "Introduction", "textarea"),
+      field("library.sponsorPage.recognitionFollow", "Follow-up", "textarea"),
+      field("library.sponsorPage.privateHeading", "Private heading"),
+      field("library.sponsorPage.privateBody", "Private text", "textarea"),
+      field("library.sponsorPage.privateLabel", "Private label"),
+      field("library.sponsorPage.privateNote", "Private note", "textarea"),
+      field("library.sponsorPage.shirtHeading", "Shirt heading"),
+      field("library.sponsorPage.shirtAmount", "Shirt amount label"),
+      field("library.sponsorPage.shirtBody", "Shirt text", "textarea"),
+      field("library.sponsorPage.shirtItems", "Shirt conditions", "lines"),
+      field("library.sponsorPage.shirtFine", "Shirt note", "textarea"),
+      field("library.sponsorPage.homeHeading", "Homepage heading"),
+      field("library.sponsorPage.homeAmount", "Homepage amount label"),
+      field("library.sponsorPage.homeBody", "Homepage text", "textarea"),
+      field("library.sponsorPage.homeItems", "Homepage conditions", "lines"),
+      field("library.sponsorPage.homeFine", "Homepage note", "textarea"),
+      field("library.sponsorPage.inKindNote", "In-kind note", "textarea"),
+      field("library.sponsorPage.paymentHeading", "Payment heading"),
+      field("library.sponsorPage.paymentBody", "Payment explanation", "textarea", "This explains that checkout is not live. It does not connect a payment service."),
+    ],
+  },
+  {
+    id: "sponsors-community",
+    pageIds: ["sponsors"],
+    label: "Community supporters",
+    help: "Lakeshore wording and the public sponsor list. A sponsor appears on the website only after it is approved and not hidden. A new logo file cannot be uploaded here.",
+    fields: [
+      field("library.sponsorPage.lakeshoreEyebrow", "Lakeshore label"),
+      field("library.sponsorPage.lakeshoreHeading", "Lakeshore heading"),
+      field("library.sponsorPage.lakeshoreBody", "Lakeshore paragraph", "textarea"),
+      field("library.sponsorPage.lakeshoreDetail", "Lakeshore support line"),
+      field("library.sponsorPage.lakeshoreLogoAlt", "Lakeshore image description"),
+      field("library.sponsorPage.directionsLabel", "Directions button"),
+      field("library.sponsorPage.websiteLabel", "Website button"),
+      field("library.sponsorPage.callLabel", "Call button"),
+      field("library.sponsorPage.supportersHeading", "Supporters heading"),
+      field("library.sponsorPage.supportersBody", "Supporters paragraph", "textarea"),
+      field("library.sponsorPage.emptyHeading", "Empty-state heading"),
+      field("library.sponsorPage.emptyBody", "Empty-state paragraph", "textarea"),
+      field("library.sponsorPage.emptyButton", "Empty-state button"),
+    ],
+    custom: "sponsors",
+  },
+  {
+    id: "donate-body",
+    pageIds: ["donate"],
+    label: "Donation page",
+    help: "Public wording on the Donate page. Saving a draft does not turn on checkout or mark a gift as paid.",
+    fields: [
+      field("library.donations.headline", "Headline"),
+      field("library.donations.intro", "Introduction", "textarea"),
+      field("library.donations.contributionHeading", "Contribution heading"),
+      field("library.donations.why", "Why gifts help", "textarea"),
+      field("library.donations.suggestedAmounts", "Suggested amounts", "lines", "Whole dollar amounts from 1 to 1000. These are examples, not sponsorship packages."),
+      field("library.donations.customLabel", "Other-amount label"),
+      field("library.donations.unavailable", "Checkout status", "textarea"),
+      field("library.donations.taxNote", "Tax note", "textarea"),
+      field("library.donations.secureNote", "Security note", "textarea"),
+      field("library.donations.donateButton", "Donate button"),
+      field("library.donations.burgervillePrompt", "Burgerville prompt"),
+      field("library.donations.businessHeading", "Business heading"),
+      field("library.donations.businessBody", "Business paragraph", "textarea"),
+      field("library.donations.inquiryLabel", "Inquiry button"),
+      field("library.donations.inquiryTo", "Inquiry destination", "internal"),
+      field("library.donations.questionsHeading", "Questions heading"),
+      field("library.donations.contactNote", "Contact note", "textarea"),
+    ],
+    custom: "donation-faq",
+  },
+  {
+    id: "fundraisers-body",
+    pageIds: ["fundraisers"],
+    label: "Participation instructions",
+    help: "The public how-to text for each restaurant. Changing a code here does not create a payment. Flyer files stay in Fundraiser cards.",
+    fields: [
+      field("library.fundraisers.hero", "Page introduction", "textarea"),
+      field("library.fundraisers.activeEvent", "Current public fundraiser", "text", "Use burgerville. The ended Panda Express fundraiser is not public."),
+      field("library.fundraisers.burgerville.yearNote", "Burgerville date note", "textarea"),
+      field("library.fundraisers.burgerville.steps", "Burgerville instructions", "textarea"),
+      field("library.fundraisers.burgerville.code", "Burgerville code"),
+      field("library.fundraisers.burgerville.volunteerIntro", "Volunteer introduction", "textarea"),
+      field("library.fundraisers.burgerville.volunteerItems", "Volunteer tasks", "lines"),
+      field("library.fundraisers.shareHeading", "Share heading"),
+      field("library.fundraisers.shareBody", "Share paragraph", "textarea"),
+      field("library.fundraisers.donateBanner", "Donate banner"),
+      field("library.fundraisers.donateButton", "Donate button"),
+      field("library.fundraisers.donateTo", "Donate destination", "internal", "Use a path on this site. This does not turn checkout on."),
+      field("library.fundraisers.flyerButton", "Flyer button"),
+      field("library.fundraisers.volunteersHeading", "Volunteers heading"),
+    ],
+  },
+  {
+    id: "bowlathon-body",
+    pageIds: ["bowl-a-thon"],
+    label: "Bowl-a-thon instructions",
+    help: "Public wording and form labels. The form remains a preview and does not save a pledge or take a payment.",
+    fields: [
+      field("library.bowlathon.hero", "Introduction", "textarea"),
+      field("library.bowlathon.how", "How a pledge works", "lines"),
+      field("library.bowlathon.example", "Example line"),
+      field("library.bowlathon.dateNote", "Event date note", "textarea"),
+      field("library.bowlathon.formNotice", "Form notice", "textarea", "This notice tells visitors the form does not save a pledge."),
+      field("library.bowlathon.labels.bowler", "Bowler name label"),
+      field("library.bowlathon.labels.sponsor", "Sponsor label"),
+      field("library.bowlathon.labels.submit", "Submit button label"),
+      field("library.bowlathon.paymentNote", "Payment note", "textarea", "This explains that payments are not active."),
+    ],
+  },
+  {
+    id: "resources-body",
+    pageIds: ["resources"],
+    label: "Bowling resource listings",
+    help: "Business names, descriptions, and https links on the public Bowling Resources page. Hiding a listing keeps the record but removes it from the public page after publish.",
+    fields: [
+      field("library.resources.hero", "Page introduction", "textarea"),
+      field("library.resources.proShopsIntro", "Pro shop introduction", "textarea"),
+      field("library.resources.centersIntro", "Bowling center introduction", "textarea"),
+    ],
+    custom: "resources",
+  },
+  {
+    id: "tournaments-body",
+    pageIds: ["tournaments"],
+    label: "Etiquette and articles",
+    help: "The spectator note and etiquette article on the public Tournaments page. This does not confirm a start time.",
+    fields: [
+      field("library.tournaments.hero", "Introduction", "textarea"),
+      field("library.tournaments.seasonNote", "Earlier schedule note", "textarea"),
+      field("library.tournaments.arrivalNote", "Arrival note", "textarea"),
+      field("library.tournaments.arrivalFormat", "Format note", "textarea"),
+      field("library.tournaments.attireNote", "Attire note", "textarea"),
+      field("library.tournaments.attire", "Attire rules", "lines"),
+      field("library.tournaments.spectatorIntro", "Spectator paragraphs", "lines"),
+      field("library.tournaments.faqHeading", "Etiquette heading"),
+      field("library.tournaments.faqIntro", "Etiquette introduction", "textarea"),
+    ],
+  },
+  {
+    id: "faq-body",
+    pageIds: ["faq"],
+    label: "Questions and answers",
+    help: "Public FAQ questions, answers, and order. The ask form opens the visitor's own email application. This website does not deliver the message.",
+    fields: [
+      field("library.faq.hero", "Page introduction", "textarea"),
+      field("library.faq.askHeading", "Ask heading"),
+      field("library.faq.askIntro", "Ask introduction", "textarea"),
+      field("library.faq.askNotice", "Ask form notice", "textarea", "Keep the notice that this website does not deliver the message."),
+      field("library.faq.askLabels.name", "Name label"),
+      field("library.faq.askLabels.email", "Email label"),
+      field("library.faq.askLabels.question", "Question label"),
+      field("library.faq.askLabels.submit", "Submit label"),
+    ],
+    custom: "faq",
+  },
+  {
+    id: "contact-body",
+    pageIds: ["contact"],
+    label: "Contact page copy",
+    help: "The public contact introduction and form labels. Submitting the form still does not send email.",
+    fields: [
+      field("library.contact.hero", "Introduction", "textarea"),
+      field("library.contact.formHeading", "Form heading"),
+      field("library.contact.formNotice", "Form notice", "textarea", "Keep the notice that the form is not connected to email."),
+      field("library.contact.labels.name", "Name label"),
+      field("library.contact.labels.email", "Email label"),
+      field("library.contact.labels.topic", "Topic label"),
+      field("library.contact.labels.message", "Message label"),
+      field("library.contact.labels.submit", "Submit label"),
+      field("library.contact.topics", "Topic choices", "lines"),
+      field("library.contact.coachesNote", "Coaches note", "textarea"),
+    ],
+  },
+  {
+    id: "sponsor-qr-body",
+    pageIds: ["sponsor-qr"],
+    label: "Sponsorship QR wording",
+    help: "The public sentences on the QR page. The approved destination is edited under Payment Connections and stays off until it is verified. This screen cannot turn payments on.",
+    fields: [
+      field("library.sponsorQr.title", "Browser title"),
+      field("library.sponsorQr.description", "Search description", "textarea"),
+      field("library.sponsorQr.hero", "Introduction", "textarea"),
+      field("library.sponsorQr.readyHeading", "Ready heading"),
+      field("library.sponsorQr.readyBody", "Ready explanation", "textarea"),
+      field("library.sponsorQr.emptyHeading", "Not ready heading"),
+      field("library.sponsorQr.emptyBody", "Not ready explanation", "textarea"),
+    ],
+  },
+  locked("sign-in-body", ["sign-in"], "Sign in", "Sign-in screens are account access, not public page copy."),
+  locked("family-body", ["family"], "Family page", "Family access is closed and is not edited as website copy."),
+]
+
+const FIELDS = EDITOR_SECTIONS.flatMap((section) => section.fields)
+const FIELD_BY_PATH = new Map(FIELDS.map((item) => [item.path, item]))
+
+export function sectionsForPage(pageId: string): EditorSection[] {
+  return EDITOR_SECTIONS.filter((section) => section.pageIds.includes(pageId))
+}
+
+export function pageById(pageId: string): EditorPage | undefined {
+  return EDITOR_PAGES.find((item) => item.id === pageId)
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+function step(current: unknown, segment: string): unknown {
+  const keyed = /^([A-Za-z]+)#([A-Za-z0-9-]+)$/.exec(segment)
+  if (keyed) {
+    if (!isRecord(current)) return undefined
+    const list = current[keyed[1]]
+    if (!Array.isArray(list)) return undefined
+    return list.find((item: unknown) => isRecord(item) && item.id === keyed[2])
+  }
+  if (Array.isArray(current) && /^\d+$/.test(segment)) return current[Number(segment)]
+  if (isRecord(current)) return current[segment]
+  return undefined
+}
+
+export function readPath(source: unknown, path: string): unknown {
+  return path.split(".").reduce<unknown>((current, segment) => step(current, segment), source)
+}
+
+function writePath(source: SiteContent, path: string, value: unknown) {
+  const segments = path.split(".")
+  let current: unknown = source
+  for (const segment of segments.slice(0, -1)) {
+    current = step(current, segment)
+  }
+  const last = segments[segments.length - 1]
+  if (Array.isArray(current) && /^\d+$/.test(last)) current[Number(last)] = value
+  else if (isRecord(current)) current[last] = value
+  else throw new Error(`Cannot edit ${path}.`)
+}
+
+function coerce(item: EditorField, raw: string): unknown {
+  if (item.kind === "lines") return raw.split(/\r?\n/)
+  if (item.kind === "optional-https" || item.kind === "optional-text" || item.kind === "email") {
+    return raw.trim() ? raw.trim() : null
+  }
+  if (item.kind === "number") {
+    if (!raw.trim()) return null
+    const value = Number(raw)
+    return Number.isInteger(value) ? value : raw
+  }
+  return raw
+}
+
+export function fieldText(content: SiteContent, item: EditorField): string {
+  const value = readPath(content, item.path)
+  if (item.kind === "lines" && Array.isArray(value)) return value.map(String).join("\n")
+  if (value == null) return ""
+  return String(value)
+}
+
+const BOWLER_REVIEW_FIELDS = [
+  "displayName",
+  "school",
+  "logoStyle",
+  "yearsBowling",
+  "grade",
+  "age",
+  "introduction",
+  "photoVisibility",
+  "publicationStatus",
+  "hidden",
+] as const
+
+function reviewValue(value: unknown): string {
+  if (value == null || value === "") return "(empty)"
+  if (typeof value === "boolean") return value ? "yes" : "no"
+  if (Array.isArray(value)) return value.map(String).join(", ") || "(empty)"
+  return String(value)
+}
+
+export type ContentChange = { label: string; before: string; after: string }
+
+/** Plain-language differences between the editor copy and the published file. */
+export function reviewContentChanges(current: SiteContent, baseline: SiteContent): ContentChange[] {
+  const changes: ContentChange[] = []
+  for (const item of FIELDS) {
+    const before = reviewValue(readPath(baseline, item.path))
+    const after = reviewValue(readPath(current, item.path))
+    if (before !== after) changes.push({ label: item.label, before, after })
+  }
+
+  const ids = new Set([
+    ...current.bowlerProfiles.map((profile) => profile.id),
+    ...baseline.bowlerProfiles.map((profile) => profile.id),
+  ])
+  collectLibraryChanges(baseline.library, current.library, "library", changes, new Set(FIELDS.map((item) => item.path)))
+
+  for (const id of ids) {
+    const before = baseline.bowlerProfiles.find((profile) => profile.id === id)
+    const after = current.bowlerProfiles.find((profile) => profile.id === id)
+    if (!before || !after) {
+      changes.push({
+        label: `Bowler ${after?.displayName || before?.displayName || id}`,
+        before: before ? before.displayName : "(not in the published file)",
+        after: after ? after.displayName : "(removed from this editor copy)",
+      })
+      continue
+    }
+    for (const key of BOWLER_REVIEW_FIELDS) {
+      const previous = reviewValue(before[key])
+      const next = reviewValue(after[key])
+      if (previous !== next) changes.push({ label: `${after.displayName}: ${key}`, before: previous, after: next })
+    }
+  }
+  return changes
+}
+
+function collectLibraryChanges(before: unknown, after: unknown, path: string, changes: ContentChange[], skip: Set<string>) {
+  if (skip.has(path)) return
+  if (typeof before === "string" || typeof after === "string" || typeof before === "boolean" || typeof after === "boolean") {
+    const previous = reviewValue(before)
+    const next = reviewValue(after)
+    if (previous !== next) changes.push({ label: path, before: previous, after: next })
+    return
+  }
+  if (Array.isArray(before) || Array.isArray(after)) {
+    const left = Array.isArray(before) ? before : []
+    const right = Array.isArray(after) ? after : []
+    const length = Math.max(left.length, right.length)
+    for (let index = 0; index < length; index += 1) collectLibraryChanges(left[index], right[index], `${path}.${index}`, changes, skip)
+    return
+  }
+  if (isRecord(before) || isRecord(after)) {
+    const keys = new Set([...Object.keys(isRecord(before) ? before : {}), ...Object.keys(isRecord(after) ? after : {})])
+    for (const key of keys) {
+      collectLibraryChanges(isRecord(before) ? before[key] : undefined, isRecord(after) ? after[key] : undefined, `${path}.${key}`, changes, skip)
+    }
+  }
+}
+
+export function editField(content: SiteContent, path: string, raw: string): SiteContent {
+  const item = FIELD_BY_PATH.get(path)
+  if (!item) throw new Error("That field is not editable.")
+  const next = structuredClone(content)
+  writePath(next, path, coerce(item, raw))
+  return next
+}
+
+function canWritePath(source: SiteContent, path: string): boolean {
+  const segments = path.split(".")
+  let current: unknown = source
+  for (const segment of segments.slice(0, -1)) {
+    current = step(current, segment)
+    if (current === undefined || current === null) return false
+  }
+  return Array.isArray(current) || isRecord(current)
+}
+
+export function prepareContentForSave(content: SiteContent): SiteContent {
+  const next = structuredClone(content)
+  for (const item of FIELDS) {
+    if (!canWritePath(next, item.path)) continue
+    const value = readPath(next, item.path)
+    if (item.kind === "lines" && Array.isArray(value)) {
+      writePath(
+        next,
+        item.path,
+        value.map((line) => String(line).trim()).filter(Boolean),
+      )
+    } else if (typeof value === "string") {
+      const trimmed = value.trim()
+      const clears = item.kind === "optional-https" || item.kind === "optional-text" || item.kind === "email"
+      writePath(next, item.path, clears ? trimmed || null : trimmed)
+    } else if (item.kind === "optional-https" || item.kind === "optional-text" || item.kind === "email") {
+      writePath(next, item.path, null)
+    }
+  }
+  return next
+}
+
+export function contentFromDraftPayload(
+  payload: unknown,
+): { ok: true; content: SiteContent; status: string } | { ok: false; message: string } {
+  if (!isRecord(payload)) return { ok: false, message: "The saved draft could not be read." }
+  const draft = isRecord(payload.draft) ? payload.draft : null
+  if (!draft || !("content" in draft)) return { ok: false, message: "The saved draft has no page content." }
+  const issues = validateSiteContent(draft.content)
+  if (issues.length) {
+    return {
+      ok: false,
+      message: "That draft does not match the current pages, so it was not loaded. The live site is unchanged.",
+    }
+  }
+  return {
+    ok: true,
+    content: structuredClone(draft.content) as SiteContent,
+    status: typeof draft.status === "string" ? draft.status : "draft",
+  }
+}
+
+export function draftRecordStatus(submitForApproval: boolean): "draft" | "pending_approval" {
+  return submitForApproval ? "pending_approval" : "draft"
+}
+
+export function draftRequestBody(id: string, content: SiteContent, submitForApproval: boolean) {
+  return {
+    id,
+    content,
+    submitForApproval,
+    message: submitForApproval ? `content: submit ${id} for approval` : `content: save draft ${id}`,
+  }
+}
+
+export function publishRequestBody(content: SiteContent) {
+  return {
+    content,
+    message: "content: publish approved site content",
+  }
+}
+
+export function failureMessage(status: number, body: { error?: string; code?: string }): string {
+  const fallback = "The content service could not finish that request. Nothing was changed on the live site."
+  const error = body.error && !/ghp_|github_pat_|bearer\s+\S+|postgres:\/\//i.test(body.error) ? body.error : ""
+  if (body.code === "github_token_rejected") {
+    return "GitHub rejected the content token. It may be expired or missing permission. Nothing was saved. The live site is unchanged."
+  }
+  if (body.code === "github_conflict") {
+    return "GitHub has a newer copy of this file. Nothing was saved. Reload the editor and try again. The live site is unchanged."
+  }
+  if (body.code === "production_write_blocked" || body.code === "preview_branch_required" || body.code === "repository_rejected") {
+    return `${error || "This preview cannot change the live site."} The live site is unchanged.`
+  }
+  if (body.code === "github_token_missing" || status === 503) {
+    return `${error || "GitHub publishing is not configured."} Nothing was saved. The live site is unchanged.`
+  }
+  if (status === 401 || status === 403) {
+    return "You are not authorized for that action. Publishing requires the super administrator role. Nothing was changed."
+  }
+  return error || fallback
+}
+
+export function successMessage(
+  intent: "draft" | "approval" | "publish",
+  body: { commitSha?: string; note?: string },
+): string | null {
+  if (!body.commitSha) return null
+  const sha = body.commitSha.slice(0, 7)
+  if (intent === "publish") {
+    return (
+      body.note ||
+      `GitHub commit ${sha} is saved on the review branch. The live production site is unchanged.`
+    )
+  }
+  if (intent === "approval") {
+    return `Draft submitted for approval (commit ${sha}). It is not published, and the live site is unchanged.`
+  }
+  return `Draft saved (commit ${sha}). The live site is unchanged.`
+}
+
+function storedIssuePath(content: SiteContent, path: string): string {
+  const keyed = /^coaches#([A-Za-z0-9-]+)\.(.+)$/.exec(path)
+  if (!keyed) return path
+  const index = content.coaches.findIndex((coach) => coach.id === keyed[1])
+  return index >= 0 ? `coaches.${index}.${keyed[2]}` : path
+}
+
+export function issuesForSection(
+  content: SiteContent,
+  section: EditorSection,
+  issues: SiteContentIssue[],
+): SiteContentIssue[] {
+  const paths = new Set(section.fields.flatMap((item) => [item.path, storedIssuePath(content, item.path)]))
+  return issues.filter((issue) => paths.has(issue.path))
+}
