@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 96" role="img" aria-label="Blue ribbon">
+  <path fill="#163A66" d="M0 50c200 30 340-34 560 2 220 34 400-30 600 4 140 16 220-2 280-4v28c-70 6-150 14-290 0-210-28-390 32-610 0C330 50 190 112 0 80z"/>
+  <path fill="#1F4F8A" d="M0 40c200 28 340-36 560 0 220 34 400-32 600 2 140 16 220-4 280-6v26c-70 6-150 16-290 0-210-30-390 34-610-2C330 38 190 100 0 70z"/>
+  <path d="M0 48c210 20 350-24 570 4 230 28 410-20 620 4" fill="none" stroke="#FFF0D5" stroke-width="3" stroke-linecap="round" opacity="0.22"/>
+</svg>

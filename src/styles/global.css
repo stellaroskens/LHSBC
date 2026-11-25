@@ -323,19 +323,6 @@ main {
   border-color: #e8eefc;
 }
 
-.bowlathon {
-  position: relative;
-  background: var(--blue);
-  color: #fff;
-  padding: 1.35rem 0 2.1rem;
-  border-bottom: 4px solid var(--red);
-  overflow: hidden;
-}
-
-.bowlathon :focus-visible {
-  outline-color: #fff;
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -1748,11 +1735,18 @@ textarea[aria-invalid="true"] {
 }
 
 .site-footer {
-  border-top: 4px solid var(--red);
-  background: #ffffff;
+  border-top: 4px solid #e30616;
+  background: #081f46;
+  color: #fffdf8;
   padding: 1.75rem 0 1.5rem;
   font-size: 1rem;
   line-height: 1.5;
+}
+
+.site-footer .brand-wordmark,
+.site-footer .footer-name,
+.site-footer .footer-contact h2 {
+  color: #fffdf8;
 }
 
 @media (max-width: 700px) {
@@ -1774,7 +1768,7 @@ textarea[aria-invalid="true"] {
 }
 
 .footer-links a {
-  color: var(--text);
+  color: #fffdf8;
   text-decoration: none;
   overflow-wrap: anywhere;
 }
@@ -1785,7 +1779,29 @@ textarea[aria-invalid="true"] {
 
 .footer-links a:hover,
 .footer-contact a:hover {
-  color: var(--red-deep);
+  color: #ffc400;
+}
+
+.footer-links a:focus-visible,
+.footer-contact a:focus-visible {
+  outline: 3px solid #ffc400;
+  outline-offset: 3px;
+}
+
+.footer-tagline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  margin: 0.85rem 0 0;
+  color: #ffc400;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.footer-contact a {
+  color: #fffdf8;
 }
 
 .footer-links li + li {

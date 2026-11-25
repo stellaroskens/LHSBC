@@ -16,10 +16,10 @@ describe("sponsorship QR prep", () => {
   })
 
   it("builds a QR image URL only for an explicit public target", () => {
-    const approved = sponsorshipQrTarget("https://albany-hs-bowling.netlify.app/sponsors")
-    assert.equal(approved, "https://albany-hs-bowling.netlify.app/sponsors")
+    const approved = sponsorshipQrTarget("https://lhsbcor.com/sponsors")
+    assert.equal(approved, "https://lhsbcor.com/sponsors")
     const url = sponsorshipQrImageUrl(approved!)
     assert.match(url, /^https:\/\/api\.qrserver\.com\/v1\/create-qr-code\/\?/)
-    assert.match(url, /albany-hs-bowling\.netlify\.app/)
+    assert.match(url, /lhsbcor\.com/)
   })
 })

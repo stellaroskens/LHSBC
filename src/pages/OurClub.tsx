@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { AthleticHero, SectionHeading } from "../components/AthleticHero"
 import { BrandWordmark } from "../components/BrandWordmark"
 import { PageMeta } from "../components/PageMeta"
-import { bakerFrames, club, coaches, pageBodies, pages, seasonRegistrationClosed } from "../content/site"
+import { bakerFrames, club, coaches, library, pageBodies, pages, seasonRegistrationClosed } from "../content/site"
 
 export function OurClub() {
   return (
@@ -36,7 +36,42 @@ export function OurClub() {
         </p>
         <p>{seasonRegistrationClosed.description}</p>
         <p>{seasonRegistrationClosed.volunteerSecondary}</p>
+        <p>
+          <Link to="/meet-the-bowlers">Meet the bowlers</Link>
+          {" · "}
+          <Link to="/sponsors">Become a Sponsor</Link>
+          {" · "}
+          <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
+          {" · "}
+          <Link to="/contact">Contact</Link>
+        </p>
       </AthleticHero>
+
+      <section className="section" aria-labelledby="how-to-join">
+        <div className="wrap">
+          <article className="card">
+            <h2 id="how-to-join">How to join</h2>
+            <p>
+              <strong>{seasonRegistrationClosed.heading}</strong>
+            </p>
+            <p>{seasonRegistrationClosed.description}</p>
+            <p>
+              This site does not have a public registration form. Students can read the club information,
+              practices, and team pages here. A working club mailbox has not been connected, so the contact
+              form does not send a message.
+            </p>
+            <p>
+              <Link to="/practices">Practices</Link>
+              {" · "}
+              <Link to="/meet-the-bowlers">Meet the bowlers</Link>
+              {" · "}
+              <Link to="/tournaments">Tournaments</Link>
+              {" · "}
+              <Link to="/contact">Contact</Link>
+            </p>
+          </article>
+        </div>
+      </section>
 
       <section className="section sw-club__coaches" id="coaches" aria-labelledby="coaches-heading">
         <div className="wrap">

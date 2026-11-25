@@ -56,9 +56,11 @@ test("public indexing files leave staff and family routes out", () => {
   for (const path of ["/admin", "/coach", "/team-administrator", "/staff", "/sign-in", "/family", "/api"]) {
     assert.match(robots, new RegExp(`Disallow: ${path}`))
     assert.equal(sitemap.includes(`https://albany-hs-bowling.netlify.app${path}`), false)
+    assert.equal(sitemap.includes(`https://lhsbc.netlify.app${path}`), false)
   }
-  assert.match(sitemap, /\/donate</)
-  assert.match(sitemap, /\/fundraisers</)
+  assert.match(sitemap, /<loc>https:\/\/lhsbcor\.com\/donate<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/lhsbcor\.com\/fundraisers<\/loc>/)
+  assert.equal(sitemap.includes("lhsbc.netlify.app"), false)
 })
 
 test("the fundraisers page keeps checkout off until a published fundraiser is active", () => {

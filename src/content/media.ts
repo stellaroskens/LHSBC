@@ -54,28 +54,49 @@ export const lhsbcCrest = {
   height: 640,
 } as const
 
-/** Red-ball Lebanon crest. The source JPEG stays beside this transparent display copy. */
+/**
+ * Original club crest (preferred over pack 01_lhsbc_crest.png — closer to the approved brand mark).
+ * Pack crest remains at /assets/canva-assets/LHSBC_Homepage_Artwork/01_lhsbc_crest.png.
+ */
 export const lhsbcBallCrest = {
   src: "/brand/lhsbc/display-crest-redball.png",
   width: 1019,
   height: 991,
 } as const
 
-/** Header mark. display-header-ribbon.png remains on disk and is no longer the header. */
+/** Header crest used on the rebrand homepage. */
 export const lhsbcHeaderMark = lhsbcBallCrest
 
-/** Complete theater marquee. marquee-theater.png stays as the cropped original. */
-export const lhsbcMarquee = {
-  src: "/brand/lhsbc/display-marquee.png",
-  width: 1024,
-  height: 519,
+const PACK = "/assets/canva-assets/LHSBC_Homepage_Artwork"
+
+/** Prompt 11A layered homepage assets (transparent PNGs). */
+export const lhsbcHomePack = {
+  crestPack: { src: `${PACK}/01_lhsbc_crest.png`, width: 778, height: 848 },
+  joinButton: { src: `${PACK}/02_join_the_club_button.png`, width: 1078, height: 298 },
+  donateButton: { src: `${PACK}/03_donate_button.png`, width: 998, height: 300 },
+  hero: { src: `${PACK}/04_bowling_club_hero.png`, width: 3008, height: 1008 },
+  findMore: { src: `${PACK}/05_find_out_more_bowling_lane.png`, width: 2242, height: 890 },
 } as const
 
-/** Full illustrations. The earlier illust-*.png crops stay in place. */
+/** Hero wordmark + tagline from the 11A pack. */
+export const lhsbcMarquee = {
+  src: lhsbcHomePack.hero.src,
+  width: lhsbcHomePack.hero.width,
+  height: lhsbcHomePack.hero.height,
+} as const
+
+/** Legacy feature-card paths kept for other pages / rollback. */
 export const lhsbcFeatureArt = {
-  join: { src: "/brand/lhsbc/display-join.png", width: 1018, height: 916 },
-  handshake: { src: "/brand/lhsbc/display-handshake.png", width: 1006, height: 315 },
-  storefront: { src: "/brand/lhsbc/display-storefront.png", width: 965, height: 381 },
+  join: { src: "/brand/lhsbc/join-illustration.png", width: 1301, height: 1209 },
+  handshake: { src: "/brand/lhsbc/handshake.png", width: 2172, height: 724 },
+  storefront: { src: "/brand/lhsbc/storefront.png", width: 1920, height: 819 },
+} as const
+
+/** Full-page mockup kept as a reference only (Prompt 11). Live home uses lhsbcHomePack. */
+export const lhsbcApprovedHomepage = {
+  src: "/brand/lhsbc/homepage/approved-homepage.png",
+  width: 1247,
+  height: 1261,
 } as const
 
 export const coachPortraits = {

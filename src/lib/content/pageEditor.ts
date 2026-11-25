@@ -67,7 +67,6 @@ export const EDITOR_PAGES: EditorPage[] = [
   page("sponsors", "Sponsors", "/sponsors", "full", "Content editable", "Public headings, recognition copy, and community sponsor listings. A listing stays off the public page until it is marked approved and visible. Logos must already be files on this site. Payment setup stays on Payment Connections."),
   page("donate", "Donate", "/donate", "full", "Content editable", "Public headings, suggested amounts, questions, and calls to action. Checkout stays off. Turning payments on stays on Donations and Payment Connections."),
   page("fundraisers", "Fundraisers", "/fundraisers", "full", "Content editable", "Campaign records, the donate banner, and the public participation instructions. Checkout stays off."),
-  page("bowl-a-thon", "Bowl-a-thon", "/bowl-a-thon", "full", "Content editable", "Public instructions and form labels. The form still does not collect a pledge or a payment."),
   page("resources", "Bowling Resources", "/resources", "full", "Content editable", "Directory listings, descriptions, and links."),
   page("volunteer", "Volunteer Opportunities", "/volunteer", "full", "Content editable", "Public volunteer copy and Sterling Volunteers links. Screening results are not stored."),
   page("faq", "FAQ", "/faq", "full", "Content editable", "Questions, answers, order, and the ask-a-question labels. The form opens the visitor's email app and does not deliver mail."),
@@ -294,7 +293,7 @@ export const EDITOR_SECTIONS: EditorSection[] = [
   {
     id: "coach-cliff",
     pageIds: ["our-club", "coaches"],
-    label: "Cliff Meredith",
+    label: "Coach profile 1",
     help: "Public biography only. The portrait and the sign-in account stay as they are.",
     fields: [
       field("coaches#cliff-meredith.name", "Display name"),
@@ -305,7 +304,7 @@ export const EDITOR_SECTIONS: EditorSection[] = [
   {
     id: "coach-chris",
     pageIds: ["our-club", "coaches"],
-    label: "Chris Breshears",
+    label: "Coach profile 2",
     help: "Public biography only. The portrait and the sign-in account stay as they are.",
     fields: [
       field("coaches#chris-breshears.name", "Display name"),
@@ -469,7 +468,6 @@ export const EDITOR_SECTIONS: EditorSection[] = [
       field("fundraiserContact.email", "Public contact email", "email"),
     ],
   },
-  seo("bowl-a-thon", "bowlathon"),
   seo("resources", "resources"),
   seo("volunteer", "volunteer"),
   {
@@ -509,7 +507,7 @@ export const EDITOR_SECTIONS: EditorSection[] = [
   },
   {
     id: "contribution-options",
-    pageIds: ["sponsors", "donate", "bowl-a-thon"],
+    pageIds: ["sponsors", "donate"],
     label: "Ways to contribute",
     help: "The shared explanation that payment links are not connected. Editing this does not add a bank account or turn checkout on.",
     fields: [
@@ -660,23 +658,6 @@ export const EDITOR_SECTIONS: EditorSection[] = [
       field("library.fundraisers.donateTo", "Donate destination", "internal", "Use a path on this site. This does not turn checkout on."),
       field("library.fundraisers.flyerButton", "Flyer button"),
       field("library.fundraisers.volunteersHeading", "Volunteers heading"),
-    ],
-  },
-  {
-    id: "bowlathon-body",
-    pageIds: ["bowl-a-thon"],
-    label: "Bowl-a-thon instructions",
-    help: "Public wording and form labels. The form remains a preview and does not save a pledge or take a payment.",
-    fields: [
-      field("library.bowlathon.hero", "Introduction", "textarea"),
-      field("library.bowlathon.how", "How a pledge works", "lines"),
-      field("library.bowlathon.example", "Example line"),
-      field("library.bowlathon.dateNote", "Event date note", "textarea"),
-      field("library.bowlathon.formNotice", "Form notice", "textarea", "This notice tells visitors the form does not save a pledge."),
-      field("library.bowlathon.labels.bowler", "Bowler name label"),
-      field("library.bowlathon.labels.sponsor", "Sponsor label"),
-      field("library.bowlathon.labels.submit", "Submit button label"),
-      field("library.bowlathon.paymentNote", "Payment note", "textarea", "This explains that payments are not active."),
     ],
   },
   {

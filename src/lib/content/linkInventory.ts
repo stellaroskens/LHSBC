@@ -21,6 +21,7 @@ const BLOCKED_INTERNAL = /^\/(admin|coach|team-administrator|staff|api)(\/|$)/
 
 export const PUBLIC_ROUTES = [
   "/",
+  "/information",
   "/our-club",
   "/meet-the-bowlers",
   "/practices",
@@ -33,7 +34,6 @@ export const PUBLIC_ROUTES = [
   "/volunteer",
   "/contact",
   "/faq",
-  "/bowl-a-thon",
   "/team-gear",
   "/sign-in",
   "/family",
@@ -41,8 +41,8 @@ export const PUBLIC_ROUTES = [
 
 export const CODE_ONLY_SETTINGS = [
   {
-    name: "Contact form and Bowl-a-thon pledge delivery",
-    reason: "The forms can be labeled here, but no email provider or payment provider is connected. Submitting one does not send a message or collect a pledge.",
+    name: "Contact form delivery",
+    reason: "The form can be labeled here, but no email provider is connected. Submitting it does not send a message.",
   },
   {
     name: "Sponsorship QR destination",

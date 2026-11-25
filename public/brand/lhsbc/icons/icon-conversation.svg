@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Conversation">
+  <path fill="#B90C17" d="M46 18h40c16 0 26 10 26 26v22c0 16-10 26-26 26H58l-22 22 4-22h-8c-16 0-26-10-26-26V44c0-16 10-26 26-26z"/>
+  <circle cx="46" cy="55" r="6" fill="#FFF0D5"/>
+  <circle cx="66" cy="55" r="6" fill="#FFF0D5"/>
+  <circle cx="86" cy="55" r="6" fill="#FFF0D5"/>
+</svg>

@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from "react"
-import { Link } from "react-router-dom"
 import { nav } from "../content/site"
 import { AccountButton } from "./header/AccountButton"
 import { BurgerIcon } from "./header/icons"
@@ -21,29 +20,20 @@ export function Header() {
           <button
             ref={buttonRef}
             type="button"
-            className="header-icon topbar__toggle"
+            className="topbar__pill topbar__toggle"
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => (open ? closeMenu() : setOpen(true))}
           >
             <BurgerIcon />
-            <span className="header-icon__label">{open ? "Close" : "Menu"}</span>
+            <span>{open ? "Close" : "Menu"}</span>
           </button>
           <PublicMenu id="site-menu" open={open} items={nav.filter((item) => !item.hidden)} onClose={closeMenu} />
         </div>
-
-        <SiteSearch />
-
-        <div className="topbar__tools">
-          <Link className="topbar__donate" to="/donate">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 20s-7-4.4-7-9a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4.6-7 9-7 9z" />
-            </svg>
-            <span>
-              Donate
-              <span className="visually-hidden">. Checkout is not live.</span>
-            </span>
-          </Link>
+        <span className="topbar__rule" aria-hidden="true" />
+        <div className="topbar__cluster">
+          <SiteSearch />
+          <span className="topbar__rule" aria-hidden="true" />
           <AccountButton />
         </div>
       </div>

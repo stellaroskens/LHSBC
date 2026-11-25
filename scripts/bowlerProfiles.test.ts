@@ -21,7 +21,7 @@ import {
   validateBowlerRecords,
   type BowlerResult,
 } from "../src/lib/content/bowlerStats.ts"
-import { AHSB_LOGO, PLACEHOLDER_MARK, SCHOOLS, SCHOOL_IDS } from "../src/lib/content/schoolLogos.ts"
+import { LEGACY_SCHOOL_MARKS, PLACEHOLDER_MARK, SCHOOLS, SCHOOL_IDS } from "../src/lib/content/schoolLogos.ts"
 import { parseSiteContent, validateSiteContent } from "../src/lib/content/siteContent.ts"
 import { FAMILY_ACCESS_OPEN, familyPathIsDenied, familySessionMayAccess } from "../src/lib/family/familyAccess.ts"
 import { hasPermission as serverHasPermission } from "../netlify/functions/_shared/permissions.ts"
@@ -101,7 +101,14 @@ describe("Meet the Bowlers directory", () => {
   })
 
   it("shows one selected school logo and never a student photo", () => {
-    const approved = [AHSB_LOGO, ...SCHOOL_IDS.flatMap((id) => [SCHOOLS[id].full, SCHOOLS[id].mark])]
+    const retiredAlbanyClubMark = "/images/schools/ahsb-main-logo.png"
+    const approved = SCHOOL_IDS.flatMap((id) => [SCHOOLS[id].full, SCHOOLS[id].mark])
+    assert.equal(approved.includes(retiredAlbanyClubMark), false)
+    assert.equal(existsSync(new URL(`../public${retiredAlbanyClubMark}`, import.meta.url)), false)
+    for (const legacy of Object.values(LEGACY_SCHOOL_MARKS)) {
+      assert.equal(approved.includes(legacy.full), false)
+      assert.equal(approved.includes(legacy.mark), false)
+    }
     for (const src of approved) {
       const file = new URL(`../public${src}`, import.meta.url)
       assert.equal(existsSync(file), true, src)

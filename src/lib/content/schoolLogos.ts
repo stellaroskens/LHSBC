@@ -1,6 +1,3 @@
-/** Legacy Albany club mark path kept on disk for review; not used in public UI. */
-export const AHSB_LOGO = "/images/schools/ahsb-main-logo.png"
-
 /** Neutral artwork while school marks are under review. */
 export const PLACEHOLDER_MARK = "/images/bowler-silhouette.svg"
 

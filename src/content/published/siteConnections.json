@@ -39,7 +39,7 @@
     "publicFromAddress": null,
     "status": "disabled",
     "liveEnabled": false,
-    "staffNote": "No outbound announcement provider is configured yet."
+    "staffNote": "info@lhsbcor.com is the intended club address. It is not configured and must not be shown as a working mailbox."
   },
   "payments": [
     {
@@ -76,7 +76,7 @@
     }
   ],
   "sharing": {
-    "publicWebsiteUrl": null,
+    "publicWebsiteUrl": "https://lhsbcor.com/",
     "publicFundraiserUrl": null,
     "publicSponsorshipUrl": null
   }

@@ -44,6 +44,15 @@ export function Footer() {
           <p>
             <NavLink to="/donate">Donation page. Checkout is not live.</NavLink>
           </p>
+          <p className="footer-tagline">
+            <span>Student-Athletes</span>
+            <span aria-hidden="true">★</span>
+            <span>Teamwork</span>
+            <span aria-hidden="true">★</span>
+            <span>Community</span>
+            <span aria-hidden="true">★</span>
+            <span>School Pride</span>
+          </p>
           {club.social.length > 0 ? (
             <ul className="footer-links">
               {club.social.map((item) => (

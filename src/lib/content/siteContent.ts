@@ -338,30 +338,6 @@ export type PublicLibrary = {
     contactLabel: string
     contactTo: string
   }
-  bowlathon: {
-    hero: string
-    how: string[]
-    example: string
-    dateNote: string
-    formHeading: string
-    formNotice: string
-    labels: {
-      bowler: string
-      sponsor: string
-      email: string
-      phone: string
-      flat: string
-      perPin: string
-      flatAmount: string
-      perPinAmount: string
-      maximum: string
-      submit: string
-    }
-    paymentHeading: string
-    paymentNote: string
-    faqHeading: string
-    faqs: { question: string; answer: string }[]
-  }
   contact: {
     hero: string
     formHeading: string
@@ -450,7 +426,6 @@ const REQUIRED_PAGE_KEYS = [
   "contact",
   "volunteer",
   "notFound",
-  "bowlathon",
   "faq",
   "fundraisers",
   "teamGear",
@@ -709,7 +684,7 @@ function validateLibrary(value: unknown, issues: SiteContentIssue[]) {
     issues.push({ path: "library", message: "Public page copy is required." })
     return
   }
-  for (const key of ["faq", "resources", "practices", "tournaments", "fundraisers", "bowlathon", "contact", "sponsorQr", "donations", "sponsorPage", "contributionOptions"]) {
+  for (const key of ["faq", "resources", "practices", "tournaments", "fundraisers", "contact", "sponsorQr", "donations", "sponsorPage", "contributionOptions"]) {
     if (!isRecord(value[key])) issues.push({ path: `library.${key}`, message: "This page copy is required." })
   }
   if (!Array.isArray(value.communitySponsors)) {

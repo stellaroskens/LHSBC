@@ -51,7 +51,6 @@ describe("visual page editor", () => {
       "/volunteer",
       "/contact",
       "/faq",
-      "/bowl-a-thon",
       "/team-gear",
       "/sign-in",
       "/family",

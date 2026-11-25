@@ -48,6 +48,6 @@ Meet the Bowlers shows eight placeholder profiles and school logos. It does not 
 - Store parent or guardian records.
 - Open family photo albums.
 - Turn on live card, PayPal, Venmo, or Cash App checkout.
-- Send a contact form or a Bowl-a-thon pledge through the website. Those forms say that nothing was sent.
+- Send a contact form through the website. That form says that nothing was sent.
 
 The feature tracker in `docs/FEATURE_TRACKER.md` lists what is still missing.

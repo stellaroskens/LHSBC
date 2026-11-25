@@ -166,13 +166,6 @@ export function Faq() {
                     <FaqAnswer key={item.question} item={item} />
                   ))}
                 </div>
-                {category.id === "faq-bowl-a-thon" ? (
-                  <p className="faq-section-action">
-                    <Link className="button button-primary" to="/bowl-a-thon">
-                      Learn about the Bowl-A-Thon
-                    </Link>
-                  </p>
-                ) : null}
                 {category.id === "faq-basics" ? (
                   <aside className="faq-sources">
                     <h3>Learning resources</h3>

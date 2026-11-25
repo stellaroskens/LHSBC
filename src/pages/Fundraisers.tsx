@@ -7,6 +7,7 @@ import { club, library, pages } from "../content/site"
 import { fundraiserStatusLabel, fundraiserSupportNote, fundraiserTiming } from "../lib/events/fundraiserTiming"
 
 const burgerville = fundraisers.find((item) => item.id === "burgerville")
+const publicFundraiserEmail = fundraiserContact.email.endsWith(".invalid") ? null : fundraiserContact.email
 
 /** Decorative month/day tab built from the event's own `when` text. */
 function DateTab({ when }: { when: string }) {
@@ -26,6 +27,15 @@ export function Fundraisers() {
         <PageMeta title={pages.fundraisers.title} description={pages.fundraisers.description} />
         <AthleticHero scene="fundraisers" eyebrow="Support the team" title="Fundraisers" subtitle={club.name}>
           <p>Fundraiser details to be confirmed. No current fundraiser is published on this site.</p>
+          <p>
+            <Link to="/sponsors">Become a Sponsor</Link>
+            {" · "}
+            <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
+            {" · "}
+            <Link to="/our-club">Our Club</Link>
+            {" · "}
+            <Link to="/contact">Contact</Link>
+          </p>
         </AthleticHero>
       </div>
     )
@@ -123,14 +133,18 @@ export function Fundraisers() {
               <p>
                 {library.fundraisers.burgerville.volunteerAsk.replace("the fundraiser contact", fundraiserContact.name)}
               </p>
-              <p>
-                <a
-                  className="sw-btn sw-btn--outline sw-btn--plain"
-                  href={`mailto:${fundraiserContact.email}`}
-                >
-                  Email {fundraiserContact.email}
-                </a>
-              </p>
+              {publicFundraiserEmail ? (
+                <p>
+                  <a
+                    className="sw-btn sw-btn--outline sw-btn--plain"
+                    href={`mailto:${publicFundraiserEmail}`}
+                  >
+                    Email {publicFundraiserEmail}
+                  </a>
+                </p>
+              ) : (
+                <p>Club contact to be confirmed.</p>
+              )}
             </div>
           </div>
           <figure className="fundraiser-flyer sw-fundraiser__poster">
@@ -166,8 +180,13 @@ export function Fundraisers() {
               <h2 id="share-heading">{library.fundraisers.shareHeading}</h2>
               <p>{library.fundraisers.shareBody}</p>
               <p>
-                {library.fundraisers.shareQuestions} {fundraiserContact.name} at{" "}
-                <a href={`mailto:${fundraiserContact.email}`}>{fundraiserContact.email}</a>.
+                {library.fundraisers.shareQuestions}
+                {publicFundraiserEmail ? (
+                  <>
+                    {" "}
+                    <a href={`mailto:${publicFundraiserEmail}`}>{publicFundraiserEmail}</a>.
+                  </>
+                ) : null}
               </p>
             </div>
           </div>

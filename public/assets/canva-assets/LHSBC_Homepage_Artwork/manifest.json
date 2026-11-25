@@ -1,0 +1,37 @@
+{
+  "project": "Lebanon High School Bowling Club",
+  "source": "Recreated from user's latest approved homepage image reference",
+  "type": "transparent PNG (raster with vector-like appearance)",
+  "assets": [
+    {
+      "file": "01_lhsbc_crest.png",
+      "width": 778,
+      "height": 848,
+      "has_alpha": true
+    },
+    {
+      "file": "02_join_the_club_button.png",
+      "width": 1078,
+      "height": 298,
+      "has_alpha": true
+    },
+    {
+      "file": "03_donate_button.png",
+      "width": 998,
+      "height": 300,
+      "has_alpha": true
+    },
+    {
+      "file": "04_bowling_club_hero.png",
+      "width": 3008,
+      "height": 1008,
+      "has_alpha": true
+    },
+    {
+      "file": "05_find_out_more_bowling_lane.png",
+      "width": 2242,
+      "height": 890,
+      "has_alpha": true
+    }
+  ]
+}

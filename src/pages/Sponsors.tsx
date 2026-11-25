@@ -57,6 +57,13 @@ export function Sponsors() {
         subtitle={copy.heroSubtitle}
       >
         <p>{copy.heroBody}</p>
+        <p>
+          <Link to="/fundraisers">Fundraising Opportunities</Link>
+          {" · "}
+          <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
+          {" · "}
+          <Link to="/our-club">Our Club</Link>
+        </p>
       </AthleticHero>
 
       <section className="section sponsor-options" aria-labelledby="sponsor-options-heading">

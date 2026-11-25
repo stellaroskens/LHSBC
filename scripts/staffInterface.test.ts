@@ -39,7 +39,8 @@ describe("staff interface contrast", () => {
 
 describe("editable public library", () => {
   it("keeps the public FAQ, resources, and page instructions in the content file", () => {
-    assert.equal(published.library.faq.categories.some((category) => category.items.some((item) => item.question === "What is the Bowl-A-Thon?")), true)
+    assert.equal(published.library.faq.categories.some((category) => category.items.some((item) => item.question === "What is the Bowl-A-Thon?")), false)
+    assert.equal(published.library.faq.categories.some((category) => category.items.some((item) => item.question === "Is registration open?")), true)
     assert.ok(published.library.resources.proShops.length >= 1)
     assert.match(published.library.practices.hero, /Practice venue to be confirmed/)
     assert.match(published.library.sponsorQr.emptyBody, /verified/)

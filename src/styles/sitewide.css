@@ -4,14 +4,14 @@
  */
 
 :root {
-  --sw-navy: #0a1c48;
-  --sw-ink: #12254a;
-  --sw-royal: #143c94;
-  --sw-red: #d21b2b;
-  --sw-red-dark: #a8121f;
-  --sw-paper: #ffffff;
-  --sw-backdrop: #f4f6fa;
-  --sw-line: #d7e1ef;
+  --sw-navy: #081f46;
+  --sw-ink: #081f46;
+  --sw-royal: #081f46;
+  --sw-red: #e30616;
+  --sw-red-dark: #a50814;
+  --sw-paper: #fffdf8;
+  --sw-backdrop: #faf4e6;
+  --sw-line: #e4dcc8;
   --sw-muted: #44516a;
   --sw-gutter: clamp(10px, 1.6vw, 24px);
   --sw-frame: 1480px;
@@ -34,9 +34,9 @@
 
 .sw-page .card {
   background: var(--sw-paper);
-  border: 1px solid var(--sw-line);
-  border-radius: var(--sw-radius);
-  box-shadow: var(--sw-shadow);
+  border: 3px solid var(--sw-navy);
+  border-radius: 1.15rem;
+  box-shadow: none;
   padding: clamp(1.1rem, 2vw, 1.6rem);
 }
 
@@ -193,13 +193,9 @@
 .ah__title-main {
   display: inline-block;
   padding-right: 0.12em;
-  font-size: clamp(2.6rem, 7.2vw, 6rem);
-  transform: skewX(-8deg);
-  background: linear-gradient(180deg, #ffffff 0%, #f4f7fc 44%, #b4c0d6 50%, #ffffff 63%, #dce4f1 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 2px 0 #06122f) drop-shadow(0 7px 14px rgba(0, 0, 0, 0.5));
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-style: italic;
+  color: #fffdf8;
 }
 
 .ah__title-sub {
@@ -208,8 +204,9 @@
   margin-top: 0.45rem;
   font-size: clamp(1.05rem, 2.3vw, 1.8rem);
   letter-spacing: 0.03em;
-  transform: skewX(-8deg);
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+  font-style: italic;
+  color: #ffc400;
+  text-shadow: none;
 }
 
 .ah__title-sub::after {
@@ -277,8 +274,10 @@
     height: 34%;
   }
 
-  .ah__title-main {
-    font-size: clamp(2.35rem, 12vw, 3.4rem);
+  .ah__title-main,
+  .sw-sponsors .ah__title-main,
+  .sw-faq .ah__title-main {
+    font-size: clamp(2.1rem, 10vw, 3.2rem);
   }
 }
 
@@ -353,13 +352,6 @@
     linear-gradient(112deg, transparent 0 57%, rgba(210, 27, 43, 0.92) 57% 59%, transparent 59%),
     radial-gradient(50% 90% at 85% 50%, rgba(210, 27, 43, 0.5), transparent 70%),
     linear-gradient(120deg, #06122f 0%, var(--sw-navy) 52%, #2a0f2a 100%);
-}
-
-.ah--bowlathon {
-  background:
-    radial-gradient(55% 90% at 90% 0%, rgba(255, 70, 80, 0.55), transparent 70%),
-    radial-gradient(45% 80% at 0% 100%, rgba(20, 60, 148, 0.7), transparent 70%),
-    linear-gradient(120deg, #3b0710 0%, #7d0f1c 40%, var(--sw-navy) 100%);
 }
 
 .ah--resources .ah__lanes {
@@ -443,9 +435,9 @@
 
 .sw-panel {
   background: var(--sw-paper);
-  border: 1px solid var(--sw-line);
-  border-radius: var(--sw-radius);
-  box-shadow: var(--sw-shadow);
+  border: 3px solid var(--sw-navy);
+  border-radius: 1.15rem;
+  box-shadow: none;
   padding: clamp(1.1rem, 2.2vw, 1.75rem);
   min-width: 0;
 }
@@ -459,7 +451,7 @@
   max-width: 100%;
   padding: 0.55rem 1.15rem;
   border: 2px solid var(--sw-red);
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--sw-red);
   color: #fff;
   font-family: var(--display);
@@ -2137,101 +2129,6 @@
 
 .sw-contact__coaches span {
   margin-left: auto;
-}
-
-/* ---------- Bowl-a-thon ---------- */
-
-.sw-bowlathon__banner {
-  width: min(100%, 36rem);
-  padding: 6px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #fff, #c9d4ea);
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
-  transform: rotate(-1.5deg);
-}
-
-.sw-bowlathon__banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 9px;
-}
-
-.sw-bowlathon__grid {
-  align-items: start;
-}
-
-.sw-page .sw-bowlathon__how {
-  border-top: 4px solid var(--sw-red);
-}
-
-.sw-page .pledge-example {
-  margin: 1rem 0 0;
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  background: linear-gradient(120deg, #06122f, var(--sw-navy));
-  color: #fff;
-  font-family: var(--display);
-  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-  letter-spacing: 0.03em;
-}
-
-.sw-page .sw-bowlathon__date {
-  border-top: 4px solid var(--sw-royal);
-}
-
-.sw-bowlathon .pledge-calculator {
-  border-top: 4px solid var(--sw-red);
-}
-
-.sw-bowlathon__ways {
-  margin-top: 1.25rem;
-}
-
-.sw-bowlathon .connect-block {
-  background: none;
-}
-
-.sw-bowlathon__faq {
-  display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: pledge;
-}
-
-.sw-page .sw-bowlathon__faq li {
-  position: relative;
-  padding-left: clamp(4.25rem, 6vw, 5rem);
-  counter-increment: pledge;
-}
-
-.sw-bowlathon__faq li::before {
-  content: counter(pledge, decimal-leading-zero);
-  position: absolute;
-  left: clamp(1rem, 2vw, 1.4rem);
-  top: clamp(1.1rem, 2vw, 1.6rem);
-  display: grid;
-  place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 50%;
-  background: var(--sw-red);
-  color: #fff;
-  font-family: var(--display);
-  font-weight: 700;
-}
-
-.sw-page .sw-bowlathon__faq h3 {
-  margin-top: 0;
-  color: var(--sw-royal);
-}
-
-@media (min-width: 900px) {
-  .sw-bowlathon__faq {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 /* ---------- Team Gear ---------- */

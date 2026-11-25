@@ -6,7 +6,7 @@ import { MEDIA_PLACEMENTS, OBJECT_POSITIONS, type MediaItem, type MediaRole } fr
 
 const BUILT_IN = [
   { label: "Legacy website logo (not shown publicly)", path: "/brand/website-logo-480.webp", use: "Migration review only" },
-  { label: "Homepage hero artwork", path: "/images/home-hero-banner-1280.webp", use: "Homepage and Bowl-a-thon until a library image is placed" },
+  { label: "Homepage hero artwork", path: "/images/home-hero-banner-1280.webp", use: "Earlier homepage artwork. The current hero uses the approved lane plate." },
   { label: "Legacy coach portrait (not shown publicly)", path: "/coaches/cliff-meredith-640.webp", use: "Migration review only" },
   { label: "Legacy coach portrait (not shown publicly)", path: "/coaches/chris-breshears-640.webp", use: "Migration review only" },
   { label: "Legacy fundraiser flyer (not shown publicly)", path: "/images/burgerville-fundraiser.png", use: "Migration review only" },

@@ -1,11 +1,10 @@
 import { lazy, Suspense } from "react"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import { AuthCallbackRedirect } from "./components/AuthCallbackRedirect"
 import { Layout } from "./components/Layout"
 import { RouteLoading } from "./components/RouteLoading"
 import { RequireStaff } from "./lib/auth/RequireStaff"
 import { RequireSuperAdmin } from "./lib/auth/RequireSuperAdmin"
-import { Bowlathon } from "./pages/Bowlathon"
 import { BowlerProfilePage } from "./pages/BowlerProfilePage"
 import { Contact } from "./pages/Contact"
 import { Donate } from "./pages/Donate"
@@ -13,6 +12,7 @@ import { FamilyDashboard } from "./pages/FamilyDashboard"
 import { Faq } from "./pages/Faq"
 import { Fundraisers } from "./pages/Fundraisers"
 import { HomeReview } from "./pages/HomeReview"
+import { Information } from "./pages/Information"
 import { MeetTheBowlers } from "./pages/MeetTheBowlers"
 import { NotFound } from "./pages/NotFound"
 import { OurClub } from "./pages/OurClub"
@@ -142,6 +142,7 @@ export default function App() {
 
           <Route element={<Layout />}>
             <Route index element={<HomeReview />} />
+            <Route path="information" element={<Information />} />
             <Route path="our-club" element={<OurClub />} />
             <Route path="meet-the-bowlers" element={<MeetTheBowlers />} />
             <Route path="meet-the-bowlers/:playerId" element={<BowlerProfilePage />} />
@@ -155,7 +156,7 @@ export default function App() {
             <Route path="volunteer" element={<Volunteer />} />
             <Route path="contact" element={<Contact />} />
             <Route path="faq" element={<Faq />} />
-            <Route path="bowl-a-thon" element={<Bowlathon />} />
+            <Route path="bowl-a-thon" element={<Navigate to="/fundraisers" replace />} />
             <Route path="team-gear" element={<TeamGear />} />
             <Route path="sign-in" element={<SignIn />} />
             <Route path="family" element={<FamilyDashboard />} />

@@ -24,19 +24,16 @@ export function Layout() {
     return () => cancelAnimationFrame(frame)
   }, [pathname, hash])
 
-  const homeStage = pathname === "/" || (import.meta.env.DEV && pathname === "/home-review")
-  const showSiteChrome = !homeStage
-
   return (
     <div className="site">
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      {showSiteChrome && <Header />}
+      <Header />
       <main id="main">
         <Outlet />
       </main>
-      {showSiteChrome && <Footer />}
+      <Footer />
     </div>
   )
 }

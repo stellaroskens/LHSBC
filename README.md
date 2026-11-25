@@ -6,7 +6,7 @@ It does not include private student records, coach or player administration, gua
 
 ## Pages
 
-Home, Our Club, Practices, Tournaments, Team Gear, Sponsors, Fundraisers, Bowling Resources, Contact, FAQ, and Bowl-a-Thon.
+Home, Our Club, Practices, Tournaments, Team Gear, Sponsors, Fundraisers, Bowling Resources, Contact, and FAQ.
 
 Sign In explains that team accounts are not open.
 

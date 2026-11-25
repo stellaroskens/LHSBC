@@ -6,7 +6,6 @@ export type HeroScene =
   | "tournaments"
   | "sponsors"
   | "fundraisers"
-  | "bowlathon"
   | "resources"
   | "faq"
   | "contact"

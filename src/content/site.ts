@@ -40,11 +40,6 @@ export type Venue = (typeof venues)[number]
 export const practiceTournaments = siteContent.practiceTournaments
 export const library = siteContent.library
 
-/** Confirmed Bowl-a-thon date only. Leave null until the club publishes one. */
-export const bowlathonEvent: { date: string | null } = {
-  date: null,
-}
-
 export const practiceLocation = siteContent.practiceLocation
 export const tournamentEvents = library.tournaments.events
 export const bakerFrames = pageBodies.club.bakerFrames

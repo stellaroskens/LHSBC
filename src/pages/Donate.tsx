@@ -32,6 +32,13 @@ export function Donate() {
           <p>
             <Link className="sw-btn" to={library.donations.inquiryTo}>{library.donations.inquiryLabel}</Link>
           </p>
+          <p>
+            <Link to="/fundraisers">Fundraising Opportunities</Link>
+            {" · "}
+            <Link to="/sponsors">Sponsors</Link>
+            {" · "}
+            <Link to="/our-club">Our Club</Link>
+          </p>
           <h2>{library.donations.questionsHeading}</h2>
           {library.donations.faq.map((item) => (
             <details key={item.question}>

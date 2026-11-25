@@ -41,10 +41,6 @@
       "title": "Page not found | Lebanon High School Bowling Club",
       "description": "That page is not part of the Lebanon High School Bowling Club site."
     },
-    "bowlathon": {
-      "title": "Bowl-a-thon | Lebanon High School Bowling Club",
-      "description": "Bowl-a-thon details to be confirmed for Lebanon High School Bowling Club. This form does not send, save, or collect a pledge."
-    },
     "faq": {
       "title": "Frequently Asked Questions | Lebanon High School Bowling Club",
       "description": "Answers about volunteering, practices, equipment, and etiquette for Lebanon High School Bowling Club. Some club-specific details are still being confirmed."
@@ -222,11 +218,11 @@
   "pageBodies": {
     "home": {
       "hero": {
-        "imageAlt": "Bowl-A-Thon",
+        "imageAlt": "Lebanon High School Bowling Club",
         "heading": "Strike up support for our bowlers.",
-        "description": "The Bowl-A-Thon page is a preview. It does not collect a pledge or a payment.",
-        "buttonLabel": "Bowl-A-Thon preview",
-        "buttonTo": "/bowl-a-thon"
+        "description": "Fundraising details are to be confirmed. This site does not collect a pledge or a payment.",
+        "buttonLabel": "Fundraisers",
+        "buttonTo": "/fundraisers"
       },
       "club": {
         "eyebrow": "More than a game",
@@ -270,7 +266,7 @@
         "websiteLabel": "Website to be confirmed"
       },
       "footerTitle": "Lebanon High School Bowling Club",
-      "footerEventLabel": "Bowl-A-Thon"
+      "footerEventLabel": "Fundraisers"
     },
     "club": {
       "heroTitle": "Our Club",
@@ -570,92 +566,6 @@
     "faq": {
       "hero": "Everything you need to know about bowling with us, getting started, tournaments, equipment, and supporting our bowlers.",
       "categories": [
-        {
-          "id": "faq-bowl-a-thon",
-          "title": "Bowl-A-Thon & Fundraising",
-          "intro": "The Bowl-A-Thon pledge page is a preview. It does not send, save, or collect a pledge, and it cannot take a payment.",
-          "items": [
-            {
-              "question": "What is the Bowl-A-Thon?",
-              "paragraphs": [
-                "The Bowl-A-Thon is a fundraiser for Lebanon High School Bowling Club. A supporter can give a flat donation or pledge an amount for each pin.",
-                "The event date is not confirmed yet."
-              ]
-            },
-            {
-              "question": "How does the Bowl-A-Thon help our bowlers?",
-              "paragraphs": [
-                "Fundraising supports the club’s bowling-related expenses, equipment, and competition opportunities.",
-                "The club confirms any recognition before a sponsor is listed."
-              ]
-            },
-            {
-              "question": "What is a per-pin pledge?",
-              "paragraphs": [
-                "A per-pin pledge is an amount you choose to give for each pin. After the event, that amount is multiplied by the bowler’s verified eligible pin total. Sponsors do not enter the pin total.",
-                "For example, $0.10 per pin × 500 verified pins = $50. The example shows the math. It is not a predicted score."
-              ]
-            },
-            {
-              "question": "Can I make a flat donation instead?",
-              "paragraphs": [
-                "Yes. A flat donation is a set amount, and it does not change with the pin total. Families and businesses can choose a flat donation or a per-pin pledge."
-              ]
-            },
-            {
-              "question": "How is my pledge calculated?",
-              "paragraphs": [
-                "A per-pin pledge is calculated after the event: your amount per pin multiplied by the bowler’s verified eligible pin total. Sponsors do not enter that total.",
-                "For example, $0.10 per pin × 500 verified pins = $50.",
-                "The pledge page can show how the form is laid out. It does not calculate a payment, and online payments are not active."
-              ]
-            },
-            {
-              "question": "Can I set a maximum amount for my pledge?",
-              "paragraphs": [
-                "Yes. A per-pin pledge can include an optional maximum. If you pledge $0.10 per pin and set a $30 maximum, the donation will not exceed $30, even when the calculated total is higher."
-              ]
-            },
-            {
-              "question": "When will I know how much I owe?",
-              "paragraphs": [
-                "Per-pin pledges are calculated after the event. The club will confirm the bowler’s pin total and send the amount due with payment instructions. You do not need to guess the score."
-              ]
-            },
-            {
-              "question": "When and how do I make my donation?",
-              "paragraphs": [
-                "Online payments are not active. The current pledge system is a preview and cannot take a payment.",
-                "The club has said flat donations can be paid once payments are connected, and that per-pin sponsors receive payment instructions after the verified pin total is known. A donation deadline and a payment method have not been published. Ask the coaches before you send money."
-              ]
-            },
-            {
-              "question": "Can businesses sponsor a bowler?",
-              "paragraphs": [
-                "Yes. Families and businesses can choose a flat donation or a per-pin pledge. The club confirms any recognition before a sponsor is listed.",
-                "Sponsorship packages and business benefits are not published on this site. Ask the coaches."
-              ]
-            },
-            {
-              "question": "What does the fundraising money pay for?",
-              "paragraphs": [
-                "Fundraising supports the club’s bowling-related expenses, equipment, and competition opportunities. A more detailed budget has not been published here."
-              ]
-            },
-            {
-              "question": "Is my donation tax deductible?",
-              "paragraphs": [
-                "This site does not state that a donation is tax deductible. The club has not published its tax status. Do not treat a gift as tax deductible until the club confirms that in writing."
-              ]
-            },
-            {
-              "question": "What happens if a bowler cannot participate?",
-              "paragraphs": [
-                "The club has not published a cancellation policy or a rule for a bowler who cannot take part. Contact the coaches before the event so they can tell you how a pledge should be handled."
-              ]
-            }
-          ]
-        },
         {
           "id": "faq-practices",
           "title": "Practices & Participation",
@@ -1162,7 +1072,7 @@
         "Respect officials and bowling-center staff.",
         "Stay in spectator areas.",
         "Ask permission before sharing photographs of other students.",
-        "Support all three participating school communities as one bowling club."
+        "Support Lebanon High School Bowling Club."
       ],
       "askHeading": "Still Have Questions?",
       "askIntro": "Can't find the answer you're looking for? Send your question to our coaching team. We're happy to help families and students learn more about bowling with us.",
@@ -1181,7 +1091,7 @@
         "Practices & Lessons",
         "Bowling Equipment",
         "Tournaments",
-        "Bowl-A-Thon & Fundraising",
+        "Fundraising",
         "Other"
       ]
     },
@@ -1224,19 +1134,6 @@
       "centersTitle": "Bowling Alleys & Centers",
       "centersIntro": "Explore bowling centers throughout Oregon for recreation, practice, leagues, and family bowling. Locations are listed approximately from closest to farthest from Lebanon, Oregon.",
       "proShops": [
-        {
-          "id": "albany-bowling-center-pro-shop",
-          "name": "Albany Bowling Center Pro Shop",
-          "city": "Albany, OR",
-          "status": "An operating pro shop under this name in Albany, Oregon could not be confirmed.",
-          "hoursNote": "Hours: Not confirmed — please contact the business.",
-          "points": [
-            "Ball plugging and redrilling",
-            "Resurfacing",
-            "Engraving",
-            "Finger and thumb inserts"
-          ]
-        },
         {
           "id": "players-edge-pro-shop",
           "name": "Players Edge Pro Shop",
@@ -1994,51 +1891,6 @@
       "shareHeading": "Share the announcement",
       "shareBody": "Fundraiser details to be confirmed. Families can share approved announcements after leadership publishes them.",
       "shareQuestions": "Questions about fundraisers can go to the club contact once that contact is confirmed."
-    },
-    "bowlathon": {
-      "hero": "This pledge form is a preview of the paper sheet. It does not send, save, or collect a pledge, and it cannot take a payment.",
-      "how": [
-        "Flat donations can be paid immediately once payments are connected.",
-        "Per-pin totals are calculated after the event from the bowler’s verified pin total, then the sponsor receives payment instructions.",
-        "Sponsors do not enter the pin total."
-      ],
-      "example": "Example: $0.10 per pin × 500 pins = $50.",
-      "dateNote": "Printed QR cards are planned to open this page. Each card will use a private link for one bowler, without placing a student name in the address. Cards will be made after the club has a permanent website address.",
-      "formHeading": "Pledge preview",
-      "formNotice": "This form is a preview. It is not connected, and nothing is saved.",
-      "labels": {
-        "bowler": "Bowler name",
-        "sponsor": "Sponsor name or business",
-        "email": "Email",
-        "phone": "Phone (optional)",
-        "flat": "Flat Donation",
-        "perPin": "Per-Pin Pledge",
-        "flatAmount": "Donation amount (USD)",
-        "perPinAmount": "Amount per pin (USD)",
-        "maximum": "Optional maximum total (USD)",
-        "submit": "Submit preview"
-      },
-      "paymentHeading": "Choose how to support our bowlers",
-      "paymentNote": "Payment options will become available after the club completes setup and approval.",
-      "faqHeading": "How pledging works",
-      "faqs": [
-        {
-          "question": "What is a per-pin pledge?",
-          "answer": "You choose an amount to donate for each pin your bowler knocks down during the Bowl-a-thon. After the event, we multiply your pledge by their confirmed pin total. For example, pledging 10 cents per pin with a total of 500 pins means a $50 donation. The example is illustrative, not a predicted score."
-        },
-        {
-          "question": "When do I pay, and how will I know the total?",
-          "answer": "Per-pin pledges are calculated after the event. The club will confirm your bowler’s pin total and send you the amount due with payment instructions. You do not need to guess their score or calculate it yourself."
-        },
-        {
-          "question": "Can I set a limit on my donation?",
-          "answer": "Yes. Enter an optional maximum donation with your per-pin pledge. If you pledge 10 cents per pin and set a $30 maximum, your donation will not exceed $30, even if the calculated total is higher."
-        },
-        {
-          "question": "Can I give a fixed amount instead?",
-          "answer": "Absolutely. Choose “Flat Donation” to give a set amount regardless of how many pins your bowler knocks down. Both families and businesses can choose either pledge type."
-        }
-      ]
     },
     "contact": {
       "hero": "Questions about volunteering, practices, or supporting a bowler are welcome. Email the club, or use the form to see the layout. The form does not send or save a message.",

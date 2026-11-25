@@ -173,6 +173,15 @@ export function Contact() {
                 ) : (
                   <p>Social links to be confirmed</p>
                 )}
+                <p>
+                  <Link to="/our-club">Our Club</Link>
+                  {" · "}
+                  <Link to="/sponsors">Sponsors</Link>
+                  {" · "}
+                  <Link to="/fundraisers">Fundraisers</Link>
+                  {" · "}
+                  <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
+                </p>
               </div>
             </article>
 
