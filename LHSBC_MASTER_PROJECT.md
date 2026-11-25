@@ -106,7 +106,7 @@ Exact individual dates for P01–P14 not recovered. P11 original ZIP installatio
 | T12 | P2 | OPEN | Obtain delivered uniform quotes, size list, proof and budget approval |
 | T13 | P1 | OPEN | Release QA, privacy/security, metadata, legacy asset review and role gates |
 | T14 | P2 | OPEN | Maintain weekly review, archive completed items, update master record |
-| NAV-01 | P1 | IN REVIEW | Replace the full-height sidebar with a compact accordion under the Menu button. Expandable navy category headings, cream link backgrounds, red and gold accents. Keep every current destination. Add Donate inside Support the Team. Do not dim the page, shift the page, or change the approved header. Keyboard access stays. Complete before the Pass 09 review. **Built November 25, 2026 (section 43); in draft only, awaiting owner approval before production.** |
+| NAV-01 | P1 | DONE | Replace the full-height sidebar with a compact accordion under the Menu button. Expandable navy category headings, cream link backgrounds, red and gold accents. Keep every current destination. Add Donate inside Support the Team. Do not dim the page, shift the page, or change the approved header. Keyboard access stays. Complete before the Pass 09 review. **Built November 25, 2026 (section 43). Owner approved; live in production deploy `6b0768f8e5805be40a0ca4e5` (section 44).** |
 | ART-03 | Deferred | OPEN | The Pass 03 ball and pins are a temporary vector. Replace them in the final visual refinement with artwork that matches the approved support-banner reference. Do not block earlier passes. |
 | FONT-03 | Deferred | OPEN | Review the Support Our Team heading against the approved reference during the final visual refinement. The current band uses the existing Oswald italic. Do not add a font for this now. |
 | ART-05 | Deferred | OPEN | Outstanding visual refinement for Upcoming Events: the calendar illustration, the yellow schedule badge, and the decorative arrow. The current calendar and badge are temporary geometry, and the arrow is absent. Do not correct this during later homepage passes. |
@@ -367,6 +367,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-25 v1.21: Owner approved the draft. Commit `32d5412` pushed to `main`; GitHub-built deploy `6b0768f8e5805be40a0ca4e5` verified and published to `https://lhsbcor.com/` with auto-publishing still locked. NAV-01 done. See section 44.
 - 2026-11-25 v1.20: Netlify now builds from GitHub. Production is GitHub-triggered deploy `6b075ef250dcb001616aef79` (commit `b71d492`). NAV-01 is built and in review on draft `6b07673f0b9d465e59464863`. Client demo guide added. No commit, push, or production publish. See section 43.
 - 2026-11-25 v1.19: Production is live. Commit `90fdd11` is on `main`. Production deploy `6b074fb7e798b7b7c7b42a5e` serves `https://lhsbcor.com/`. Payments and the mailbox stay off. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay open.
 
@@ -746,3 +747,29 @@ Other non-blocking findings from the review:
 - The menu interaction checks pass on the local build and on the draft.
 
 **Draft preview (not production).** `https://6b07673f0b9d465e59464863--lhsbc.netlify.app/`, deploy `6b07673f0b9d465e59464863`, built from the uncommitted working tree. The client demo guide is `docs/LHSBC_CLIENT_DEMO_GUIDE.md`. Email (`info@lhsbcor.com`) and payments stay inactive.
+
+## 44. November 25, 2026 — NAV-01 production publication
+
+The owner approved draft `6b07673f0b9d465e59464863`, including NAV-01 and the admin corrections, and authorized production. No design changes were made in this pass.
+
+**Commit.** `32d5412` ("Add the accordion menu and prepare the client demonstration.") was pushed to `main` at `https://github.com/stellaroskens/LHSBC.git`. It contains only the section 43 application changes, the master record, and `docs/LHSBC_CLIENT_DEMO_GUIDE.md`. The following were deliberately left uncommitted: the untracked `public/assets/canva-assets/final-homepage/` and `public/assets/homepage-image-1/` folders, `references/homepage/LHSBC_Cursor_Handoff.zip`, and `tmp/` screenshots. A scan of the committed files found no secrets or private student information.
+
+**Publishing lock.** Auto-publishing was locked on production deploy `6b075ef250dcb001616aef79`. The push built GitHub-triggered deploy `6b0768f8e5805be40a0ca4e5` (context production, state ready), and the lock kept it unpublished. It was verified at `https://6b0768f8e5805be40a0ca4e5--lhsbc.netlify.app/`:
+- With the menu closed, the homepage is pixel-identical to the previous live site at 1440×900 and 390×844.
+- The dropdown opens under Menu with no page shift at both sizes, and every interaction check passes.
+- All key pages return 200.
+- Donate still says checkout is not live, and its button is disabled.
+
+The deploy was then published manually. Auto-publishing remains **locked**. Later pushes build but do not go live until someone publishes them.
+
+**Production.**
+- URL: `https://lhsbcor.com/`. `https://www.lhsbcor.com/` returns 301 to it.
+- Deployment ID: `6b0768f8e5805be40a0ca4e5`, commit `32d5412`, published `2026-11-25T23:05:01.494Z`.
+- Deploy log: `https://app.netlify.com/projects/lhsbc/deploys/6b0768f8e5805be40a0ca4e5`
+- Main script `/assets/index-D6qLlgDd.js`; stylesheet `/assets/index-CjQzbDpu.css`.
+- Live checks after publishing: the homepage is unchanged at desktop and mobile sizes. The accordion dropdown works on `https://lhsbcor.com/` at 1440 and 390 pixels, including the Support the Team links (Sponsors, Fundraisers, Volunteer, Donate), Escape with focus return, outside click, the Join the club anchor, and closing on selection.
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+
+Payments (Stripe, PayPal, Venmo, Cash App) and the `info@lhsbcor.com` mailbox remain inactive. Staff sign-in remains disabled (`ADMIN_AUTH_ENABLED` is unset).
+
+This record update is a documentation-only commit after `32d5412`. Its Netlify build is intentionally not published, so production stays on the verified deploy above.
