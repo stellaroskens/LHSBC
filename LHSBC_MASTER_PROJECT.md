@@ -367,6 +367,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-25 v1.19: Production is live. Commit `90fdd11` is on `main`. Production deploy `6b074fb7e798b7b7c7b42a5e` serves `https://lhsbcor.com/`. Payments and the mailbox stay off. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay open.
 
 ## 28. November 25, 2026 — Pass 00 and Pass 01 header
 
@@ -688,3 +689,24 @@ Final production publication, only after a separate owner authorization:
 3. Run `npx netlify deploy --prod --site 45fe01b0-d58c-4255-a47d-7cfa8df98ab1 --dir dist --functions netlify/functions --no-build` from `~/Developer/LHSBC`, or let the connected Git production branch publish the same commit.
 4. Confirm `https://lhsbcor.com/` shows this build and `https://www.lhsbcor.com/` redirects to it.
 5. Leave payment accounts and the mailbox off until they are actually configured.
+
+## 42. November 25, 2026 — production launch
+
+The owner approved draft `https://6b074d57d7a776040e6f5a4a--lhsbc.netlify.app` and authorized production.
+
+Application commit `90fdd1131daa55fc68059ec5362163a096cd4f98` is on `main` at `https://github.com/stellaroskens/LHSBC.git`. The commit excludes scratch screenshots, the handoff zip, and unused duplicate artwork folders. No secrets, student records, or private roster files were added. The Albany campaign page and Albany school logo were removed in that commit. The original WAHSB repository was not changed.
+
+Before the launch, Netlify site `lhsbc` (`45fe01b0-d58c-4255-a47d-7cfa8df98ab1`) was still building `https://github.com/stellaroskens/WAHSB` on `main`. It now points at `https://github.com/stellaroskens/LHSBC`, branch `main`, build command `npm run build`, publish directory `dist`. The first Git production attempt, deploy `6b074f56585eb08a27554d1e`, failed while cloning the repository (`Host key verification failed`) and did not publish. Production was then published from the verified local build, the same script as the approved draft.
+
+- Production URL: `https://lhsbcor.com/`
+- Deployment ID: `6b074fb7e798b7b7c7b42a5e`
+- Deploy log: `https://app.netlify.com/projects/lhsbc/deploys/6b074fb7e798b7b7c7b42a5e`
+- State: ready, context production, published `2026-11-25T21:14:34.130Z`
+- Main script: `/assets/index-CT1dYjMO.js` (499,271 bytes). Stylesheet: `/assets/index-DuC2RvBf.css`
+- `https://www.lhsbcor.com/` returns 301 to `https://lhsbcor.com/`
+
+Live checks on November 25, 2026: the homepage, Our Club, Sponsors, Donate, Contact, and Sign In render the Lebanon site. Donate amounts and the checkout button are disabled, and the page says checkout is not live. Contact says the club contact is to be confirmed and the form does not send. Sign In says staff sign-in is not open. `/bowl-a-thon` replaces itself with `/fundraisers`, which says no current fundraiser is published. The public bundle contains no Albany or Bowl-A-Thon text. The official QR files still decode to `https://lhsbcor.com/`.
+
+Security headers on the public pages: `x-content-type-options: nosniff`, `x-frame-options: DENY`, `referrer-policy: strict-origin-when-cross-origin`, `permissions-policy` with camera, microphone, geolocation, and payment empty, and HSTS. `/sign-in` also sends `cache-control: no-store` and `x-robots-tag: noindex, nofollow`. `/api/admin/system-status` returns JSON `admin_auth_disabled`. The sitemap lists `https://lhsbcor.com/` paths.
+
+`info@lhsbcor.com` remains the intended address in the unpublished staff note. It is not shown as a working mailbox. Stripe, PayPal, Venmo, and Cash App stay disconnected. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay deferred. The domain and Netlify project were not replaced.

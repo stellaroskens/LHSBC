@@ -405,3 +405,7 @@ The accepted homepage was not redesigned. A sponsor panel and the shared navy fo
 ## Draft deployment — November 25, 2026
 
 Interior pages use the homepage navy, cream, and red treatment, with readable italic titles. How to Join is on Our Club and does not offer a working mailbox. `info@lhsbcor.com` is the intended address and is not published. NAV-01 remains open. Payments stay off. The draft of this local build is `https://6b074d57d7a776040e6f5a4a--lhsbc.netlify.app`. Production `https://lhsbcor.com/` was not updated. `npm test` 133 passed, 0 failed. `npm run build` succeeded. Nothing was committed or pushed.
+
+## Production launch — November 25, 2026
+
+Production is published. Commit `90fdd1131daa55fc68059ec5362163a096cd4f98` is on `main`. Deployment ID `6b074fb7e798b7b7c7b42a5e` is the live production deploy at `https://lhsbcor.com/`. `https://www.lhsbcor.com/` returns 301 to the apex. The Netlify project is still `45fe01b0-d58c-4255-a47d-7cfa8df98ab1` and now builds `stellaroskens/LHSBC` on `main`. A Git clone attempt failed and did not publish; the verified local build did. Homepage, Our Club, Sponsors, Donate, Contact, and Sign In show the Lebanon site. `/bowl-a-thon` opens the empty fundraisers page. Checkout and the mailbox stay off. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay open. The WAHSB repository was not modified.
