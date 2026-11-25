@@ -1,81 +1,101 @@
-import { useEffect, useRef } from "react"
-import { NavLink } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
+import { NavLink, useLocation } from "react-router-dom"
 import { groupPublicNav, type PublicNavItem } from "../lib/nav/publicMenu"
 
-export function PublicMenu({
-  id,
-  open,
-  items,
-  onClose,
-}: {
+/** Recruitment, sponsorship, and donation shortcuts shown above the categories. */
+const QUICK_LINKS = [
+  { to: "/our-club#how-to-join", label: "Join the club" },
+  { to: "/sponsors", label: "Sponsor" },
+  { to: "/donate", label: "Donate" },
+] as const
+
+const SUPPORT_EXTRA: PublicNavItem = { to: "/donate", label: "Donate" }
+
+function ChevronIcon() {
+  return (
+    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+      <path d="M1 1.5 6 6.5l5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+type MenuProps = {
   id: string
   open: boolean
   items: readonly PublicNavItem[]
   onClose: () => void
-}) {
-  const dialogRef = useRef<HTMLDivElement>(null)
-  const groups = groupPublicNav(items)
+}
+
+/** Dropdown under the Menu button. Not modal: no backdrop, no scroll lock, the page stays put. */
+export function PublicMenu({ open, ...props }: MenuProps) {
+  return open ? <MenuPanel {...props} /> : null
+}
+
+function MenuPanel({ id, items, onClose }: Omit<MenuProps, "open">) {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const { pathname } = useLocation()
+  const groups = groupPublicNav(items).map((group) =>
+    group.id === "support" && !group.links.some((link) => link.to === SUPPORT_EXTRA.to)
+      ? { ...group, links: [...group.links, SUPPORT_EXTRA] }
+      : group,
+  )
+  const [expanded, setExpanded] = useState<string | undefined>(
+    () => groups.find((group) => group.links.some((link) => link.to === pathname))?.id ?? groups[0]?.id,
+  )
 
   useEffect(() => {
-    if (!open) return
-    const dialog = dialogRef.current
-    const focusable = () =>
-      Array.from(dialog?.querySelectorAll<HTMLElement>("a, button") ?? []).filter((item) => !item.hasAttribute("disabled"))
-    focusable()[0]?.focus()
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+    panelRef.current?.querySelector<HTMLElement>("a, button")?.focus()
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        event.preventDefault()
-        onClose()
-        return
-      }
-      if (event.key !== "Tab") return
-      const nodes = focusable()
-      if (nodes.length === 0) return
-      const first = nodes[0]
-      const last = nodes[nodes.length - 1]
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
-      }
+      if (event.key !== "Escape") return
+      event.preventDefault()
+      onClose()
+    }
+
+    function onPointerDown(event: PointerEvent) {
+      const target = event.target as Element | null
+      if (!target || panelRef.current?.contains(target)) return
+      if (target.closest(`[aria-controls="${id}"]`)) return
+      onClose()
     }
 
     document.addEventListener("keydown", onKeyDown)
+    document.addEventListener("pointerdown", onPointerDown)
     return () => {
-      document.body.style.overflow = previousOverflow
       document.removeEventListener("keydown", onKeyDown)
+      document.removeEventListener("pointerdown", onPointerDown)
     }
-  }, [open, onClose])
-
-  if (!open) return null
+  }, [onClose, id])
 
   return (
-    <div className="public-drawer">
-      <button type="button" className="public-drawer__backdrop" aria-label="Close menu" onClick={onClose} />
-      <div
-        ref={dialogRef}
-        id={id}
-        className="public-drawer__panel"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Site menu"
-      >
-        <div className="public-drawer__bar">
-          <p>LHSBC</p>
-          <button type="button" onClick={onClose}>
-            Close
-          </button>
-        </div>
-        <nav aria-label="Primary">
-          {groups.map((group) => (
-            <section key={group.id}>
-              <h2>{group.title}</h2>
-              <ul>
+    <div ref={panelRef} id={id} className="nav-dropdown">
+      <nav aria-label="Primary">
+        <ul className="nav-dropdown__quick" aria-label="Get involved">
+          {QUICK_LINKS.map((item) => (
+            <li key={item.to}>
+              <NavLink to={item.to} onClick={onClose}>
+                {item.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        {groups.map((group) => {
+          const isOpen = expanded === group.id
+          const listId = `${id}-${group.id}`
+          return (
+            <section key={group.id} className="nav-dropdown__group">
+              <h2>
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={listId}
+                  onClick={() => setExpanded(isOpen ? undefined : group.id)}
+                >
+                  <span>{group.title}</span>
+                  <ChevronIcon />
+                </button>
+              </h2>
+              <ul id={listId} hidden={!isOpen}>
                 {group.links.map((item) => (
                   <li key={item.to}>
                     {item.openInNewTab ? (
@@ -92,9 +112,9 @@ export function PublicMenu({
                 ))}
               </ul>
             </section>
-          ))}
-        </nav>
-      </div>
+          )
+        })}
+      </nav>
     </div>
   )
 }

@@ -2076,6 +2076,11 @@
   color: #fff;
 }
 
+.sw-page .sw-contact__email-card p,
+.sw-page .sw-contact__email-card a {
+  color: #fff;
+}
+
 .sw-contact__email-card .contact-page__email a {
   color: #fff;
   font-size: clamp(1.1rem, 1.8vw, 1.35rem);

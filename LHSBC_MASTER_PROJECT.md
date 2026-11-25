@@ -106,7 +106,7 @@ Exact individual dates for P01–P14 not recovered. P11 original ZIP installatio
 | T12 | P2 | OPEN | Obtain delivered uniform quotes, size list, proof and budget approval |
 | T13 | P1 | OPEN | Release QA, privacy/security, metadata, legacy asset review and role gates |
 | T14 | P2 | OPEN | Maintain weekly review, archive completed items, update master record |
-| NAV-01 | Deferred | OPEN | Replace the full-height sidebar with a compact accordion under the Menu button. Expandable navy category headings, cream link backgrounds, red and gold accents. Keep every current destination. Add Donate inside Support the Team. Do not dim the page, shift the page, or change the approved header. Keyboard access stays. Complete before the Pass 09 review. Not started. |
+| NAV-01 | P1 | IN REVIEW | Replace the full-height sidebar with a compact accordion under the Menu button. Expandable navy category headings, cream link backgrounds, red and gold accents. Keep every current destination. Add Donate inside Support the Team. Do not dim the page, shift the page, or change the approved header. Keyboard access stays. Complete before the Pass 09 review. **Built November 25, 2026 (section 43); in draft only, awaiting owner approval before production.** |
 | ART-03 | Deferred | OPEN | The Pass 03 ball and pins are a temporary vector. Replace them in the final visual refinement with artwork that matches the approved support-banner reference. Do not block earlier passes. |
 | FONT-03 | Deferred | OPEN | Review the Support Our Team heading against the approved reference during the final visual refinement. The current band uses the existing Oswald italic. Do not add a font for this now. |
 | ART-05 | Deferred | OPEN | Outstanding visual refinement for Upcoming Events: the calendar illustration, the yellow schedule badge, and the decorative arrow. The current calendar and badge are temporary geometry, and the arrow is absent. Do not correct this during later homepage passes. |
@@ -367,6 +367,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-25 v1.20: Netlify now builds from GitHub. Production is GitHub-triggered deploy `6b075ef250dcb001616aef79` (commit `b71d492`). NAV-01 is built and in review on draft `6b07673f0b9d465e59464863`. Client demo guide added. No commit, push, or production publish. See section 43.
 - 2026-11-25 v1.19: Production is live. Commit `90fdd11` is on `main`. Production deploy `6b074fb7e798b7b7c7b42a5e` serves `https://lhsbcor.com/`. Payments and the mailbox stay off. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay open.
 
 ## 28. November 25, 2026 — Pass 00 and Pass 01 header
@@ -710,3 +711,38 @@ Live checks on November 25, 2026: the homepage, Our Club, Sponsors, Donate, Cont
 Security headers on the public pages: `x-content-type-options: nosniff`, `x-frame-options: DENY`, `referrer-policy: strict-origin-when-cross-origin`, `permissions-policy` with camera, microphone, geolocation, and payment empty, and HSTS. `/sign-in` also sends `cache-control: no-store` and `x-robots-tag: noindex, nofollow`. `/api/admin/system-status` returns JSON `admin_auth_disabled`. The sitemap lists `https://lhsbcor.com/` paths.
 
 `info@lhsbcor.com` remains the intended address in the unpublished staff note. It is not shown as a working mailbox. Stripe, PayPal, Venmo, and Cash App stay disconnected. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay deferred. The domain and Netlify project were not replaced.
+
+## 43. November 25, 2026 — client presentation readiness
+
+**Production record.** The Netlify repository connection was corrected by the owner. The GitHub-triggered production deploy succeeded and is the current verified production: deploy `6b075ef250dcb001616aef79`, commit `b71d492aaf1bff1804cbfbfab81389687ac50d4e`, branch `main`, repository `https://github.com/stellaroskens/LHSBC.git`, serving `https://lhsbcor.com/`. The Netlify API confirmed this deploy is still published at the end of this pass. Nothing was committed, pushed, or published to production in this pass.
+
+**NAV-01 built (in review).** `src/components/PublicMenu.tsx` replaces the full-height sidebar with a dropdown that opens directly under the Menu button. It has three red and gold quick links at the top (Join the club → `/our-club#how-to-join`, Sponsor → `/sponsors`, Donate → `/donate`), then four accordion categories with navy headings, gold chevrons, and cream link lists. Donate was added inside Support the Team. Every published destination is kept. There is no backdrop and no scroll lock, so the page is not dimmed or shifted. It closes on a selection, an outside click, a second Menu press, or Escape, and Escape returns focus to Menu. Category buttons expose `aria-expanded`. The panel fits a 390-pixel phone. The approved header was not changed. The old drawer styles were removed from `portal.css`, and the new styles are in `header.css`. `scripts/publicNav.test.ts` now checks the non-modal dropdown instead of `aria-modal`.
+
+**Public page fixes.** On Contact, the Club Email card's text was dark on navy and could not be read. It is now white (`sitewide.css`). On Meet the Bowlers, the title now has space below it and "Group by school" no longer wraps (`bowlers.css`). No content was invented.
+
+**Admin fixes.** `netlify/functions/content-history.ts` referred to an undefined `context`, which would make `/admin/history` fail once sign-in is enabled. It now uses the function's `context` argument, and the super_admin check is unchanged. The content editor's Publish help text claimed changes go straight to the public website. It now says changes are saved to the review branch, which matches `publishTarget.ts`.
+
+**Admin readiness (code review, no sign-in bypassed).** Every `/admin`, `/coach`, and `/team-administrator` screen requires Netlify Identity, checked on the server. Production returns `admin_auth_disabled` because `ADMIN_AUTH_ENABLED` is not set. Turning sign-in on requires:
+- Identity enabled with invite-only registration.
+- `ADMIN_AUTH_ENABLED=true`, `VITE_ADMIN_AUTH_ENABLED=true`, and `ADMIN_EMAIL_ALLOWLIST`.
+- A `super_admin` role on the owner's account.
+
+Saving edits also needs `GITHUB_CONTENT_TOKEN`, and edits are made from a preview or branch deploy, since production writes are blocked. The following are not built: donations checkout, the announcement email sender, the family accounts database, and guardian consent storage. No demonstration accounts were created. The full table is in `docs/LHSBC_CLIENT_DEMO_GUIDE.md`.
+
+**Open items for owner approval.** These were not changed, because the footer also appears on the approved homepage:
+- The footer wordmark subtitle "Lebanon High School Bowling Club" is dark blue on navy and hard to read.
+- The dev-only "Follow" heading has the same problem.
+
+Other non-blocking findings from the review:
+- Team administrators have the `propose_announcements` permission but no screen for it.
+- Staff bowler editing saves a full-site content draft.
+- Rate limiting is per function instance.
+- Multi-factor authentication is not enforced.
+
+**Verification.**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds, with only the existing chunk-size warning.
+- No horizontal overflow or broken images on Our Club, Sponsors, Donate, Fundraisers, Contact, Meet the Bowlers, Practices, or Tournaments at 1440 and 390 pixels.
+- With the menu closed, the draft homepage is pixel-identical to production at 1440×900 and 390×844.
+- The menu interaction checks pass on the local build and on the draft.
+
+**Draft preview (not production).** `https://6b07673f0b9d465e59464863--lhsbc.netlify.app/`, deploy `6b07673f0b9d465e59464863`, built from the uncommitted working tree. The client demo guide is `docs/LHSBC_CLIENT_DEMO_GUIDE.md`. Email (`info@lhsbcor.com`) and payments stay inactive.

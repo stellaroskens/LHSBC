@@ -7,7 +7,7 @@ function json(status: number, body: unknown): Response {
   return Response.json(body, { status, headers: { "Cache-Control": "no-store" } })
 }
 
-export default async (req: Request, _context: Context) => {
+export default async (req: Request, context: Context) => {
   if (req.method !== "GET") return json(405, { error: "Method not allowed." })
 
   const auth = await requireSuperAdmin(context)
