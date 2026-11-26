@@ -367,6 +367,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-25 v1.27: Final design release published. Commit `32677b3`, production deploy `6b0776fbc59d1b17b27ae880`, published 2026-11-26T00:07:14.833Z. Auto-publishing is still locked. Rollback: `6b0768f8e5805be40a0ca4e5`. See section 50.
 - 2026-11-25 v1.26: Owner-approved footer readability fix (subtitle and Follow heading now cream). Final consolidated draft `6b0774fec2d47481687baad4`. Development closed for the client presentation. No commit, push, or production publish. See section 49.
 - 2026-11-25 v1.25: Design passes 3 to 7 (Tournaments, Sponsors, Donate, Fundraisers, Contact) are in one consolidated draft, `6b077306a75a7dee3b4fe6be`. No commit, push, or production publish. See section 48.
 - 2026-11-25 v1.24: Design pass 2 (Practices schedule board) is in draft `6b0770544786321df7c87c44`. No commit, push, or production publish. See section 47.
@@ -942,3 +943,34 @@ The owner approved one minor footer correction as an authorized exception to the
 - Content waiting on leadership: club email, coach names, practice venue and schedule, tournament dates, registration status, sponsors, fundraisers, and social media links.
 - The footer and header wordmark is the temporary text version until approved artwork is supplied. The official logo on the homepage is unaffected.
 - The build warns that one JavaScript chunk is larger than the recommended size. This is a performance note, not a defect.
+
+## 50. November 25, 2026 — final design release published to production
+
+The owner approved final draft `6b0774fec2d47481687baad4`, design passes 1 to 7, and the footer readability fix, and authorized production publication. No code, features, design changes, or dependencies were added in this step.
+
+**Rollback record.** Before publication, production was deploy `6b0768f8e5805be40a0ca4e5` (commit `32d5412`, published `2026-11-25T23:05:01.494Z`, locked). To roll back, publish that deploy again from the Netlify deploy list or with `restoreSiteDeploy`.
+
+**Commit.** `32677b3` ("Apply the approved retro design passes across the public pages.") was pushed to `main` at `https://github.com/stellaroskens/LHSBC.git`. It contains 13 files: the nine page and stylesheet changes reviewed in sections 46 to 49, the master record, and the design system approval notes. A scan found no secrets or private student information. Left uncommitted on purpose: `public/assets/canva-assets/final-homepage/`, `public/assets/homepage-image-1/`, `references/homepage/LHSBC_Cursor_Handoff.zip`, and `tmp/`.
+
+**Build and publication.**
+- The push built deploy `6b0776fbc59d1b17b27ae880` (context production, state ready). The lock kept it unpublished.
+- Before publishing, it was compared with the approved draft. Home, Donate, Tournaments, Sponsors, Our Club, and Practices were pixel-identical at 1440 × 900 and 390 × 844, and the menu checks passed.
+- It was then published manually at `2026-11-26T00:07:14.833Z`. Auto-publishing remains **locked**.
+
+**Production.**
+- URL: `https://lhsbcor.com/`. `https://www.lhsbcor.com/` returns 301 to it.
+- Deployment ID: `6b0776fbc59d1b17b27ae880`, commit `32677b3`.
+- Deploy log: `https://app.netlify.com/projects/lhsbc/deploys/6b0776fbc59d1b17b27ae880`
+- Main script `/assets/index-Bd5mKLom.js`; stylesheet `/assets/index-SV5rv4IY.css`.
+
+**Live checks after publishing:**
+- All 15 public pages on `https://lhsbcor.com/` match the approved draft pixel for pixel at desktop and mobile sizes. A one-off Practices difference was rendering noise; the draft itself renders both ways between captures, and a re-capture matched exactly.
+- No page has horizontal overflow or broken images.
+- The menu works on desktop and mobile: the accordion, the Support the Team links, Escape with focus return, outside click, the toggle, the Join the club anchor, and closing on selection.
+- The footer subtitle is cream (`rgb(255, 253, 248)`).
+- Donate's checkout button is disabled and the page says checkout is not live. Sign In says staff sign-in is not open.
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+
+Givebutter, payments (Stripe, PayPal, Venmo, Cash App), email delivery, and the unconfigured forms remain inactive. Staff sign-in remains disabled (`ADMIN_AUTH_ENABLED` is unset). Authentication, permissions, and privacy protections are unchanged.
+
+This record update is a documentation-only commit after `32677b3`. Its Netlify build is intentionally not published, so production stays on the verified deploy above.
