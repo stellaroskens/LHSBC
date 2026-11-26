@@ -367,6 +367,11 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-25 v1.26: Owner-approved footer readability fix (subtitle and Follow heading now cream). Final consolidated draft `6b0774fec2d47481687baad4`. Development closed for the client presentation. No commit, push, or production publish. See section 49.
+- 2026-11-25 v1.25: Design passes 3 to 7 (Tournaments, Sponsors, Donate, Fundraisers, Contact) are in one consolidated draft, `6b077306a75a7dee3b4fe6be`. No commit, push, or production publish. See section 48.
+- 2026-11-25 v1.24: Design pass 2 (Practices schedule board) is in draft `6b0770544786321df7c87c44`. No commit, push, or production publish. See section 47.
+- 2026-11-25 v1.23: Owner approved the creative direction and permanent preferences (balanced navy and cream, moderate retro accents, clean private dashboards). Refinement order set. Design pass 1 (Our Club / How to Join) is in draft `6b076db398b6a78ac4717c9a`. No commit, push, or production publish. See section 46.
+- 2026-11-25 v1.22: Recorded the permanent website-wide creative direction (Modern American Retro Bowling — Refined Atomic Age Marquee) and the page compliance review. Information, Meet the Bowlers, and bowler profiles were refined in draft `6b076c5b55b3fdf1784648c9`. No commit, push, or production publish. See section 45.
 - 2026-11-25 v1.21: Owner approved the draft. Commit `32d5412` pushed to `main`; GitHub-built deploy `6b0768f8e5805be40a0ca4e5` verified and published to `https://lhsbcor.com/` with auto-publishing still locked. NAV-01 done. See section 44.
 - 2026-11-25 v1.20: Netlify now builds from GitHub. Production is GitHub-triggered deploy `6b075ef250dcb001616aef79` (commit `b71d492`). NAV-01 is built and in review on draft `6b07673f0b9d465e59464863`. Client demo guide added. No commit, push, or production publish. See section 43.
 - 2026-11-25 v1.19: Production is live. Commit `90fdd11` is on `main`. Production deploy `6b074fb7e798b7b7c7b42a5e` serves `https://lhsbcor.com/`. Payments and the mailbox stay off. NAV-01, ART-03, ART-05, ART-06, and FONT-03 stay open.
@@ -773,3 +778,167 @@ The deploy was then published manually. Auto-publishing remains **locked**. Late
 Payments (Stripe, PayPal, Venmo, Cash App) and the `info@lhsbcor.com` mailbox remain inactive. Staff sign-in remains disabled (`ADMIN_AUTH_ENABLED` is unset).
 
 This record update is a documentation-only commit after `32d5412`. Its Netlify build is intentionally not published, so production stays on the verified deploy above.
+
+## 45. November 25, 2026 — permanent website-wide creative direction
+
+**Owner direction (permanent).** The approved homepage is the authoritative visual foundation for the whole website. Do not redesign it. Every page carries the same identity: **Modern American Retro Bowling — Refined Atomic Age Marquee**. That means mid-century American bowling alley character, subtle retro-futurism, vintage marquee signage, classic athletic typography, restrained Atomic Age details, mostly matte surfaces, and modern usability. It must never feel like a themed diner, a comic book, a cartoon, a generic sports template, or a gaming interface.
+
+**Authorities, in order:**
+1. The currently published homepage, shared header, accordion menu (NAV-01), and shared footer.
+2. The official LHSBC logo masters.
+3. `references/homepage/LHSBC_Cursor_Handoff/reference/APPROVED_HOMEPAGE.png`, for visual direction.
+
+Superseded homepage designs are not restored.
+
+**Reconciliation with the existing design system.** No new design system is introduced. The direction maps to what is already in the code:
+
+| Direction | Existing implementation |
+|---|---|
+| Deep navy, cream, bowling red, restrained gold | `--sw-navy #081f46`, `--sw-backdrop #faf4e6`, `--sw-paper #fffdf8`, `--sw-red #e30616`, `--sw-red-dark #a50814` (`src/styles/sitewide.css`). The header uses the same values (`--header-*`, gold `#e9b23c`) in `src/styles/header.css` |
+| Athletic condensed type, bold italic headings | `--display` (Oswald) and `--body` (Source Sans 3) in `global.css`. Page titles use `.ah__title` (italic) |
+| Marquee page openings | `AthleticHero` (`src/components/AthleticHero.tsx`) with per-page `scene` backdrops and sweeping red and blue streaks |
+| Section headings with a red rule | `SectionHeading` / `.sw-heading` |
+| Matte cards with clean navy outlines | `.sw-page .card`: cream paper, 3px navy border, rounded corners, no gloss |
+| Marquee buttons | `.sw-btn`, `.sw-btn--ghost`, `.sw-btn--outline`. The header pills are the only glossy buttons |
+
+Rules for future work:
+- Gloss is reserved for selected buttons and marquee accents.
+- Cards, forms, and tables stay matte.
+- Decoration (starbursts, pinstripes, streaks, plaques, scoreboard details) is used sparingly, never behind important text, and never as an animated or glowing border.
+- Simple geometry is drawn in CSS or SVG. Complex bowling art must be sharp, approved artwork.
+- Private and admin areas stay restrained: branding through color and type only, with readability, tables, and data entry first.
+
+**Page compliance review (November 25, 2026).**
+
+| Page | Status | Notes |
+|---|---|---|
+| Home `/` | Authority | Do not change |
+| Our Club `/our-club` | Complies | Marquee hero, How to Join, coach cards, team sport and volunteer panels |
+| Practices `/practices` | Complies | Photo hero and FAQ. Next: schedule-board treatment once a schedule is published |
+| Tournaments `/tournaments` | Complies | Next: championship and scoreboard treatment for event cards once dates exist |
+| Sponsors `/sponsors` | Complies | Recognition levels already read as tiers. Next: refined recognition-plaque styling |
+| Donate `/donate` | Complies | Calm, trustworthy, clear "checkout is not live" status |
+| Fundraisers `/fundraisers` | Complies | Short because no fundraiser is published. Content-dependent |
+| Contact `/contact` | Complies | Club Email card contrast fixed in section 43 |
+| Resources, FAQ, Volunteer, Team Gear, Sponsor QR, Family, Sign In | Comply | Shared hero and matte cards. Resources stays clean and organized |
+| **Information `/information`** | **Refined this pass** | Was effectively unstyled. Now uses the marquee hero with How to Join and Donate actions, plus a two-column "Club directory" board of navy-outlined rows with red chevrons. The same eight destinations and descriptions are kept. The outdated "a dedicated How to Join page will replace that link" note now links to `/our-club#how-to-join` |
+| **Meet the Bowlers `/meet-the-bowlers`** | **Refined this pass** | Was a separate dark theme with a plain heading. Now uses the shared hero (CSS marquee scene; the blurred sign photo was rejected as not sharp), a matte directory panel, and **athletic trading cards**: cream card, navy frame, gold pinstripe, red name band. Search, school filter, sort, grouping, and privacy text are unchanged |
+| **Bowler profile `/meet-the-bowlers/:id`** | **Refined this pass** | Trading-card portrait frame, italic name, navy fact chips. The Season Snapshot uses a scoreboard style (navy tiles, gold figures, red top rule). The statistics table has a navy header row |
+| Page not found, Staff login | Acceptable | Plain utility pages. Low priority |
+| Admin, Coach, Team Administrator dashboards | Not visually reviewed | Behind staff sign-in, which is disabled. Review once sign-in is enabled, without bypassing auth |
+| Shared footer | Open item, owner approval needed | The wordmark subtitle and dev-only "Follow" heading are dark blue on navy. The footer appears on the homepage, so it was not changed |
+
+**Temporary artwork to replace:**
+- `BrandWordmark` is a text wordmark used until approved logo artwork is installed in the footer and Team Gear.
+- The bowler silhouette placeholders stay until guardian-approved roster cards exist.
+
+**Files changed in this pass:** `src/pages/Information.tsx`, `src/pages/MeetTheBowlers.tsx`, `src/pages/BowlerProfilePage.tsx` (wrapper class only), `src/styles/bowlers.css`, `src/styles/sitewide.css` (Information board and the `ah--team` hero scene). Routes, data, privacy text, filters, authentication, and tests are unchanged.
+
+**Verification:**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+- No horizontal overflow or broken images on the refined pages at 1440 and 390 pixels.
+- The draft homepage is pixel-identical to production at both sizes, and the accordion menu checks pass on the draft.
+
+**Draft preview (not production):** `https://6b076c5b55b3fdf1784648c9--lhsbc.netlify.app/`, deploy `6b076c5b55b3fdf1784648c9`. Production remains deploy `6b0768f8e5805be40a0ca4e5`, with auto-publishing locked. Nothing was committed, pushed, or published.
+
+## 46. November 25, 2026 — owner approval of the design direction and design pass 1
+
+**Approved permanently.** The owner approved the section 45 creative direction with these preferences:
+- **Interior page backgrounds:** a balanced mix of navy and warm cream, chosen by each page's purpose. Navy bands are for marquee, recruitment, and scoreboard moments; cream is for reading, lists, and forms.
+- **Decorative intensity:** moderate, tasteful retro accents.
+- **Private dashboards:** modern and clean, with subtle LHSBC branding.
+
+**Protected elements:** the approved homepage, the official LHSBC logo, NAV-01, the working admin tools, authentication and permissions, the current production website, the custom domain, and the official QR code. The preferences are also recorded in the approval record of `references/homepage/LHSBC_Cursor_Handoff/LHSBC_DESIGN_SYSTEM.md` and in the header comment of `src/styles/sitewide.css`.
+
+**Refinement order** (one page per pass, with a preview after each):
+1. Our Club / How to Join
+2. Practices: schedule-board treatment and a navy band
+3. Tournaments: championship and scoreboard event cards
+4. Sponsors: refined recognition plaques
+5. Donate: trust-focused summary panel
+6. Fundraisers and Contact: minor navy and cream balance
+7. Spot-check Resources, FAQ, Volunteer, Team Gear, Sponsor QR, Family, and Sign In, which already meet the standard
+
+Information, Meet the Bowlers, and bowler profiles were already refined in section 45. The private dashboards will be reviewed once staff sign-in is enabled.
+
+**Design pass 1 — Our Club / How to Join** (`src/pages/OurClub.tsx`, `src/styles/sitewide.css`):
+- **Hero:** keeps the intro, the page links, and both buttons. The duplicated registration-status block was removed from the hero; the same text remains in How to Join and the volunteer panel.
+- **How to join:** now a welcoming navy marquee band with a gold frame, a gold pinstripe, one small gold starburst, a red "Recruitment" chip, and an italic heading with a red rule. The registration status sits on a cream plaque with a gold border. The existing explanation is unchanged. Practices, Meet the bowlers, Tournaments, and Contact appear as cream link tiles with red chevrons under "Get to know the club."
+- **What stayed the same:** the `#how-to-join` anchor (used by NAV-01 and the Information page), the wording, the coaches, the info panels, and the CTA band. A red diagonal streak was tried and removed because it crossed the link tiles.
+
+**Verification:**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+- Our Club has no horizontal overflow at 1440, 820 (tablet), and 390 pixels.
+- The draft homepage is pixel-identical to production at desktop and mobile sizes.
+- The menu checks pass on the draft, and "Join the club" lands on How to Join.
+
+**Draft preview (not production):** `https://6b076db398b6a78ac4717c9a--lhsbc.netlify.app/our-club`, deploy `6b076db398b6a78ac4717c9a`. It also contains the section 45 refinements. Production is unchanged (deploy `6b0768f8e5805be40a0ca4e5`, locked). Nothing was committed, pushed, or published.
+
+## 47. November 25, 2026 — design pass 2: Practices schedule board
+
+The owner authorized the Practices pass, using the homepage and the refined Our Club page as the foundation. The goal is a modern take on a vintage bowling alley schedule board, not a diner menu and not a cartoon.
+
+**Changes** (`src/pages/Practices.tsx`, `src/styles/sitewide.css`, Practices selectors only):
+- **Practice board.** The Location and Schedule panels now sit inside a navy board with a gold frame and a gold inner pinstripe. A red marquee title plate reads "★ Practice board ★". The two panels are cream with gold borders, a red top rule, a fine gold pinstripe, and italic headings. On desktop they split 7/5 in a row; on tablet and mobile they stack.
+- **Schedule letterboard.** The schedule status is shown on a recessed navy letterboard plate. The title is in gold condensed capitals and the body in cream condensed capitals.
+- **Support panels.** What to Bring and Registration stay cream cards below the board, now with a navy top rule and a gold pinstripe.
+- **What stayed the same:** the hero (lanes photo and both buttons), the `#practice-location` anchor, the confirmed-venue code path (phone, directions, and website buttons appear automatically once venue data is published), the Practice FAQs, and every wording string.
+
+No practice dates, times, or locations were invented. The board shows only the published "to be confirmed" content, and its slots fill in from `practiceLocation` and `library.practices` when leadership publishes details.
+
+**Verification:**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+- Practices has no horizontal overflow at 1440, 820, and 390 pixels.
+- The hero venue button scrolls to the Location panel, and FAQ items expand.
+- The draft homepage is pixel-identical to production at desktop and mobile sizes, and the menu checks pass on the draft.
+- Our Club, Information, and Meet the Bowlers were not touched in this pass.
+
+**Housekeeping.** The local disk filled up during verification because of temporary headless-browser profiles created by the screenshot scripts. They were deleted (about 6.5 GB). The scripts now remove each profile after use. No project files were affected.
+
+**Draft preview (not production):** `https://6b0770544786321df7c87c44--lhsbc.netlify.app/practices`, deploy `6b0770544786321df7c87c44`. It includes passes 1 and 2 and the section 45 refinements. Production is unchanged (deploy `6b0768f8e5805be40a0ca4e5`, locked). Nothing was committed, pushed, or published.
+
+## 48. November 25, 2026 — design passes 3 to 7: Tournaments, Sponsors, Donate, Fundraisers, Contact
+
+The owner asked for the remaining passes to run back to back without separate approvals, followed by one consolidated preview. Each pass follows the approved homepage direction and the section 46 preferences. The homepage, the logo, NAV-01, the admin tools, authentication, the production site, the domain, and the QR code were not touched.
+
+**Pass 3: Tournaments, championship board.** The season section now sits in the same gold-framed navy board used on Practices. Its red title plate reads "★ Championship board ★". Event cards are cream tiles with a gold border and pinstripe. The date block is a recessed navy scoreboard with gold numerals, the event kind is a red ribbon label, and titles are italic. Arrival, Attire, the spectator note, and the FAQ are unchanged. No dates, venues, or events were added; the cards still say "Date not confirmed".
+
+**Pass 4: Sponsors, recognition plaques.** The Sponsor Recognition panel is now a navy band with a gold frame. The three recognition levels are cream plaques with a double gold border, CSS corner rivets, centered italic titles, and a red amount nameplate with a gold edge. Body text stays left-aligned for readability. The levels, amounts, and conditions are the existing verified text. No sponsors were added.
+
+**Pass 5: Donate, trust panels.** The donation form sits in a matte cream panel with a red top rule and gold pinstripe. Beside it on desktop (below it on mobile), a navy "★ Giving with confidence ★" panel holds the existing payment-security and tax-status notes under the labels "Payment security" and "Tax status". Business sponsorship and Questions are paired cards. The three related links are outlined pills. Checkout stays disabled, every "not live" statement is kept, and the canceled and returned status messages are unchanged.
+
+**Pass 6: Fundraisers, campaign board.** No LHSBC fundraiser is published (section 34), so the page shows its empty state. Below the hero, a navy "★ Campaign board ★" marquee says "No fundraiser posted yet" and that details will be posted when the club confirms a fundraiser. The four existing links (Sponsors, Donate, Our Club, Contact) are gold-outlined pills. No campaign was invented. The published-fundraiser layout is unchanged and will appear automatically when one is published.
+
+**Pass 7: Contact, branded details.** The form card has a red top rule and gold pinstripe. The navy Club Email card has a gold frame and gold heading rule. The Coaches card has a navy top rule. The form is still a preview and sends nothing; email stays deferred.
+
+**Verification:**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+- All five pages were captured on the draft at 1440, 820, and 390 pixels. None has horizontal overflow or broken images.
+- The draft homepage is pixel-identical to `https://lhsbcor.com/` at 1440 × 900 and 390 × 844.
+- The menu checks pass on the draft: the accordion, Escape, outside click, the toggle, the How to Join link, and page links.
+- Temporary browser profiles were deleted after each capture. None remain.
+
+**Draft preview (not production):** `https://6b077306a75a7dee3b4fe6be--lhsbc.netlify.app/`, deploy `6b077306a75a7dee3b4fe6be`. It contains passes 1 to 7 and the section 45 refinements. Production is unchanged (deploy `6b0768f8e5805be40a0ca4e5`, locked). Nothing was committed, pushed, or published.
+
+**Still open for the owner:** the footer wordmark subtitle and the "Follow" heading are dark blue on navy. The footer is shared with the homepage, so the fix waits for owner approval.
+
+## 49. November 25, 2026 — footer readability fix and final presentation draft
+
+The owner approved one minor footer correction as an authorized exception to the protected-homepage rule. Only two text colors changed. The footer wordmark subtitle ("Lebanon High School Bowling Club" under "LHSBC") and the "Follow Lebanon High School Bowling Club" heading were dark blue on navy. Both now use the footer's existing cream, `#fffdf8`, the same color as its other headings. The change is one footer-scoped rule in `src/styles/global.css`. Layout, artwork, spacing, typography, and all other homepage elements are unchanged. The draft homepage differs from production only in the subtitle's text box (desktop 132,2199 to 345,2232; mobile 18,3641 to 217,3654). The Follow row appears only when social links are configured, so the production build doesn't show it yet; its computed color on the dev server is cream.
+
+**Verification on the final draft:**
+- `npm test`: 133 of 133 pass. `npm run build`: succeeds.
+- 15 public pages were captured at 1440 × 900 and 390 × 844: Home, Our Club, Practices, Tournaments, Meet the Bowlers, Team Gear, Sponsors, Fundraisers, Donate, Resources, Volunteer, FAQ, Contact, Information, and Sign In. None has horizontal overflow, a broken image, or a "Page not found" result.
+- All 44 unique internal links on those pages resolve to a known route or a built file. Every in-page anchor target exists.
+- The footer is readable on desktop and mobile.
+- Design passes 1 to 7 are preserved. No new features or design passes were started.
+- No temporary browser profiles remain.
+
+**Final draft (not production):** `https://6b0774fec2d47481687baad4--lhsbc.netlify.app/`, deploy `6b0774fec2d47481687baad4`. Production is unchanged (deploy `6b0768f8e5805be40a0ca4e5`, locked). Nothing was committed, pushed, or published. Development is closed for the client presentation and waits for the owner's final approval.
+
+**Known limitations at close:**
+- Payments, Givebutter, and email are deferred. Checkout is disabled, and the contact and sponsor forms are previews that send nothing.
+- Staff and family sign-in is not open, so private dashboards weren't visually reviewed in this cycle.
+- Content waiting on leadership: club email, coach names, practice venue and schedule, tournament dates, registration status, sponsors, fundraisers, and social media links.
+- The footer and header wordmark is the temporary text version until approved artwork is supplied. The official logo on the homepage is unaffected.
+- The build warns that one JavaScript chunk is larger than the recommended size. This is a performance note, not a defect.

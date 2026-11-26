@@ -1,73 +1,92 @@
+/* Meet the Bowlers: shared cream page, athletic trading-card directory. */
+
 .meet-bowlers {
-  background:
-    radial-gradient(circle at top right, rgba(20, 60, 148, 0.45), transparent 28rem),
-    linear-gradient(180deg, #071433 0%, var(--sw-navy) 40%, #081226 100%);
-  color: #e7eefb;
-  padding: 1.25rem 0 3rem;
+  padding-bottom: 3rem;
 }
 
 .meet-bowlers h1,
 .meet-bowlers h2,
 .meet-bowlers h3 {
-  color: #fff;
+  color: var(--sw-navy);
   text-transform: uppercase;
 }
 
-.meet-hero,
+.meet-season,
 .meet-directory,
 .meet-upcoming,
 .meet-profile,
 .meet-summary,
 .meet-table-wrap,
-.meet-bowlers > section {
+.meet-bowlers > section:not([class]),
+.meet-back,
+.meet-missing {
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto 1.5rem;
 }
 
-.meet-hero__logo {
-  width: min(100%, 28rem);
-  height: auto;
+.meet-season {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--sw-navy);
+  border-left: 6px solid var(--sw-red);
+  border-radius: var(--sw-radius);
+  background: var(--sw-paper);
+}
+
+.meet-season h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.meet-season p {
+  margin: 0 0 0.35rem;
 }
 
 .meet-hero__eyebrow {
-  margin: 0.8rem 0 0.2rem;
-  color: #ffd0d6;
+  margin: 0 0 0.2rem;
+  color: var(--sw-red);
+  font-family: var(--display);
   font-weight: 700;
   letter-spacing: 0.14em;
 }
 
-.meet-hero h1 {
-  margin: 0 0 0.75rem;
-  font-size: clamp(2.4rem, 7vw, 4.6rem);
-  line-height: 0.92;
-}
-
-.meet-hero__privacy,
 .meet-note,
 .meet-empty,
 .meet-missing {
-  color: #c9d4ea;
+  color: var(--sw-muted);
+}
+
+/* Directory panel and filters */
+
+.meet-directory {
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 3px solid var(--sw-navy);
+  border-radius: 1.15rem;
+  background: var(--sw-paper);
 }
 
 .meet-filters {
   display: grid;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--sw-line);
 }
 
 .meet-filters label {
   display: grid;
   gap: 0.3rem;
-  color: #d5e0f5;
+  color: var(--sw-ink);
+  font-weight: 600;
 }
 
 .meet-filters input,
 .meet-filters select {
   min-height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #8b97ad;
   border-radius: 8px;
-  background: #10224d;
-  color: #fff;
+  background: #fff;
+  color: #172033;
   padding: 0.4rem 0.7rem;
 }
 
@@ -79,41 +98,79 @@
   white-space: nowrap;
 }
 
+.meet-filters__check input {
+  min-height: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--sw-red);
+}
+
+/* Trading cards */
+
 .meet-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.1rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .meet-card {
+  position: relative;
   display: grid;
-  gap: 0.45rem;
+  align-content: start;
+  gap: 0.4rem;
   height: 100%;
-  padding: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: 3px solid var(--sw-red);
+  padding: 0.6rem 0.6rem 0.9rem;
+  border: 3px solid var(--sw-navy);
   border-radius: 14px;
-  background: #10244f;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  background: var(--sw-backdrop);
+  box-shadow: inset 0 0 0 3px var(--sw-backdrop), inset 0 0 0 4px #e9b23c;
+  transition: transform 160ms ease;
 }
 
-.meet-card a {
-  color: #fff;
+.meet-card > a {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--sw-ink);
   text-decoration: none;
 }
 
-.meet-card__view {
+.meet-card h3 {
+  margin: -1.1rem 0.4rem 0;
+  position: relative;
+  padding: 0.35rem 0.6rem;
+  border: 2px solid #e9b23c;
+  border-radius: 6px;
+  background: var(--sw-red);
   color: #fff;
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.meet-card p {
+  margin: 0 0.35rem;
+  color: var(--sw-ink);
+  font-size: 0.95rem;
+}
+
+.meet-card .meet-card__view {
+  justify-self: start;
+  margin: 0.25rem 0.35rem 0;
+  color: var(--sw-red-dark);
+  font-family: var(--display);
   font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .meet-card__view:focus-visible,
 .meet-card a:focus-visible,
 .meet-back a:focus-visible {
-  outline: 3px solid #fff;
+  outline: 3px solid #e9b23c;
   outline-offset: 3px;
 }
 
@@ -121,8 +178,9 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 12px;
-  background: #0b1736;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 50% 35%, #163a7d, var(--sw-navy) 70%);
 }
 
 .bowler-frame--card {
@@ -132,6 +190,8 @@
 .bowler-frame--profile {
   aspect-ratio: 4 / 5;
   width: min(100%, 18rem);
+  border: 3px solid var(--sw-navy);
+  box-shadow: 0 0 0 3px var(--sw-backdrop), 0 0 0 4px #e9b23c;
 }
 
 .bowler-frame img {
@@ -141,8 +201,10 @@
 }
 
 .meet-group {
-  margin: 1.2rem 0 0.6rem;
+  margin: 1.2rem 0 0.8rem;
 }
+
+/* Upcoming tournaments, profile, statistics */
 
 .meet-upcoming__list {
   display: grid;
@@ -152,20 +214,25 @@
   list-style: none;
 }
 
-.meet-upcoming li,
+.meet-upcoming,
 .meet-profile,
 .meet-summary,
 .meet-table-wrap,
-.meet-bowlers > section {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  background: rgba(8, 22, 52, 0.72);
-  padding: 1rem;
+.meet-bowlers > section:not([class]) {
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 3px solid var(--sw-navy);
+  border-radius: 1.15rem;
+  background: var(--sw-paper);
+  color: var(--sw-ink);
 }
 
 .meet-upcoming li {
   display: grid;
   gap: 0.6rem;
+  padding: 0.75rem;
+  border: 1px solid var(--sw-line);
+  border-radius: 10px;
+  background: #fff;
 }
 
 .meet-upcoming__date {
@@ -173,7 +240,7 @@
   justify-items: center;
   min-width: 4.5rem;
   margin: 0;
-  color: #fff;
+  color: var(--sw-navy);
 }
 
 .meet-upcoming__date strong {
@@ -184,34 +251,45 @@
 .meet-upcoming a,
 .meet-back a,
 .meet-missing a {
-  color: #fff;
+  color: var(--sw-navy);
+  font-weight: 600;
+}
+
+.meet-back {
+  margin-top: 1.25rem;
 }
 
 .meet-profile {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
+  border-top: 6px solid var(--sw-red);
 }
 
 .meet-profile h1 {
   margin: 0;
   font-size: clamp(2rem, 6vw, 4rem);
+  font-style: italic;
+  line-height: 0.95;
 }
 
 .meet-facts {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 0.6rem 0;
+  margin: 0.75rem 0;
   padding: 0;
   list-style: none;
 }
 
 .meet-facts li {
-  padding: 0.35rem 0.6rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  background: #143c94;
+  background: var(--sw-navy);
+  color: #fff;
+  font-weight: 600;
 }
 
+/* Season snapshot reads like a scoreboard. */
 .meet-summary ul {
   display: grid;
   grid-template-columns: 1fr;
@@ -222,20 +300,28 @@
 }
 
 .meet-summary li {
-  padding: 0.75rem;
-  border-top: 3px solid var(--sw-red);
-  background: #10244f;
+  padding: 0.75rem 0.9rem;
+  border-top: 4px solid var(--sw-red);
+  border-radius: 8px;
+  background: var(--sw-navy);
 }
 
-.meet-summary span,
-.meet-table {
+.meet-summary span {
   color: #d5e0f5;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .meet-summary strong {
   display: block;
-  color: #fff;
+  color: #ffc400;
+  font-family: var(--display);
   font-size: 1.3rem;
+}
+
+.meet-table {
+  color: var(--sw-ink);
 }
 
 .meet-table-scroll {
@@ -251,9 +337,14 @@
 .meet-table th,
 .meet-table td {
   padding: 0.55rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--sw-line);
   text-align: left;
   white-space: nowrap;
+}
+
+.meet-table th {
+  background: var(--sw-navy);
+  color: #fff;
 }
 
 .meet-honors {
@@ -267,6 +358,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .meet-summary ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .meet-filters {
     grid-template-columns: 1.4fr 1fr 1fr auto;
     align-items: end;
@@ -277,17 +372,15 @@
     grid-template-columns: 11rem minmax(0, 1fr);
     align-items: center;
   }
+
+  .meet-profile {
+    grid-template-columns: 18rem minmax(0, 1fr);
+  }
 }
 
 @media (min-width: 1100px) {
   .meet-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .meet-card {
-    transition: none;
   }
 }
 
@@ -298,7 +391,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .meet-card,
   .meet-card:hover {
+    transition: none;
     transform: none;
   }
 }

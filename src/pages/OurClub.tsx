@@ -32,11 +32,6 @@ export function OurClub() {
           <p key={paragraph}>{paragraph}</p>
         ))}
         <p>
-          <strong>{seasonRegistrationClosed.heading}</strong>
-        </p>
-        <p>{seasonRegistrationClosed.description}</p>
-        <p>{seasonRegistrationClosed.volunteerSecondary}</p>
-        <p>
           <Link to="/meet-the-bowlers">Meet the bowlers</Link>
           {" · "}
           <Link to="/sponsors">Become a Sponsor</Link>
@@ -49,27 +44,43 @@ export function OurClub() {
 
       <section className="section" aria-labelledby="how-to-join">
         <div className="wrap">
-          <article className="card">
-            <h2 id="how-to-join">How to join</h2>
-            <p>
-              <strong>{seasonRegistrationClosed.heading}</strong>
-            </p>
-            <p>{seasonRegistrationClosed.description}</p>
-            <p>
-              This site does not have a public registration form. Students can read the club information,
-              practices, and team pages here. A working club mailbox has not been connected, so the contact
-              form does not send a message.
-            </p>
-            <p>
-              <Link to="/practices">Practices</Link>
-              {" · "}
-              <Link to="/meet-the-bowlers">Meet the bowlers</Link>
-              {" · "}
-              <Link to="/tournaments">Tournaments</Link>
-              {" · "}
-              <Link to="/contact">Contact</Link>
-            </p>
-          </article>
+          <div className="sw-join">
+            <svg className="sw-join__burst" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+              <path d="M20 0l3 15 13-8-8 13 12 0-12 3 8 13-13-8-3 12-3-12-13 8 8-13L0 20l12-3L4 4l13 8z" />
+            </svg>
+            <div className="sw-join__copy">
+              <p className="sw-chip sw-chip--red">Recruitment</p>
+              <h2 id="how-to-join">How to join</h2>
+              <div className="sw-join__status">
+                <p>
+                  <strong>{seasonRegistrationClosed.heading}</strong>
+                </p>
+                <p>{seasonRegistrationClosed.description}</p>
+              </div>
+              <p>
+                This site does not have a public registration form. Students can read the club information,
+                practices, and team pages here. A working club mailbox has not been connected, so the contact
+                form does not send a message.
+              </p>
+            </div>
+            <nav className="sw-join__explore" aria-label="Get to know the club">
+              <p className="sw-join__explore-title">Get to know the club</p>
+              <ul>
+                <li>
+                  <Link to="/practices">Practices</Link>
+                </li>
+                <li>
+                  <Link to="/meet-the-bowlers">Meet the bowlers</Link>
+                </li>
+                <li>
+                  <Link to="/tournaments">Tournaments</Link>
+                </li>
+                <li>
+                  <Link to="/contact">Contact</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </section>
 

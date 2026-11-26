@@ -4,8 +4,8 @@ import { BowlerArtwork } from "../components/bowlers/BowlerArtwork"
 import { UpcomingTournaments } from "../components/bowlers/UpcomingTournaments"
 import { PageMeta } from "../components/PageMeta"
 import { SeasonClosedNotice } from "../components/SeasonClosedNotice"
-import { bowlerProfiles, pageBodies, pages } from "../content/site"
-import { BrandWordmark } from "../components/BrandWordmark"
+import { AthleticHero } from "../components/AthleticHero"
+import { bowlerProfiles, club, pageBodies, pages } from "../content/site"
 import { SCHOOLS, SCHOOL_IDS, type SchoolId } from "../lib/content/schoolLogos"
 import { schoolLabel, visibleBowlerProfiles, type BowlerProfile } from "../lib/content/bowlerProfiles"
 
@@ -44,18 +44,15 @@ export function MeetTheBowlers() {
     : [{ id: "all", label: "", cards }]
 
   return (
-    <div className="meet-bowlers">
+    <div className="sw-page meet-bowlers">
       <PageMeta title={pages.bowlers.title} description={pages.bowlers.description} />
-      <header className="meet-hero">
-        <div className="meet-hero__logo">
-          <BrandWordmark />
-        </div>
-        <p className="meet-hero__eyebrow">{copy.eyebrow}</p>
-        <h1>{copy.title}</h1>
+      <AthleticHero scene="team" eyebrow={copy.eyebrow} title={copy.title} subtitle={club.name}>
         <p>{copy.intro}</p>
-        <p className="meet-hero__privacy">{copy.privacy}</p>
+        <p>{copy.privacy}</p>
+      </AthleticHero>
+      <div className="meet-season">
         <SeasonClosedNotice showVolunteerCta={false} />
-      </header>
+      </div>
 
       <section className="meet-directory" aria-label="Bowler directory">
         <form className="meet-filters" onSubmit={(event) => event.preventDefault()}>

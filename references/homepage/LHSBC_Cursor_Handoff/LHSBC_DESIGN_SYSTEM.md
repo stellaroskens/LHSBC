@@ -58,4 +58,10 @@ Audit actual route inventory, then keep shared header, frame, footer, typography
 Keyboard navigation, logical heading hierarchy, visible focus rings, form labels, text alternatives, error states and reduced motion. Avoid text-only-in-images except approved logo wordmarks with appropriate alt text. Test at narrow and wide widths, 200% browser zoom and with long labels. Avoid decorative overlays intercepting pointer events. Verify contrast on actual rendered components.
 
 ## Approval record
-Header rebuild: candidate, not approved. All other isolated artwork: pending high-quality recreation/approval. Homepage source is the selected visual reference; it is not approval of every derived file, all example copy, or any financial/event data.
+**November 25, 2026 — owner-approved permanent direction (supersedes earlier "candidate" notes for the header and homepage).** The published homepage, shared header, NAV-01 accordion menu, and shared footer are approved and are the authority for all pages. Identity: Modern American Retro Bowling — Refined Atomic Age Marquee. Permanent preferences:
+- Interior page backgrounds: a balanced mix of navy and warm cream, chosen by each page's purpose (navy bands for marquee and scoreboard moments, cream for reading, forms, and lists).
+- Decorative intensity: moderate, tasteful retro accents (starbursts, pinstripes, sweeping streaks, plaques, scoreboard details), never behind important text.
+- Private dashboards: modern and clean with subtle LHSBC branding (colors and type only).
+Implementation tokens live in `src/styles/sitewide.css` (`--sw-*`) and `src/styles/header.css`. The full record is section 45–46 of `LHSBC_MASTER_PROJECT.md`.
+
+Earlier note: Header rebuild: candidate, not approved. All other isolated artwork: pending high-quality recreation/approval. Homepage source is the selected visual reference; it is not approval of every derived file, all example copy, or any financial/event data.

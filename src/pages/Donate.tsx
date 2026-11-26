@@ -12,44 +12,59 @@ export function Donate() {
       <AthleticHero scene="sponsors" eyebrow="LHSBC" title={library.donations.headline} subtitle={club.name}>
         <p>{library.donations.intro}</p>
       </AthleticHero>
-      <section className="section">
-        <div className="wrap sw-panel quick-donate-panel">
-          {result === "canceled" ? <p role="status">Checkout was canceled. No payment was recorded.</p> : null}
-          {result === "returned" ? (
-            <p role="status">Returning from a provider does not confirm a payment. This site has no verified receipt for this visit.</p>
-          ) : null}
-          <h2>{library.donations.contributionHeading}</h2>
-          <p>{library.donations.why}</p>
-          <QuickDonate />
-          <p>{library.donations.secureNote}</p>
-          <p>{library.donations.taxNote}</p>
+      <section className="section sw-donate">
+        <div className="wrap sw-donate__grid">
+          <div className="sw-panel quick-donate-panel sw-donate__gift">
+            {result === "canceled" ? <p role="status">Checkout was canceled. No payment was recorded.</p> : null}
+            {result === "returned" ? (
+              <p role="status">Returning from a provider does not confirm a payment. This site has no verified receipt for this visit.</p>
+            ) : null}
+            <h2>{library.donations.contributionHeading}</h2>
+            <p>{library.donations.why}</p>
+            <QuickDonate />
+          </div>
+          <aside className="sw-donate__trust" aria-label="Giving with confidence">
+            <p className="sw-donate__trust-title">
+              <span aria-hidden="true">★</span> Giving with confidence <span aria-hidden="true">★</span>
+            </p>
+            <div className="sw-donate__trust-item">
+              <h3>Payment security</h3>
+              <p>{library.donations.secureNote}</p>
+            </div>
+            <div className="sw-donate__trust-item">
+              <h3>Tax status</h3>
+              <p>{library.donations.taxNote}</p>
+            </div>
+          </aside>
         </div>
       </section>
       <section className="section">
-        <div className="wrap sw-panel">
-          <h2>{library.donations.businessHeading}</h2>
-          <p>{library.donations.businessBody}</p>
-          <p>
-            <Link className="sw-btn" to={library.donations.inquiryTo}>{library.donations.inquiryLabel}</Link>
-          </p>
-          <p>
-            <Link to="/fundraisers">Fundraising Opportunities</Link>
-            {" · "}
-            <Link to="/sponsors">Sponsors</Link>
-            {" · "}
-            <Link to="/our-club">Our Club</Link>
-          </p>
-          <h2>{library.donations.questionsHeading}</h2>
-          {library.donations.faq.map((item) => (
-            <details key={item.question}>
-              <summary>{item.question}</summary>
-              <p>{item.answer}</p>
-            </details>
-          ))}
-          <p>
-            {library.donations.contactNote}{" "}
-            {club.email ? <a href={`mailto:${club.email}`}>{club.email}</a> : "Club contact to be confirmed"}
-          </p>
+        <div className="wrap sw-donate__more">
+          <div className="sw-panel sw-donate__business">
+            <h2>{library.donations.businessHeading}</h2>
+            <p>{library.donations.businessBody}</p>
+            <p>
+              <Link className="sw-btn" to={library.donations.inquiryTo}>{library.donations.inquiryLabel}</Link>
+            </p>
+            <nav className="sw-donate__links" aria-label="More ways to support">
+              <Link to="/fundraisers">Fundraising Opportunities</Link>
+              <Link to="/sponsors">Sponsors</Link>
+              <Link to="/our-club">Our Club</Link>
+            </nav>
+          </div>
+          <div className="sw-panel sw-donate__faq">
+            <h2>{library.donations.questionsHeading}</h2>
+            {library.donations.faq.map((item) => (
+              <details key={item.question}>
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+            <p>
+              {library.donations.contactNote}{" "}
+              {club.email ? <a href={`mailto:${club.email}`}>{club.email}</a> : "Club contact to be confirmed"}
+            </p>
+          </div>
         </div>
       </section>
     </div>

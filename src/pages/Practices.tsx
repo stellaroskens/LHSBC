@@ -40,62 +40,73 @@ export function Practices() {
         <p>{library.practices.hero}</p>
       </AthleticHero>
 
+      <section className="section" aria-label="Practice board">
+        <div className="wrap">
+          <div className="sw-board">
+            <p className="sw-board__title">
+              <span aria-hidden="true">★</span> Practice board <span aria-hidden="true">★</span>
+            </p>
+            <div className="sw-board__panels">
+              <article className="card sw-practices__location" id="practice-location">
+                <div className="sw-practices__location-copy">
+                  <h2>
+                    <PinMark /> Location
+                  </h2>
+                  <p className="place-name">{practiceLocation.name}</p>
+                  <p className="sw-practices__address">
+                    {practiceLocation.street}
+                    <br />
+                    {practiceLocation.locality}
+                  </p>
+                  <p>{practiceLocation.detail}</p>
+                  {venueConfirmed ? (
+                    <>
+                      <p>
+                        <a className="sw-practices__phone" href={practiceLocation.phoneHref}>
+                          {practiceLocation.phone}
+                        </a>
+                      </p>
+                      <p className="practice-location__actions">
+                        <a
+                          className="sw-btn sw-btn--plain"
+                          href={practiceLocation.directions ?? undefined}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Get directions
+                          <span className="visually-hidden"> (opens in a new tab)</span>
+                        </a>
+                        <a
+                          className="sw-btn sw-btn--outline sw-btn--plain"
+                          href={practiceLocation.website ?? undefined}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Visit website
+                          <span className="visually-hidden"> (opens in a new tab)</span>
+                        </a>
+                        <a className="sw-btn sw-btn--outline sw-btn--plain" href={practiceLocation.phoneHref}>
+                          Call {practiceLocation.name}
+                        </a>
+                      </p>
+                    </>
+                  ) : (
+                    <p>Practice venue to be confirmed. Phone, directions, and website links will appear after approval.</p>
+                  )}
+                </div>
+              </article>
+
+              <article className="card sw-practices__schedule">
+                <h2>Schedule</h2>
+                <EmptyState title={library.practices.scheduleTitle}>{library.practices.scheduleBody}</EmptyState>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="wrap sw-practices__grid">
-          <article className="card sw-practices__location" id="practice-location">
-            <div className="sw-practices__location-copy">
-              <h2>
-                <PinMark /> Location
-              </h2>
-              <p className="place-name">{practiceLocation.name}</p>
-              <p className="sw-practices__address">
-                {practiceLocation.street}
-                <br />
-                {practiceLocation.locality}
-              </p>
-              <p>{practiceLocation.detail}</p>
-              {venueConfirmed ? (
-                <>
-                  <p>
-                    <a className="sw-practices__phone" href={practiceLocation.phoneHref}>
-                      {practiceLocation.phone}
-                    </a>
-                  </p>
-                  <p className="practice-location__actions">
-                    <a
-                      className="sw-btn sw-btn--plain"
-                      href={practiceLocation.directions ?? undefined}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Get directions
-                      <span className="visually-hidden"> (opens in a new tab)</span>
-                    </a>
-                    <a
-                      className="sw-btn sw-btn--outline sw-btn--plain"
-                      href={practiceLocation.website ?? undefined}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Visit website
-                      <span className="visually-hidden"> (opens in a new tab)</span>
-                    </a>
-                    <a className="sw-btn sw-btn--outline sw-btn--plain" href={practiceLocation.phoneHref}>
-                      Call {practiceLocation.name}
-                    </a>
-                  </p>
-                </>
-              ) : (
-                <p>Practice venue to be confirmed. Phone, directions, and website links will appear after approval.</p>
-              )}
-            </div>
-          </article>
-
-          <article className="card sw-practices__schedule">
-            <h2>Schedule</h2>
-            <EmptyState title={library.practices.scheduleTitle}>{library.practices.scheduleBody}</EmptyState>
-          </article>
-
           <article className="card">
             <h2>What to bring</h2>
             <ul className="plain-list">

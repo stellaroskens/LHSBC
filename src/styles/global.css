@@ -1744,8 +1744,10 @@ textarea[aria-invalid="true"] {
 }
 
 .site-footer .brand-wordmark,
+.site-footer .brand-wordmark__full,
 .site-footer .footer-name,
-.site-footer .footer-contact h2 {
+.site-footer .footer-contact h2,
+.site-footer .connect-social h2 {
   color: #fffdf8;
 }
 

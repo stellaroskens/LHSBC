@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { AthleticHero, SectionHeading } from "../components/AthleticHero"
 import { PageMeta } from "../components/PageMeta"
 import { club } from "../content/site"
 
@@ -16,29 +17,50 @@ const links = [
 /** Public information hub for the homepage FIND OUT MORE control. */
 export function Information() {
   return (
-    <div className="sw-page">
+    <div className="sw-page sw-info">
       <PageMeta
         title={`Information | ${club.name}`}
         description={`Club information for ${club.name}: practices, tournaments, resources, and contact paths.`}
       />
-      <header className="ah">
-        <p className="ah__eyebrow">{club.name}</p>
-        <h1>Information</h1>
-        <p>Find club pages for joining, schedules, resources, and support. Checkout and live payments stay off until approved.</p>
-      </header>
-      <ul className="info-hub">
-        {links.map((item) => (
-          <li key={item.to}>
-            <Link to={item.to}>
-              <span className="info-hub__label">{item.label}</span>
-              <span className="info-hub__detail">{item.detail}</span>
+      <AthleticHero
+        scene="club"
+        eyebrow="Find out more"
+        title="Information"
+        subtitle={club.name}
+        actions={
+          <>
+            <Link className="sw-btn" to="/our-club#how-to-join">
+              How to join
             </Link>
-          </li>
-        ))}
-      </ul>
-      <p className="info-hub__join">
-        Ready to join? Start on <Link to="/our-club">Our Club</Link>. A dedicated How to Join page will replace that link when it is ready.
-      </p>
+            <Link className="sw-btn sw-btn--ghost" to="/donate">
+              Donate
+            </Link>
+          </>
+        }
+      >
+        <p>Find club pages for joining, schedules, resources, and support. Checkout and live payments stay off until approved.</p>
+      </AthleticHero>
+
+      <section className="section" aria-labelledby="info-directory-heading">
+        <div className="wrap">
+          <div className="card sw-info__board">
+            <SectionHeading id="info-directory-heading" title="Club directory" />
+            <ul className="sw-info__list">
+              {links.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to}>
+                    <span className="sw-info__label">{item.label}</span>
+                    <span className="sw-info__detail">{item.detail}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="sw-info__join">
+              Ready to join? Start with <Link to="/our-club#how-to-join">How to join</Link> on the Our Club page.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

@@ -27,16 +27,26 @@ export function Fundraisers() {
         <PageMeta title={pages.fundraisers.title} description={pages.fundraisers.description} />
         <AthleticHero scene="fundraisers" eyebrow="Support the team" title="Fundraisers" subtitle={club.name}>
           <p>Fundraiser details to be confirmed. No current fundraiser is published on this site.</p>
-          <p>
-            <Link to="/sponsors">Become a Sponsor</Link>
-            {" · "}
-            <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
-            {" · "}
-            <Link to="/our-club">Our Club</Link>
-            {" · "}
-            <Link to="/contact">Contact</Link>
-          </p>
         </AthleticHero>
+        <section className="section" aria-labelledby="campaign-board-heading">
+          <div className="wrap">
+          <div className="sw-campaign">
+            <p className="sw-campaign__title">
+              <span aria-hidden="true">★</span> Campaign board <span aria-hidden="true">★</span>
+            </p>
+            <div className="sw-campaign__marquee">
+              <h2 id="campaign-board-heading">No fundraiser posted yet</h2>
+              <p>When the club confirms a fundraiser, its date, place, and details will be posted here.</p>
+            </div>
+            <nav className="sw-campaign__links" aria-label="Other ways to support">
+              <Link to="/sponsors">Become a Sponsor</Link>
+              <Link to={library.fundraisers.donateTo}>{library.fundraisers.donateButton}</Link>
+              <Link to="/our-club">Our Club</Link>
+              <Link to="/contact">Contact</Link>
+            </nav>
+          </div>
+          </div>
+        </section>
       </div>
     )
   }

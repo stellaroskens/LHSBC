@@ -18,7 +18,7 @@ export function BowlerProfilePage() {
   const profile = bowlerById(bowlerProfiles, playerId)
   if (!profile || !isPublicBowler(profile)) {
     return (
-      <div className="meet-bowlers">
+      <div className="sw-page meet-bowlers">
         <PageMeta title="Bowler profile | LHSBC" description="That bowler profile is not on the public LHSBC site." />
         <p className="meet-missing">
           This bowler profile is not on the public site. <Link to="/meet-the-bowlers">Back to Meet the Bowlers</Link>
@@ -33,7 +33,7 @@ export function BowlerProfilePage() {
   const honors = bowlerHonors.filter((honor) => honor.profileId === profile.id && honor.status === "published")
 
   return (
-    <div className="meet-bowlers">
+    <div className="sw-page meet-bowlers">
       <PageMeta
         title={`${profile.displayName} | Meet the Bowlers | LHSBC`}
         description={`${profile.displayName} on the LHSBC Meet the Bowlers page.`}

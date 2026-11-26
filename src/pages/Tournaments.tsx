@@ -132,54 +132,59 @@ export function Tournaments() {
 
       <section className="section sw-tournaments__season" aria-labelledby="season-heading">
         <div className="wrap">
-          <div className="season-list event-list">
-            {practiceTournaments.map((event) => {
-              const venue = venues.find((item) => item.id === event.venueId)
-              if (!venue) return null
-              return <PracticeCard key={event.id} event={event} venue={venue} />
-            })}
+          <div className="sw-board sw-champ">
+            <p className="sw-board__title">
+              <span aria-hidden="true">★</span> Championship board <span aria-hidden="true">★</span>
+            </p>
+            <div className="season-list event-list">
+              {practiceTournaments.map((event) => {
+                const venue = venues.find((item) => item.id === event.venueId)
+                if (!venue) return null
+                return <PracticeCard key={event.id} event={event} venue={venue} />
+              })}
+            </div>
+
+            {confirmedEvents.length > 0 ? (
+              <>
+                <h2 className="subhead">Confirmed events</h2>
+                <div className="season-list event-list">
+                  {confirmedEvents.map((event) => (
+                    <article className="event-card" key={event.id}>
+                      <p className="event-card__date">
+                        <span className="event-card__year">Date not confirmed</span>
+                      </p>
+                      <div className="event-card__body">
+                        <p className="event-card__kind">Confirmed</p>
+                        <h2>{event.name}</h2>
+                        <p>{event.detail}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </>
+            ) : null}
+
+            {earlierEvents.length > 0 ? (
+              <>
+                <h2 className="subhead">Events the club has scheduled before</h2>
+                <p className="season-note">{library.tournaments.seasonNote}</p>
+                <div className="season-list event-list">
+                  {earlierEvents.map((event) => (
+                    <article className="event-card" key={event.id}>
+                      <p className="event-card__date">
+                        <span className="event-card__year">Date not confirmed</span>
+                      </p>
+                      <div className="event-card__body">
+                        <p className="event-card__kind">Not confirmed</p>
+                        <h2>{event.name}</h2>
+                        <p>{event.detail}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </>
+            ) : null}
           </div>
-
-          {confirmedEvents.length > 0 ? (
-            <>
-              <h2 className="subhead">Confirmed events</h2>
-              <div className="season-list event-list">
-                {confirmedEvents.map((event) => (
-                  <article className="event-card" key={event.id}>
-                    <p className="event-card__date">
-                      <span className="event-card__year">Date not confirmed</span>
-                    </p>
-                    <div className="event-card__body">
-                      <p className="event-card__kind">Confirmed</p>
-                      <h2>{event.name}</h2>
-                      <p>{event.detail}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </>
-          ) : null}
-
-          {earlierEvents.length > 0 ? (
-            <>
-              <h2 className="subhead">Events the club has scheduled before</h2>
-              <p className="season-note">{library.tournaments.seasonNote}</p>
-              <div className="season-list event-list">
-                {earlierEvents.map((event) => (
-                  <article className="event-card" key={event.id}>
-                    <p className="event-card__date">
-                      <span className="event-card__year">Date not confirmed</span>
-                    </p>
-                    <div className="event-card__body">
-                      <p className="event-card__kind">Not confirmed</p>
-                      <h2>{event.name}</h2>
-                      <p>{event.detail}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </>
-          ) : null}
         </div>
       </section>
 
