@@ -111,7 +111,7 @@ Exact individual dates for P01–P14 not recovered. P11 original ZIP installatio
 | FONT-03 | Deferred | OPEN | Review the Support Our Team heading against the approved reference during the final visual refinement. The current band uses the existing Oswald italic. Do not add a font for this now. |
 | ART-05 | Deferred | OPEN | Outstanding visual refinement for Upcoming Events: the calendar illustration, the yellow schedule badge, and the decorative arrow. The current calendar and badge are temporary geometry, and the arrow is absent. Do not correct this during later homepage passes. |
 | ORG-01 | P0 | DONE | Lebanon High School Bowling Club received its official IRS EIN on November 27, 2026, confirmed by IRS Notice CP575E. The notice is kept in secure organizational records outside the public repository; neither the notice nor the EIN is stored in this repository. Use the official organization information when Givebutter verification requires it. An EIN is not federal tax exemption: do not claim tax-exempt status or tax deductibility without confirmation. See section 52. |
-| GIVE-01 | P1 | IN REVIEW (draft `6b0a071ec238925f58957bf4`, section 53) | Integrate the Givebutter campaign "Support Lebanon High School Bowlers" (campaign ID 803228, account ID 451198, `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`) into the existing donation and Payment Connections architecture. Keep it inactive until the campaign is verified, published, and explicitly approved for activation. Preserve the existing design and fundraising components. Starts after the Athlete Safety publication (section 52). |
+| GIVE-01 | P1 | DONE (published inactive, section 54; activation needs separate authorization) | Integrate the Givebutter campaign "Support Lebanon High School Bowlers" (campaign ID 803228, account ID 451198, `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`) into the existing donation and Payment Connections architecture. Keep it inactive until the campaign is verified, published, and explicitly approved for activation. Preserve the existing design and fundraising components. Starts after the Athlete Safety publication (section 52). |
 | LAYOUT-01 | P1 | OPEN | Client request: a more contained layout with clearly defined outer margins, consistent content boundaries, and more comfortable spacing. Layout refinement only, not a redesign; preserve all approved artwork, typography, colors, buttons, and decorative components. After GIVE-01, prepare three homepage options (spacious, balanced, and compact contained). Do not apply website-wide until the owner approves one option. |
 | ART-06 | Deferred | OPEN | Quick-link icons are temporary. Schedule, Tournaments, Team, and Resources use the existing simplified SVGs. Sponsors uses a geometric handshake because `handshake.png` has a black background and damaged edges. Replace the set with reference-matching artwork later. |
 
@@ -370,6 +370,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-27 v1.31: GIVE-01 published with Givebutter inactive. Commit `71f0013`, production deploy `6b0a095d7639c67a02f2a4a7`, published 2026-11-27T22:55:53Z, auto-publishing locked. Rollback: `6b0a03fd6afdfd8bfc3fad4d`. LAYOUT-01 started. See section 54.
 - 2026-11-27 v1.30: GIVE-01 built, inactive: Givebutter registered as a Payment Connections provider (prepared, not live), and an inactive Givebutter block added to Donate. Draft `6b0a071ec238925f58957bf4`. No commit, push, or production publish. See section 53.
 - 2026-11-27 v1.29: Athlete Safety and Families Supporting Families published. Commit `f0ee97a`, production deploy `6b0a03fd6afdfd8bfc3fad4d`, published 2026-11-27T22:33:38.746Z, auto-publishing locked. Rollback: `6b0776fbc59d1b17b27ae880`. ORG-01 (IRS EIN received), GIVE-01, and LAYOUT-01 recorded in the task register. See section 52.
 - 2026-11-27 v1.28: Athlete Safety, Background Checks and Volunteer Verification, plus the Our Club family support section, are built from the approved content. Sterling Volunteers is replaced by USBC RVP and NCSI throughout. Draft `6b0a01954aec0b102c3a8539`. Givebutter is recorded as the next phase, inactive. No commit, push, or production publish. See section 51.
@@ -1087,3 +1088,22 @@ Givebutter is built into the existing donation and Payment Connections architect
 - The campaign URL returns HTTP 200 with the title "Support Lebanon High School Bowlers". Its publication and verification status on Givebutter can't be confirmed from outside the account.
 
 **Next:** LAYOUT-01 (three contained homepage layout options), after the owner reviews this draft.
+
+## 54. November 27, 2026 — GIVE-01 published (Givebutter inactive)
+
+The owner approved the Givebutter draft `6b0a071ec238925f58957bf4` (section 53) and authorized publication with payment processing inactive. Givebutter must not be activated until separately authorized.
+
+**Rollback record.** Before publication, production was deploy `6b0a03fd6afdfd8bfc3fad4d` (commit `f0ee97a`, published `2026-11-27T22:33:38.746Z`, locked).
+
+**Commit.** `71f0013` ("Add the Givebutter campaign to Payment Connections, inactive until approved.") was pushed to `main`. It contains the 13 files from section 53. No connection has `liveEnabled: true`.
+
+**Build and publication.**
+- The push built deploy `6b0a095d7639c67a02f2a4a7` (production, ready). The lock kept it unpublished.
+- It was pixel-identical to the approved draft on Home, Donate, Sponsors, and Volunteer at 1440 × 900 and 390 × 844.
+- It was published manually at `2026-11-27T22:55:53Z`. Auto-publishing remains **locked**.
+
+**Live checks on `https://lhsbcor.com/`.** Home and Donate match the approved draft pixel for pixel at desktop and mobile. Donate shows the inactive Givebutter block with its button disabled, no links to Givebutter, and the on-site checkout still disabled. `npm test`: 152 of 152 pass.
+
+Givebutter, payments, email delivery, and the unconfigured forms remain inactive. Authentication, permissions, and privacy protections are unchanged.
+
+This record update is a documentation-only commit after `71f0013`. Its Netlify build is intentionally not published.
