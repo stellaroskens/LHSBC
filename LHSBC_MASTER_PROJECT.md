@@ -110,6 +110,9 @@ Exact individual dates for P01–P14 not recovered. P11 original ZIP installatio
 | ART-03 | Deferred | OPEN | The Pass 03 ball and pins are a temporary vector. Replace them in the final visual refinement with artwork that matches the approved support-banner reference. Do not block earlier passes. |
 | FONT-03 | Deferred | OPEN | Review the Support Our Team heading against the approved reference during the final visual refinement. The current band uses the existing Oswald italic. Do not add a font for this now. |
 | ART-05 | Deferred | OPEN | Outstanding visual refinement for Upcoming Events: the calendar illustration, the yellow schedule badge, and the decorative arrow. The current calendar and badge are temporary geometry, and the arrow is absent. Do not correct this during later homepage passes. |
+| ORG-01 | P0 | DONE | Lebanon High School Bowling Club received its official IRS EIN on November 27, 2026, confirmed by IRS Notice CP575E. The notice is kept in secure organizational records outside the public repository; neither the notice nor the EIN is stored in this repository. Use the official organization information when Givebutter verification requires it. An EIN is not federal tax exemption: do not claim tax-exempt status or tax deductibility without confirmation. See section 52. |
+| GIVE-01 | P1 | OPEN | Integrate the Givebutter campaign "Support Lebanon High School Bowlers" (campaign ID 803228, account ID 451198, `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`) into the existing donation and Payment Connections architecture. Keep it inactive until the campaign is verified, published, and explicitly approved for activation. Preserve the existing design and fundraising components. Starts after the Athlete Safety publication (section 52). |
+| LAYOUT-01 | P1 | OPEN | Client request: a more contained layout with clearly defined outer margins, consistent content boundaries, and more comfortable spacing. Layout refinement only, not a redesign; preserve all approved artwork, typography, colors, buttons, and decorative components. After GIVE-01, prepare three homepage options (spacious, balanced, and compact contained). Do not apply website-wide until the owner approves one option. |
 | ART-06 | Deferred | OPEN | Quick-link icons are temporary. Schedule, Tournaments, Team, and Resources use the existing simplified SVGs. Sponsors uses a geometric handshake because `handshake.png` has a black background and damaged edges. Replace the set with reference-matching artwork later. |
 
 ## 8. Duplicate/conflicting instructions and resolution log
@@ -367,6 +370,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-27 v1.29: Athlete Safety and Families Supporting Families published. Commit `f0ee97a`, production deploy `6b0a03fd6afdfd8bfc3fad4d`, published 2026-11-27T22:33:38.746Z, auto-publishing locked. Rollback: `6b0776fbc59d1b17b27ae880`. ORG-01 (IRS EIN received), GIVE-01, and LAYOUT-01 recorded in the task register. See section 52.
 - 2026-11-27 v1.28: Athlete Safety, Background Checks and Volunteer Verification, plus the Our Club family support section, are built from the approved content. Sterling Volunteers is replaced by USBC RVP and NCSI throughout. Draft `6b0a01954aec0b102c3a8539`. Givebutter is recorded as the next phase, inactive. No commit, push, or production publish. See section 51.
 - 2026-11-25 v1.27: Final design release published. Commit `32677b3`, production deploy `6b0776fbc59d1b17b27ae880`, published 2026-11-26T00:07:14.833Z. Auto-publishing is still locked. Rollback: `6b0768f8e5805be40a0ca4e5`. See section 50.
 - 2026-11-25 v1.26: Owner-approved footer readability fix (subtitle and Follow heading now cream). Final consolidated draft `6b0774fec2d47481687baad4`. Development closed for the client presentation. No commit, push, or production publish. See section 49.
@@ -1028,3 +1032,30 @@ The owner approved the implementation plan and supplied the final copy for the A
 - Campaign: `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`, campaign ID 803228, account ID 451198.
 - After approval, integrate it into the existing donation page and Payment Connections architecture.
 - Payment processing stays inactive until separately verified and authorized.
+
+## 52. November 27, 2026 — Athlete Safety published; ORG-01, GIVE-01, and LAYOUT-01 recorded
+
+The owner approved draft `6b0a01954aec0b102c3a8539` (section 51) and authorized publication.
+
+**Rollback record.** Before publication, production was deploy `6b0776fbc59d1b17b27ae880` (commit `32677b3`, published `2026-11-26T00:07:14.833Z`, locked).
+
+**Commit.** `f0ee97a` ("Add the approved Athlete Safety page and Families Supporting Families section.") was pushed to `main` at `https://github.com/stellaroskens/LHSBC.git`. It contains the 16 files reviewed in section 51, including this record. A scan found no secrets or private student information. Still left uncommitted on purpose: `public/assets/canva-assets/final-homepage/`, `public/assets/homepage-image-1/`, `references/homepage/LHSBC_Cursor_Handoff.zip`, and `tmp/`.
+
+**Build and publication.**
+- The push built deploy `6b0a03fd6afdfd8bfc3fad4d` (context production, state ready). The lock kept it unpublished.
+- Before publishing, it was compared with the approved draft: Home, Volunteer, Our Club, FAQ, and Donate were pixel-identical at 1440 × 900 and 390 × 844.
+- It was published manually at `2026-11-27T22:33:38.746Z`. Auto-publishing remains **locked**.
+
+**Live checks on `https://lhsbcor.com/`.**
+- Home, Volunteer, Our Club, and FAQ match the approved draft pixel for pixel at desktop and mobile. No horizontal overflow or broken images at 1440, 820, and 390.
+- `/volunteer` has the `#volunteer-background-checks`, `#volunteer-transport-heading`, and `#report-a-concern` anchors, 21 official external links, and the clickable USBC phone and email. `/our-club` has the families section and `#coaches`. No verified coach badges and no Sterling references.
+- `https://www.lhsbcor.com/` returns 301 to the main address.
+- `npm test`: 144 of 144 pass. `npm run build`: succeeds.
+
+Givebutter, payments, email delivery, and the unconfigured forms remain inactive. Staff sign-in remains disabled. Secure volunteer storage, the private transportation directory, and family account activation remain deferred.
+
+**ORG-01 — IRS EIN.** The club received its official IRS EIN on November 27, 2026, confirmed by IRS Notice CP575E. The notice stays in secure organizational records outside the public repository. The EIN itself is not recorded here or published on the website. An EIN does not establish federal tax exemption: the website must not claim tax-exempt status or tax deductibility until that is separately confirmed.
+
+**GIVE-01 and LAYOUT-01** are recorded in the task register (section 7). GIVE-01 is the next phase. LAYOUT-01 follows it, as three homepage options for owner selection.
+
+This record update is a documentation-only commit after `f0ee97a`. Its Netlify build is intentionally not published, so production stays on the verified deploy above.
