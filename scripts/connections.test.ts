@@ -18,9 +18,9 @@ describe("site connections", () => {
   it("ships all payment options disabled and unverified", () => {
     assert.deepEqual(validateSiteConnections(published), [])
     const config = parseSiteConnections(published)
-    assert.equal(config.payments.length, 4)
+    assert.equal(config.payments.length, 5)
     assert.ok(config.payments.every((item) => item.liveEnabled === false))
-    assert.ok(config.payments.every((item) => item.status === "disabled"))
+    assert.ok(config.payments.every((item) => item.status === (item.id === "givebutter" ? "prepared" : "disabled")))
     assert.equal(anyPaymentsLive(config), false)
     assert.deepEqual(livePaymentDestinations(config), [])
     assert.equal(config.sharing.publicWebsiteUrl, "https://lhsbcor.com/")

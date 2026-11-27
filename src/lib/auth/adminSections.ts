@@ -117,7 +117,7 @@ export const ADMIN_SECTIONS: AdminSection[] = [
     id: "payment-settings",
     group: "Club management",
     title: "Payment Connections",
-    description: "Prepare Stripe, PayPal, Venmo, and Cash App. Live payments stay off until verified.",
+    description: "Prepare Stripe, PayPal, Venmo, Cash App, and Givebutter. Live payments stay off until verified.",
     status: "available",
     statusLabel: "Open",
     href: "/admin/connections",

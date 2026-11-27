@@ -1,7 +1,7 @@
 export type ConnectionStatus = "disabled" | "prepared" | "verified"
 
 export type SocialNetworkId = "facebook" | "instagram" | "youtube" | "tiktok"
-export type PaymentProviderId = "stripe" | "paypal" | "venmo" | "cash_app"
+export type PaymentProviderId = "stripe" | "paypal" | "venmo" | "cash_app" | "givebutter"
 
 export type SocialConnection = {
   id: SocialNetworkId
@@ -45,7 +45,7 @@ export type SiteConnectionsConfig = {
 export type ConnectionsIssue = { path: string; message: string }
 
 const SOCIAL_IDS: SocialNetworkId[] = ["facebook", "instagram", "youtube", "tiktok"]
-const PAYMENT_IDS: PaymentProviderId[] = ["stripe", "paypal", "venmo", "cash_app"]
+const PAYMENT_IDS: PaymentProviderId[] = ["stripe", "paypal", "venmo", "cash_app", "givebutter"]
 const STATUSES: ConnectionStatus[] = ["disabled", "prepared", "verified"]
 
 /** Reject values that look like secrets — connections may only store public destinations. */

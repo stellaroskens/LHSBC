@@ -101,7 +101,7 @@ export function AdminConnections() {
       <div className="admin-page__intro">
         <h2>Connections</h2>
         <p>
-          Prepare public destinations for Stripe, PayPal, Venmo, Cash App, email, and social links. Never enter
+          Prepare public destinations for Stripe, PayPal, Venmo, Cash App, Givebutter, email, and social links. Never enter
           passwords, API secrets, or private financial credentials here. Every payment option stays disabled until a
           super_admin marks it verified and enables it live.
         </p>

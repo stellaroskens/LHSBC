@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { AthleticHero } from "../components/AthleticHero"
+import { GivebutterGiving } from "../components/GivebutterGiving"
 import { PageMeta } from "../components/PageMeta"
 import { QuickDonate } from "../components/QuickDonate"
 import { club, library, pages } from "../content/site"
@@ -19,6 +20,7 @@ export function Donate() {
             {result === "returned" ? (
               <p role="status">Returning from a provider does not confirm a payment. This site has no verified receipt for this visit.</p>
             ) : null}
+            <GivebutterGiving />
             <h2>{library.donations.contributionHeading}</h2>
             <p>{library.donations.why}</p>
             <QuickDonate />

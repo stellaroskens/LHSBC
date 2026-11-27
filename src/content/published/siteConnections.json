@@ -73,6 +73,14 @@
       "status": "disabled",
       "liveEnabled": false,
       "staffNote": null
+    },
+    {
+      "id": "givebutter",
+      "label": "Givebutter",
+      "publicDestination": "https://givebutter.com/support-lebanon-high-school-bowlers-myav8u",
+      "status": "prepared",
+      "liveEnabled": false,
+      "staffNote": "Campaign \"Support Lebanon High School Bowlers\" (campaign ID 803228, account ID 451198). Inactive until the campaign is verified, published on Givebutter, and the owner explicitly approves activation."
     }
   ],
   "sharing": {

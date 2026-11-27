@@ -3,6 +3,7 @@ import {
   type PaymentProviderId,
   type SiteConnectionsConfig,
 } from "../content/siteConnectionsModel.ts"
+import { isApprovedGivebutterCampaign } from "./givebutter.ts"
 
 /** Whole cents. $1 is the smallest gift this site will ask a provider to charge. */
 export const MIN_DONATION_CENTS = 100
@@ -78,6 +79,7 @@ export function destinationCouldGoLive(provider: PaymentProviderId, destination:
   if (provider === "paypal") return host === "www.paypal.com" || host === "paypal.com"
   if (provider === "venmo") return host === "www.paypal.com" || host === "paypal.com"
   if (provider === "cash_app") return host === "cash.app"
+  if (provider === "givebutter") return isApprovedGivebutterCampaign(url)
   return false
 }
 
@@ -136,6 +138,7 @@ export const LAUNCH_CHECKLIST = [
   "Name the person authorized to own the payment account.",
   "Connect the bank account that should receive settlements, inside the provider dashboard.",
   "Verify Stripe, PayPal, Venmo-through-PayPal, and any Cash App destination before a button is shown.",
+  "Complete Givebutter's organization verification with the official club information, publish the campaign on Givebutter, and get the owner's explicit approval before turning Givebutter on.",
   "Write a refund and dispute policy the club is willing to publish.",
   "Publish a privacy policy that covers donor and guardian information.",
   "Keep a public contact path for payment questions.",
