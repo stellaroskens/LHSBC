@@ -37,8 +37,8 @@ const publicEntries: SearchEntry[] = [
   {
     to: "/volunteer",
     label: "Volunteer Opportunities",
-    detail: "Adult volunteers and Sterling Volunteers screening",
-    keywords: `${pages.volunteer.description} volunteer sterling background check transportation driver`,
+    detail: "Athlete safety, USBC Registered Volunteer background checks, and volunteer roles",
+    keywords: `${pages.volunteer.description} volunteer athlete safety safesport usbc rvp registered volunteer ncsi background check transportation driver report a concern`,
   },
   {
     to: "/faq",

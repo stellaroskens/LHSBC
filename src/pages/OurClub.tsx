@@ -2,7 +2,46 @@ import { Link } from "react-router-dom"
 import { AthleticHero, SectionHeading } from "../components/AthleticHero"
 import { BrandWordmark } from "../components/BrandWordmark"
 import { PageMeta } from "../components/PageMeta"
+import { ExternalLinkIcon } from "../components/header/icons"
+import { familySupport, USBC_LINKS } from "../content/athleteSafety"
 import { bakerFrames, club, coaches, library, pageBodies, pages, seasonRegistrationClosed } from "../content/site"
+import { COACH_CREDENTIALS, coachCredentialState, isPlaceholderCoachName } from "../lib/safety/coachCredentials"
+
+function formatDate(iso: string) {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })
+}
+
+function CoachCredential({ coachId, name }: { coachId: string; name: string }) {
+  const state = coachCredentialState(COACH_CREDENTIALS[coachId], name)
+  const placeholder = isPlaceholderCoachName(name)
+  return (
+    <div className="sw-coach__credential">
+      {state.status === "verified" ? (
+        <>
+          <p className="sw-coach__verified">USBC Registered Volunteer — credential reviewed</p>
+          <p>
+            Reviewed by club leadership on {formatDate(state.reviewedOn)}. Current through {formatDate(state.expiresOn)}.
+          </p>
+          {state.imageSrc ? <img src={state.imageSrc} alt={`USBC Registered Volunteer credential for ${name}`} /> : null}
+        </>
+      ) : (
+        <p className="sw-coach__credential-status">
+          {state.status === "expired" ? "Credential renewal pending review." : "Credential not yet published."}
+        </p>
+      )}
+      <p>
+        {placeholder
+          ? "Once the coach's name is published, you can search for it on USBC."
+          : `Search USBC by the name ${name}, state Oregon.`}{" "}
+        <a href={USBC_LINKS.findAVolunteer} target="_blank" rel="noopener noreferrer">
+          USBC Find a Registered Volunteer
+          <ExternalLinkIcon />
+          <span className="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </p>
+    </div>
+  )
+}
 
 export function OurClub() {
   return (
@@ -84,6 +123,52 @@ export function OurClub() {
         </div>
       </section>
 
+      <section className="section sw-families" id="families-supporting-families" aria-labelledby="families-heading">
+        <div className="wrap">
+          <div className="sw-families__intro">
+            <p className="sw-chip sw-chip--red">{familySupport.heading}</p>
+            <h2 id="families-heading">{familySupport.subheading}</h2>
+            {familySupport.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="sw-families__grid">
+            {familySupport.cards.map((card) => (
+              <article className={`sw-families__card sw-families__card--${card.id}`} key={card.id}>
+                <h3>{card.title}</h3>
+                {card.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                {card.id === "ride" ? (
+                  <p className="sw-families__link">
+                    <Link to="/volunteer#volunteer-transport-heading">Transportation safety requirements</Link>
+                  </p>
+                ) : null}
+                {card.id === "help" ? (
+                  <p className="sw-families__link">
+                    <Link to="/contact">Club contact page</Link>
+                  </p>
+                ) : null}
+                {card.id === "safety" ? (
+                  <p className="sw-families__link">
+                    <Link to="/volunteer">Athlete Safety and Background Checks</Link>
+                  </p>
+                ) : null}
+              </article>
+            ))}
+          </div>
+          <p className="sw-families__closing">{familySupport.closing}</p>
+          <p className="sw-families__actions">
+            <Link className="sw-btn" to="/volunteer">
+              Athlete Safety &amp; Background Checks
+            </Link>
+            <Link className="sw-btn sw-btn--outline" to="/contact">
+              Club contact page
+            </Link>
+          </p>
+        </div>
+      </section>
+
       <section className="section sw-club__coaches" id="coaches" aria-labelledby="coaches-heading">
         <div className="wrap">
           <SectionHeading id="coaches-heading" title={pageBodies.club.coachesHeading}>
@@ -102,6 +187,7 @@ export function OurClub() {
                   </div>
                 </div>
                 <p className="sw-coach__bio">{coach.summary}</p>
+                <CoachCredential coachId={coach.id} name={coach.name} />
               </article>
             ))}
           </div>

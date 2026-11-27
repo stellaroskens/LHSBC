@@ -12,7 +12,7 @@ describe("published site content", () => {
     assert.deepEqual(validateSiteContent(published), [])
     const content = parseSiteContent(published)
     assert.equal(content.teamGearShop.name, "BSN SPORTS")
-    assert.equal(content.sterlingVolunteerInvitationUrl, null)
+    assert.equal("sterlingVolunteerInvitationUrl" in content, false)
   })
 
   it("rejects missing venue references", () => {

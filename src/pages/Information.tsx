@@ -10,7 +10,7 @@ const links = [
   { to: "/resources", label: "Resources", detail: "Equipment, etiquette, and learning links." },
   { to: "/faq", label: "FAQ", detail: "Common questions for families and athletes." },
   { to: "/contact", label: "Contact", detail: "Reach club leadership. Club contact to be confirmed." },
-  { to: "/volunteer", label: "Volunteer", detail: "Adult volunteer opportunities and screening guidance." },
+  { to: "/volunteer", label: "Volunteer", detail: "Athlete safety, background checks, and volunteer opportunities." },
   { to: "/sponsors", label: "Sponsors", detail: "Sponsor details to be confirmed. No checkout on this page." },
 ] as const
 

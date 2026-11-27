@@ -99,18 +99,6 @@ export type PageBodies = {
     opportunities: string[]
     waysButtonLabel: string
     waysButtonTo: string
-    screeningHeading: string
-    screeningParagraphs: string[]
-    screeningNotice: string
-    screeningMissing: string
-    screeningReady: string
-    screeningAskLabel: string
-    transportHeading: string
-    transportParagraphs: string[]
-    transportListIntro: string
-    transportItems: string[]
-    transportClosing: string
-    transportButtonLabel: string
   }
   bowlers: {
     eyebrow: string
@@ -373,8 +361,6 @@ export type SiteContent = {
     volunteerCtaLabel: string
     volunteerCtaTo: string
   }
-  sterlingVolunteerInvitationUrl: string | null
-  sterlingVolunteersInfoUrl: string
   coaches: { id: string; name: string; role: string; summary: string }[]
   pageBodies: PageBodies
   venues: {
@@ -627,10 +613,6 @@ export function validateSiteContent(input: unknown): SiteContentIssue[] {
       issues.push({ path: "fundraiserContact.email", message: "Use a valid email address." })
     }
   }
-  if (input.sterlingVolunteerInvitationUrl !== null) {
-    checkHttps(input.sterlingVolunteerInvitationUrl, "sterlingVolunteerInvitationUrl", issues)
-  }
-  checkHttps(input.sterlingVolunteersInfoUrl, "sterlingVolunteersInfoUrl", issues)
   if (Array.isArray(input.venues)) validateVenues(input.venues, issues)
   if (Array.isArray(input.practiceTournaments)) validateTournamentFields(input.practiceTournaments, issues)
 
@@ -931,18 +913,6 @@ function validatePageBodies(value: unknown, issues: SiteContentIssue[]) {
     checkLines(volunteer.opportunities, "pageBodies.volunteer.opportunities", issues, 1)
     checkText(volunteer.waysButtonLabel, "pageBodies.volunteer.waysButtonLabel", issues, CONTENT_LIMITS.label)
     checkInternal(volunteer.waysButtonTo, "pageBodies.volunteer.waysButtonTo", issues)
-    checkText(volunteer.screeningHeading, "pageBodies.volunteer.screeningHeading", issues, CONTENT_LIMITS.heading)
-    checkLines(volunteer.screeningParagraphs, "pageBodies.volunteer.screeningParagraphs", issues, 1)
-    checkText(volunteer.screeningNotice, "pageBodies.volunteer.screeningNotice", issues, CONTENT_LIMITS.paragraph)
-    checkText(volunteer.screeningMissing, "pageBodies.volunteer.screeningMissing", issues, CONTENT_LIMITS.paragraph)
-    checkText(volunteer.screeningReady, "pageBodies.volunteer.screeningReady", issues, CONTENT_LIMITS.paragraph)
-    checkText(volunteer.screeningAskLabel, "pageBodies.volunteer.screeningAskLabel", issues, CONTENT_LIMITS.label)
-    checkText(volunteer.transportHeading, "pageBodies.volunteer.transportHeading", issues, CONTENT_LIMITS.heading)
-    checkLines(volunteer.transportParagraphs, "pageBodies.volunteer.transportParagraphs", issues, 1)
-    checkText(volunteer.transportListIntro, "pageBodies.volunteer.transportListIntro", issues, CONTENT_LIMITS.paragraph)
-    checkLines(volunteer.transportItems, "pageBodies.volunteer.transportItems", issues, 1)
-    checkText(volunteer.transportClosing, "pageBodies.volunteer.transportClosing", issues, CONTENT_LIMITS.paragraph)
-    checkText(volunteer.transportButtonLabel, "pageBodies.volunteer.transportButtonLabel", issues, CONTENT_LIMITS.label)
   }
 
   const bowlers = isRecord(value.bowlers) ? value.bowlers : null

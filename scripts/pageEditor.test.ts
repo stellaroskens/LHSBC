@@ -146,7 +146,7 @@ describe("visual page editor", () => {
 
   it("covers every dashboard section and keeps announcements unsent", () => {
     assert.equal(ADMIN_SECTIONS.every((section) => section.status === "available" && section.href), true)
-    assert.equal(content.pageBodies.volunteer.title, "Volunteer With Lebanon High School Bowling Club")
+    assert.equal(content.pageBodies.volunteer.title, "Our Bowlers. Their Safety. Our Responsibility.")
     assert.equal(content.practiceTournaments.length, 0)
     const next = editField(content, "pageBodies.home.cards.0.heading", "Practice nights")
     assert.equal(next.pageBodies.home.cards[0].heading, "Practice nights")

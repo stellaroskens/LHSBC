@@ -34,8 +34,8 @@
       "description": "Contact Lebanon High School Bowling Club. Club contact to be confirmed. The preview form on this page does not send a message."
     },
     "volunteer": {
-      "title": "Volunteer Opportunities | Lebanon High School Bowling Club",
-      "description": "Adult volunteer opportunities for Lebanon High School Bowling Club, including background-check guidance when leadership confirms screening."
+      "title": "Athlete Safety & Background Checks | Lebanon High School Bowling Club",
+      "description": "How Lebanon High School Bowling Club protects young athletes: USBC Registered Volunteer requirements, SafeSport training, NCSI background screening, transportation safeguards, and how to report a concern."
     },
     "notFound": {
       "title": "Page not found | Lebanon High School Bowling Club",
@@ -146,8 +146,6 @@
     "volunteerCtaLabel": "VOLUNTEER OPPORTUNITIES",
     "volunteerCtaTo": "/volunteer"
   },
-  "sterlingVolunteerInvitationUrl": null,
-  "sterlingVolunteersInfoUrl": "https://www.sterlingvolunteers.com/getavolunteerbackgroundcheck/",
   "coaches": [
     {
       "id": "cliff-meredith",
@@ -327,7 +325,7 @@
           "Bowling helps student athletes build confidence, friendships, patience, and teamwork.",
           "Athletes on the roster can chase competitive scores or enjoy the game with teammates.",
           "Adult volunteers help keep practices, events, and fundraisers running.",
-          "Background screening for volunteers uses Sterling Volunteers when leadership directs it."
+          "Adults in designated volunteer and transportation roles complete the USBC Registered Volunteer Program and receive club approval."
         ]
       },
       "college": {
@@ -374,10 +372,13 @@
       "missingStorefrontNote": "This page cannot take an order. Merchandise details to be confirmed."
     },
     "volunteer": {
-      "eyebrow": "Support our athletes",
-      "title": "Volunteer With Lebanon High School Bowling Club",
+      "eyebrow": "Athlete safety & background checks",
+      "title": "Our Bowlers. Their Safety. Our Responsibility.",
       "intro": [
-        "Lebanon High School Bowling Club depends on parents, families, and community members who help make the bowling program possible."
+        "At Lebanon High School Bowling Club, the safety and well-being of our children will always come first.",
+        "We believe every child deserves to participate in an environment where they feel safe, respected, supported and encouraged.",
+        "Our responsibility extends beyond the bowling lanes. It includes practices, tournaments, transportation, communication and all club-related activities.",
+        "We want parents to feel comfortable knowing who is coaching, supervising and transporting their children."
       ],
       "waysHeading": "Ways adults can help",
       "waysIntro": "Volunteer roles support the athletes already on the roster. Availability and approval depend on club needs and applicable school procedures.",
@@ -386,33 +387,10 @@
         "Fundraising and community events",
         "Equipment and event setup",
         "General club assistance",
-        "Student transportation, subject to additional approval"
+        "Student transportation, after Registered Volunteer clearance and club approval"
       ],
       "waysButtonLabel": "Contact club leadership",
-      "waysButtonTo": "/contact",
-      "screeningHeading": "Volunteer Background Checks",
-      "screeningParagraphs": [
-        "Lebanon High School Bowling Club may use Sterling Volunteers as a third-party background-screening provider for adult volunteers when leadership directs it. Screening helps protect student athletes and supports safe club activities.",
-        "This website does not collect sensitive personal information for background checks, and it does not process screening applications. Screening is handled through Sterling Volunteers and any school or club procedures that leadership confirms."
-      ],
-      "screeningNotice": "Contact club leadership before you order a background check. Completing a screening does not mean you are automatically authorized to volunteer with the club.",
-      "screeningMissing": "An organization-specific Sterling Volunteers invitation link has not been published here yet. Use the informational link below to learn about Sterling Volunteers, then email club leadership for current screening instructions.",
-      "screeningReady": "Use the club’s Sterling Volunteers invitation link only after leadership confirms you should begin screening for a volunteer role.",
-      "screeningAskLabel": "Ask leadership first",
-      "transportHeading": "Help With Transportation",
-      "transportParagraphs": [
-        "Helping with student transportation is separate from general volunteer screening. Adults interested in driving or otherwise supporting travel for athletes may need additional authorization beyond a standard volunteer background check.",
-        "This site does not claim that a standard Sterling Volunteers package includes a motor vehicle record (MVR) review, and it does not claim that any transportation requirements are already satisfied."
-      ],
-      "transportListIntro": "Requirements for transportation help may include:",
-      "transportItems": [
-        "A valid driver’s license",
-        "Proof of auto insurance",
-        "A motor vehicle record (MVR) review, when required by the school or club",
-        "Written authorization from club leadership and any applicable school or district procedures"
-      ],
-      "transportClosing": "Ask club leadership what is currently required before offering rides or arranging student transportation.",
-      "transportButtonLabel": "Contact Us"
+      "waysButtonTo": "/contact"
     },
     "bowlers": {
       "eyebrow": "LHSBC",
@@ -682,8 +660,8 @@
             {
               "question": "How does volunteer background screening work?",
               "paragraphs": [
-                "Lebanon High School Bowling Club uses Sterling Volunteers as its preferred third-party background-screening provider for adult volunteers.",
-                "Contact club leadership before ordering a screening. Completing a background check does not mean you are automatically authorized to volunteer. This website does not collect screening applications or sensitive personal information."
+                "Adults in designated roles complete the USBC Registered Volunteer Program: SafeSport training through the U.S. Center for SafeSport and a background screen through the National Center for Safety Initiatives (NCSI), using the USBC Athlete Safety portal.",
+                "Once your requirements are complete, notify club leadership. Your credentials must be reviewed and your volunteer role approved before you begin volunteering. Submitting an application does not mean you have been approved. This website does not collect screening applications or sensitive personal information."
               ],
               "links": [
                 {
@@ -699,8 +677,8 @@
             {
               "question": "Do volunteer drivers need extra authorization?",
               "paragraphs": [
-                "Yes. Helping with student transportation is separate from general volunteer screening. Drivers may need additional authorization such as a license, insurance proof, an MVR review when required, and written approval from club leadership or applicable school procedures.",
-                "This site does not claim that a standard Sterling Volunteers package includes an MVR review."
+                "Yes. Parents transporting other bowlers must complete the USBC Registered Volunteer Program and receive club approval. Parents transporting only their own children do not need to under club policy.",
+                "Transportation must also follow the Minor Athlete Abuse Prevention Policies (MAAPP), including appropriate supervision, written parental permission, and restrictions on one-on-one transportation. Background screening alone does not authorize transportation."
               ],
               "links": [
                 {

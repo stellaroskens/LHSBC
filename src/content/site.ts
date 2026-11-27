@@ -24,8 +24,6 @@ export const bowlerHonors = siteContent.bowlerHonors
 export const seasonRegistrationClosed = siteContent.seasonRegistrationClosed
 /** @deprecated Prefer seasonRegistrationClosed.description for new copy. */
 export const studentCapacityNotice = seasonRegistrationClosed.description
-export const sterlingVolunteerInvitationUrl = siteContent.sterlingVolunteerInvitationUrl
-export const sterlingVolunteersInfoUrl = siteContent.sterlingVolunteersInfoUrl
 export const teamGearShop = siteContent.teamGearShop
 
 /** Portrait keys in media.ts — keep in sync when adding coaches. */

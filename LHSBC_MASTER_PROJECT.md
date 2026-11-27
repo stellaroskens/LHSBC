@@ -367,6 +367,7 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-27 v1.28: Athlete Safety, Background Checks and Volunteer Verification, plus the Our Club family support section, are built from the approved content. Sterling Volunteers is replaced by USBC RVP and NCSI throughout. Draft `6b0a01954aec0b102c3a8539`. Givebutter is recorded as the next phase, inactive. No commit, push, or production publish. See section 51.
 - 2026-11-25 v1.27: Final design release published. Commit `32677b3`, production deploy `6b0776fbc59d1b17b27ae880`, published 2026-11-26T00:07:14.833Z. Auto-publishing is still locked. Rollback: `6b0768f8e5805be40a0ca4e5`. See section 50.
 - 2026-11-25 v1.26: Owner-approved footer readability fix (subtitle and Follow heading now cream). Final consolidated draft `6b0774fec2d47481687baad4`. Development closed for the client presentation. No commit, push, or production publish. See section 49.
 - 2026-11-25 v1.25: Design passes 3 to 7 (Tournaments, Sponsors, Donate, Fundraisers, Contact) are in one consolidated draft, `6b077306a75a7dee3b4fe6be`. No commit, push, or production publish. See section 48.
@@ -974,3 +975,56 @@ The owner approved final draft `6b0774fec2d47481687baad4`, design passes 1 to 7,
 Givebutter, payments (Stripe, PayPal, Venmo, Cash App), email delivery, and the unconfigured forms remain inactive. Staff sign-in remains disabled (`ADMIN_AUTH_ENABLED` is unset). Authentication, permissions, and privacy protections are unchanged.
 
 This record update is a documentation-only commit after `32677b3`. Its Netlify build is intentionally not published, so production stays on the verified deploy above.
+
+## 51. November 27, 2026 — Athlete Safety, background checks, and family support (draft)
+
+The owner approved the implementation plan and supplied the final copy for the Athlete Safety page and the Our Club family support section. This work is in a draft only.
+
+**Draft.** `https://6b0a01954aec0b102c3a8539--lhsbc.netlify.app` (deploy `6b0a01954aec0b102c3a8539`). The owner approved this draft on November 27, 2026, and authorized publication.
+
+**Rollback record.** Before publication, production was deploy `6b0776fbc59d1b17b27ae880` (commit `32677b3`, published `2026-11-26T00:07:14.833Z`, locked). To roll back, publish that deploy again from the Netlify deploy list or with `restoreSiteDeploy`.
+
+**Volunteer page (`/volunteer`, updated in place).**
+- Safety shield hero, "Our Bowlers. Their Safety. Our Responsibility.", with Start Your Background Check (USBC account login), Verify a Registered Volunteer (USBC Find a Registered Volunteer), and a Report a safety concern link.
+- Who needs to become a Registered Volunteer, and the USBC Athlete Safety Program.
+- Getting Started: six numbered steps (`#volunteer-background-checks`).
+- Parents Helping Parents with the MAAPP transportation safeguards (`#volunteer-transport-heading`), the future transportation directory marked "Not yet available", and Know Who Is Coaching.
+- General Information resources, kept separate from the six Informational Videos.
+- USBC contact panel with a clickable phone (800-514-2695, ext. 8955) and email (RVP@bowl.com).
+- The existing editable Ways adults can help.
+- Reporting a Safety Concern (`#report-a-concern`) with a 9-1-1 emergency line and the mandatory-reporting note.
+- The approved copy is code-reviewed in `src/content/athleteSafety.ts`. Only the hero and the volunteer roles stay editable in the page editor.
+
+**Our Club (`/our-club`).** "More Than a Bowling Team / We're Families Supporting Families." sits immediately after How to Join. It has four cards (Need a Ride?, Need a Little Help?, Safety Comes First, A Community Where Everyone Belongs), the closing line, and links to `/volunteer` and `/contact`. The wording calls the contact page the "Club contact page" and doesn't say the form sends messages. All other content is preserved.
+
+**Coach credentials.**
+- Each coach card shows how to verify through USBC Find a Registered Volunteer: search by name, state Oregon. Placeholder coaches are told the search becomes possible once the name is published.
+- A verified badge appears only from a record in `src/lib/safety/coachCredentials.ts`. A record is added only after actual USBC verification, coach consent, redaction, and administrator approval. It holds the review date, the expiration date, a consent flag, and an optional local redacted image.
+- Placeholder names, missing consent, invalid or future dates, and expired records never show a badge. Both current entries are empty, so no badges show.
+- No credential documents are stored or published.
+
+**Sterling Volunteers removed.** The Sterling URLs, the screening and transport fields, their validation and editor fields, and the Sterling and MVR wording in the FAQ and Our Club are replaced by accurate USBC RVP, SafeSport, and NCSI information. A test confirms no Sterling text remains in public files.
+
+**Verification.**
+- All 21 official links return HTTP 200. The congress.gov page returns 403 to automated requests only (bot challenge); it opens normally in a browser.
+- The six steps were checked against USBC: the enrollment page (SafeSport first), the NCSI screening page, the renewal page (annual SafeSport refresher), the program information (background screen every two years), and the portal instructions PDF (log in, My USBC, Athlete Safety).
+- The six video titles match their YouTube titles.
+- The transportation wording matches the U.S. Center for SafeSport MAAPP guidance: observable and interruptible, a second adult or at least two minors, and written parent consent.
+- USBC Find a Registered Volunteer is a search form with no per-person links, so the site links to the search page.
+- On the draft, the homepage is pixel-identical to production at 1440 × 900 and 390 × 844. `/volunteer`, `/our-club`, `/faq`, and `/information` have no horizontal overflow at 1440, 820, and 390. All anchors resolve, including the existing FAQ links into `/volunteer`.
+- `npm test`: 144 of 144 pass (11 new Athlete Safety tests). `npm run build`: succeeds. No dependencies were added.
+
+**Not introduced in this phase:** new databases, new authentication roles, family account activation, a private volunteer directory, administrative verification screens, public volunteer records, or sensitive screening documents. Authentication, permissions, and the security tests are unchanged.
+
+**Recommended secure architecture for the future volunteer directory (not built; needs separate authorization).**
+- Store verification records in Netlify Database (managed Postgres), never in the public bundle, published site content, or GitHub.
+- Serve the directory only from Netlify Functions that check the session and role on the server. Access is limited to authenticated, approved club families (a future family role, approved separately) and authorized staff.
+- Store only: volunteer name, USBC RVP status, verification date, expiration date, approved activities (for example transportation), and the reviewing administrator. Never store Social Security numbers, birth dates, background screening reports, or screening documents.
+- Administrators verify manually through USBC Find a Registered Volunteer. Automated USBC verification is used only if an authorized, supported integration becomes available.
+- Expired, pending, or unverified volunteers are automatically excluded from the directory.
+- Log administrative changes, and give volunteers a way to ask to be removed.
+
+**Next phase (recorded only, not started): Givebutter.**
+- Campaign: `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`, campaign ID 803228, account ID 451198.
+- After approval, integrate it into the existing donation page and Payment Connections architecture.
+- Payment processing stays inactive until separately verified and authorized.
