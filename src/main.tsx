@@ -12,6 +12,7 @@ import "./styles/portal.css"
 import "./styles/signin.css"
 import "./styles/bowlers.css"
 import "./styles/lhsbc-home.css"
+import "./styles/contained-layout.css"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

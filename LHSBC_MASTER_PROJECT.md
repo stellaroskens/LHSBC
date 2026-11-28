@@ -112,7 +112,8 @@ Exact individual dates for P01–P14 not recovered. P11 original ZIP installatio
 | ART-05 | Deferred | OPEN | Outstanding visual refinement for Upcoming Events: the calendar illustration, the yellow schedule badge, and the decorative arrow. The current calendar and badge are temporary geometry, and the arrow is absent. Do not correct this during later homepage passes. |
 | ORG-01 | P0 | DONE | Lebanon High School Bowling Club received its official IRS EIN on November 27, 2026, confirmed by IRS Notice CP575E. The notice is kept in secure organizational records outside the public repository; neither the notice nor the EIN is stored in this repository. Use the official organization information when Givebutter verification requires it. An EIN is not federal tax exemption: do not claim tax-exempt status or tax deductibility without confirmation. See section 52. |
 | GIVE-01 | P1 | DONE (published inactive, section 54; activation needs separate authorization) | Integrate the Givebutter campaign "Support Lebanon High School Bowlers" (campaign ID 803228, account ID 451198, `https://givebutter.com/support-lebanon-high-school-bowlers-myav8u`) into the existing donation and Payment Connections architecture. Keep it inactive until the campaign is verified, published, and explicitly approved for activation. Preserve the existing design and fundraising components. Starts after the Athlete Safety publication (section 52). |
-| LAYOUT-01 | P1 | OPEN | Client request: a more contained layout with clearly defined outer margins, consistent content boundaries, and more comfortable spacing. Layout refinement only, not a redesign; preserve all approved artwork, typography, colors, buttons, and decorative components. After GIVE-01, prepare three homepage options (spacious, balanced, and compact contained). Do not apply website-wide until the owner approves one option. |
+| LAYOUT-01 | P1 | IN REVIEW (Option B homepage approved; applied to every public page in draft `6b0a1d340d5a2d304f6187d7` with NAV-02, sections 58–59; not published) | Client request: a more contained layout with clearly defined outer margins, consistent content boundaries, and more comfortable spacing. Layout refinement only, not a redesign; preserve all approved artwork, typography, colors, buttons, and decorative components. After GIVE-01, prepare three homepage options (spacious, balanced, and compact contained). Do not apply website-wide until the owner approves one option. |
+| NAV-02 | P1 | IN REVIEW (built in draft `6b0a1d340d5a2d304f6187d7`, section 59; not published) | Collapsible navigation refinement, built on the NAV-01 components after the LAYOUT-01 website-wide containment pass. **Full menu:** the Menu button opens every category with all submenu links shown at once (no clicking to reveal), with headings, icons, indentation, and subtle connecting lines; active page and category highlighted. **Compact icon mode:** an expand/collapse control switches to an icon-only panel with tooltips; hovering, focusing, or tapping an icon opens one small flyout with only that category's links; the pointer can move into the flyout; it closes when the pointer leaves both, on Escape, or on outside click. **Styling:** navy background, warm cream submenu surfaces, restrained gold, red for active states, consistent icons, not ornamental; the reference screenshot is structure only, not its black and gray colors. **Positioning:** inside the contained layout and viewport, aligned with the outer margins, no page shift or resize, no permanent sidebar, no full-page dimming, closes on outside click or selection. **Mobile:** compact accordion with comfortable touch targets, no horizontal flyouts. **Protected:** destinations, categories, search, sign-in, authentication and permissions, donation links, Athlete Safety, Family Support, homepage design, contained layout. No new dependencies. Verify keyboard, focus, Escape, active indicators, screen-reader labels, expanded states, touch, and flyout positioning; tests and build; draft showing both modes; publish only with owner approval. Reference screenshot not yet received. See section 57. |
 | ART-06 | Deferred | OPEN | Quick-link icons are temporary. Schedule, Tournaments, Team, and Resources use the existing simplified SVGs. Sponsors uses a geometric handshake because `handshake.png` has a black background and damaged edges. Replace the set with reference-matching artwork later. |
 
 ## 8. Duplicate/conflicting instructions and resolution log
@@ -370,6 +371,10 @@ No owner decision was required to retire the Albany club mark. **Superseded Nove
 - 2026-11-25 v1.16: The official public address is `https://lhsbcor.com/`. `https://www.lhsbcor.com/` redirects there. `https://lhsbc.netlify.app/` remains the Netlify hosting address. Canonical metadata and the sitemap use the custom domain. The sponsorship QR stays unpublished. No deploy, commit, or push.
 - 2026-11-25 v1.17: Launch preparation adds the homepage sponsor section and shared navy footer, connects the priority public pages, and removes the unverified Albany pro shop listing. Payments stay off. No deploy, commit, or push.
 - 2026-11-25 v1.18: Public pages share the homepage type and card treatment. How to Join is on Our Club. A Netlify draft of the local build is published. Production is unchanged. No commit or push.
+- 2026-11-27 v1.35: LAYOUT-01 applied to every public page and NAV-02 built (full menu with every category expanded; compact icon rail with hover, tap, and keyboard flyouts). Combined draft `6b0a1d340d5a2d304f6187d7`. 163 tests pass. No commit, push, or production publish. See sections 58 and 59.
+- 2026-11-27 v1.34: NAV-02 (collapsible navigation refinement) recorded in the task register. Scheduled after the LAYOUT-01 website-wide pass. See section 57.
+- 2026-11-27 v1.33: Owner approved Option B (balanced, about 1280px) as the LAYOUT-01 direction. Options A and C removed. The homepage now uses the contained layout without a query string, in preview draft `6b0a0e5d93f864f77b5bc8e2`. Other pages unchanged until the homepage is approved. No commit, push, or production publish. See section 56.
+- 2026-11-27 v1.32: LAYOUT-01 homepage options A (spacious), B (balanced), and C (compact) are in preview draft `6b0a0cd4fadc7b9ab9a9bf9e`, selected with `?layout=a|b|c`. Not applied to other pages. No commit, push, or production publish. See section 55.
 - 2026-11-27 v1.31: GIVE-01 published with Givebutter inactive. Commit `71f0013`, production deploy `6b0a095d7639c67a02f2a4a7`, published 2026-11-27T22:55:53Z, auto-publishing locked. Rollback: `6b0a03fd6afdfd8bfc3fad4d`. LAYOUT-01 started. See section 54.
 - 2026-11-27 v1.30: GIVE-01 built, inactive: Givebutter registered as a Payment Connections provider (prepared, not live), and an inactive Givebutter block added to Donate. Draft `6b0a071ec238925f58957bf4`. No commit, push, or production publish. See section 53.
 - 2026-11-27 v1.29: Athlete Safety and Families Supporting Families published. Commit `f0ee97a`, production deploy `6b0a03fd6afdfd8bfc3fad4d`, published 2026-11-27T22:33:38.746Z, auto-publishing locked. Rollback: `6b0776fbc59d1b17b27ae880`. ORG-01 (IRS EIN received), GIVE-01, and LAYOUT-01 recorded in the task register. See section 52.
@@ -1107,3 +1112,102 @@ The owner approved the Givebutter draft `6b0a071ec238925f58957bf4` (section 53) 
 Givebutter, payments, email delivery, and the unconfigured forms remain inactive. Authentication, permissions, and privacy protections are unchanged.
 
 This record update is a documentation-only commit after `71f0013`. Its Netlify build is intentionally not published.
+
+## 55. November 27, 2026 — LAYOUT-01 homepage layout options (preview draft)
+
+The client likes the current design but wants comfortable page boundaries, consistent margins, and fewer full-width expanses of color. This is a layout refinement, not a redesign.
+
+**Preview draft:** `https://6b0a0cd4fadc7b9ab9a9bf9e--lhsbc.netlify.app/` (deploy `6b0a0cd4fadc7b9ab9a9bf9e`). Production is unchanged (deploy `6b0a095d7639c67a02f2a4a7`, commit `71f0013`, locked). Nothing was committed or pushed.
+- Current homepage: no query string.
+- Option A, Spacious: `?layout=a`. Frame up to 1440px, outer margin up to 40px, more generous section spacing.
+- Option B, Balanced: `?layout=b`. Frame up to 1280px, outer margin up to 32px, current section spacing.
+- Option C, Compact: `?layout=c`. Frame up to 1120px, outer margin up to 28px, reduced section padding.
+
+**How it works.**
+- The whole page (header, content, and footer) sits in one centered frame with a thin edge and soft shadow. The area outside the frame is a subtle warm neutral (`#e6e0d3`) that sits between the cream panels and the navy bands.
+- Only the frame width, outer margins, side padding, and section spacing change. The homepage's existing responsive sizing formulas are kept, but measured against the frame (CSS container units) instead of the browser window, so text and artwork scale to the frame. There is no zoom or transform scaling.
+- The logo, lane artwork, colors, fonts, buttons, illustrations, accents, cards, content, navigation, Athlete Safety, Family Support, and Givebutter are unchanged.
+- Below 760px wide, the frame fills the screen as it does today; only each option's section spacing differs on phones.
+- Files: `src/styles/layout-options.css` (all option rules, scoped to `html[data-layout]`), a small preview switch in `src/components/Layout.tsx` that applies only on the homepage, and its import in `src/main.tsx`. Other pages ignore the switch.
+
+**Verification.**
+- Frame widths: A is 1368px at a 1440px window and 1440px at 1920px; B is 1280px; C is 1120px.
+- No horizontal overflow or broken images for any option at 1440 × 900, 1920 × 1080, and 390 × 844.
+- The menu passes all checks inside the frame on desktop and mobile (accordion, Support the Team links, Escape and focus return, outside click, toggle, Join the club anchor, closing on selection), and the open menu stays inside the frame.
+- Without `?layout=`, the draft homepage, Donate, and Volunteer are pixel-identical to production at desktop and mobile. `/donate?layout=b` is not affected.
+- `npm test`: 152 of 152 pass. `npm run build`: succeeds. No dependencies added.
+
+**Next:** the owner selects an option. The selected layout will then be applied to the remaining pages as a separate draft. Nothing is published without approval.
+
+## 56. November 27, 2026 — LAYOUT-01 Option B homepage preview
+
+The owner approved Option B, the balanced contained layout, as the direction: about 1280px maximum desktop width, consistent outer margins, clearly defined page boundaries, and comfortable section spacing. Options A and C are not needed and were removed. The Givebutter phase was already approved and complete (section 54).
+
+**Preview draft:** `https://6b0a0e5d93f864f77b5bc8e2--lhsbc.netlify.app/` (deploy `6b0a0e5d93f864f77b5bc8e2`). Production is unchanged (deploy `6b0a095d7639c67a02f2a4a7`, commit `71f0013`, locked). Nothing was committed or pushed.
+
+**Changes (smallest safe change through the shared layout).**
+- `src/styles/contained-layout.css` (replaces the three-option preview file) holds the Option B frame: up to 1280px wide, outer margin `clamp(16px, 2.5vw, 32px)`, warm neutral surround `#e6e0d3`, a thin edge and soft shadow, and the homepage section spacing measured against the frame. Below 760px the frame fills the screen as before.
+- `src/components/Layout.tsx`, the shared page shell, sets `data-layout="contained"` on the homepage only (before first paint, so there is no full-width flash). The `?layout=` switch was removed. Once the homepage is approved, the same switch will apply to every public page.
+- No artwork, colors, typography, buttons, cards, illustrations, decorative elements, content, navigation, or features changed.
+- New `scripts/containedLayout.test.ts` (5 tests): 1280px frame and no A or C rules; no zoom or transform scaling; only layout properties, with the neutral surround as the only background; every homepage font formula identical to the original, measured against the frame; homepage-only for now.
+
+**Verification.**
+- The draft homepage is pixel-identical to the approved Option B preview at 1440 × 900, 1920 × 1080, and 390 × 844. The tablet view (820 × 1180) has no overflow.
+- Donate, Volunteer, and Our Club are pixel-identical to production at desktop and mobile.
+- The menu passes all checks on desktop and mobile.
+- `npm test`: 157 of 157 pass. `npm run build`: succeeds. No dependencies added.
+
+**Next:** after homepage approval, apply the contained frame and consistent spacing to all public pages in one draft, preserving Athlete Safety, Family Support, and Givebutter. Nothing is published without approval.
+
+## 57. November 27, 2026 — NAV-02 recorded
+
+The owner added NAV-02, a refinement of the NAV-01 menu, to follow the LAYOUT-01 website-wide containment pass. The full requirements are in the task register (section 7).
+
+**Resolution of overlapping instructions.** The brief has a "Revised Navigation Requirements" section that says it supersedes the earlier NAV-02 menu behavior, followed by the earlier wording. Where they differ, the revised section controls:
+- The full menu opens with every category's links already shown. Visitors do not click categories to reveal links. (The earlier wording described chevrons that expand one category at a time.)
+- Compact icon mode uses hover, focus, or tap flyouts that show one category at a time.
+- Open question for the owner: the earlier wording asks for a compact accordion on mobile, while the revised section says all categories are expanded on open. Confirm which applies on phones before building.
+
+**Dependencies.** The owner's authoritative wireframe screenshot was not received with the instruction and must be supplied before NAV-02 is built. LAYOUT-01 is awaiting owner approval of the Option B homepage preview (section 56) before the website-wide pass.
+
+**Update (same day).** Both dependencies are resolved. The owner supplied the reference screenshot (structure only; its colors are not used) and confirmed that phones open with all categories expanded, the same as the full menu. The owner approved the Option B homepage preview and asked for the website-wide pass, followed by NAV-02 (sections 58 and 59).
+
+## 58. November 27, 2026 — LAYOUT-01 applied to every public page (draft)
+
+The owner approved the Option B homepage preview ("apply it site-wide in a draft, then build NAV-02").
+
+**Changes.**
+- `src/components/Layout.tsx` now sets `data-layout="contained"` for every public page, before first paint, and removes it when the shell unmounts. Staff pages do not use this shell and are unchanged.
+- The frame (`.site`) and the main content area are CSS size containers. Every width-relative measurement in the shared public styles (`sitewide.css`, `global.css`, `bowlers.css`) now uses container units (`cqi`) instead of viewport units (`vw`). Inside the frame they scale with the 1280px frame instead of the window. Outside a container they behave exactly as before.
+- No artwork, colors, typography, buttons, cards, illustrations, decorative elements, content, navigation destinations, or features changed. No zoom or transform scaling. No dependencies added.
+- `scripts/containedLayout.test.ts`: 6 tests, now covering every page and the absence of viewport units in the shared styles.
+
+**Verification.** All 16 public routes, including sign-in, the sponsor QR page, and the not-found page, have no horizontal overflow at 1440, 1920, 820, and 390 pixels wide, and were reviewed visually. Athlete Safety, Family Support, and the inactive Givebutter section are intact. The homepage is pixel-identical to the approved Option B preview. Interim draft: `6b0a1a16db477b5a73a68aa7`, superseded by the combined draft in section 59.
+
+## 59. November 27, 2026 — NAV-02 collapsible navigation (draft)
+
+**Draft:** `https://6b0a1d340d5a2d304f6187d7--lhsbc.netlify.app/` (deploy `6b0a1d340d5a2d304f6187d7`). This draft contains both LAYOUT-01 website-wide (section 58) and NAV-02. Production is unchanged: deploy `6b0a095d7639c67a02f2a4a7`, commit `71f0013`, auto-publishing locked. Nothing was committed, pushed, or published.
+
+**Built on the NAV-01 components** (`Header.tsx`, `PublicMenu.tsx`, `publicMenu.ts`, `header.css`). The categories, destinations, labels, search, sign-in, donation links, and quick links (Join the club, Sponsor, Donate) are unchanged.
+
+**Full menu (default).**
+- The Menu button opens a navy panel anchored under it, inside the contained frame. All four categories (Overview, Team and events, Support the team, Resources) open with every link shown.
+- Each category has a gold icon and a heading. Links sit on warm cream surfaces, indented, with subtle connecting lines. The current category is highlighted, and the current page has a red bar and red text (`aria-current="page"`).
+- A category heading can still be collapsed for tidiness (`aria-expanded`), but nothing needs clicking to reveal links.
+
+**Compact icon mode (desktop and tablet, 761px and wider).**
+- A small round control on the panel edge ("Collapse menu to icons" / "Expand full menu", `aria-pressed`) switches to a narrow icon rail. The choice is remembered for the browser session only.
+- The rail shows Get involved (the quick links) plus the four categories, each with a tooltip label. The current category is highlighted.
+- Mouse: hovering an icon opens one cream flyout with only that category's links. The pointer can travel into the flyout. The flyout closes a moment after the pointer leaves both the icon and the flyout. Only one flyout is open at a time.
+- Touch: tapping an icon opens its flyout, tapping another switches, tapping again closes it. Hover is ignored for touch.
+- Keyboard: Enter or Space on an icon opens the flyout and moves focus to its first link, and ArrowDown does the same. Moving focus to another icon switches the flyout. Escape closes the flyout and returns focus to its icon. A second Escape closes the menu and returns focus to the Menu button.
+
+**Both modes.** The menu closes on Escape, an outside click or tap, or choosing a link. It does not dim the page, lock scrolling, shift or resize the page, or act as a permanent sidebar. The panel scrolls inside itself if the window is short.
+
+**Phones (760px and narrower).** The full menu only, with all categories expanded, no compact control, no horizontal flyouts, and links at least 44px tall.
+
+**Tests.** New `scripts/collapsibleNav.test.ts` (5 tests): all categories expanded by default; compact mode desktop-only and session-scoped; hover, tap, focus, ArrowDown, and Escape handling; no fixed positioning, zoom, or backdrop; no new dependencies. The NAV-01 tests are unchanged and pass. `npm test`: 163 of 163 pass. `npm run build`: succeeds.
+
+**Browser verification** on the production build and on the draft, at 1440 × 900, 1920 × 1080, 900 × 800, 820 × 1180, and 390 × 844. All 36 desktop and 13 phone interaction checks pass. They cover opening, all categories expanded, focus on open, active page and category, the panel within the frame and window, no page shift, no dimming or modal, collapsing a category, Escape and focus return, outside click, the compact toggle and its labels, hover, pointer travel into the flyout, closing on leave, one flyout at a time, hover then click, touch taps, ArrowDown, Enter, Escape inside a flyout, focus switching, every flyout within the frame and window, compact mode remembered, link selection closing the menu, switching back to the full menu, and phone touch targets. With the menu closed, the homepage is pixel-identical to the approved layout draft at desktop and mobile.
+
+**Next:** owner review of both menu modes and the website-wide layout in the draft. Commit, push, and publication only after owner approval.

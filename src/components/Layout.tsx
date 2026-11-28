@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { Footer } from "./Footer"
 import { Header } from "./Header"
@@ -6,6 +6,14 @@ import { Header } from "./Header"
 export function Layout() {
   const { pathname, hash, state } = useLocation()
   const keepScroll = Boolean((state as { keepScroll?: boolean } | null)?.keepScroll)
+
+  useLayoutEffect(() => {
+    const root = document.documentElement
+    root.dataset.layout = "contained"
+    return () => {
+      delete root.dataset.layout
+    }
+  }, [])
 
   useEffect(() => {
     if (keepScroll) return

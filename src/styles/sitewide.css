@@ -15,7 +15,7 @@
   --sw-backdrop: #faf4e6;
   --sw-line: #e4dcc8;
   --sw-muted: #44516a;
-  --sw-gutter: clamp(10px, 1.6vw, 24px);
+  --sw-gutter: clamp(10px, 1.6cqi, 24px);
   --sw-frame: 1480px;
   --sw-radius: 12px;
   --sw-shadow: 0 1px 2px rgba(10, 28, 72, 0.06), 0 10px 26px rgba(10, 28, 72, 0.07);
@@ -27,11 +27,11 @@
   --max: var(--sw-frame);
   --pad: var(--sw-gutter);
   background: var(--sw-backdrop);
-  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  padding-bottom: clamp(1.5rem, 3cqi, 3rem);
 }
 
 .sw-page .section {
-  padding: clamp(0.9rem, 1.8vw, 1.5rem) 0;
+  padding: clamp(0.9rem, 1.8cqi, 1.5rem) 0;
 }
 
 .sw-page .card {
@@ -39,14 +39,14 @@
   border: 3px solid var(--sw-navy);
   border-radius: 1.15rem;
   box-shadow: none;
-  padding: clamp(1.1rem, 2vw, 1.6rem);
+  padding: clamp(1.1rem, 2cqi, 1.6rem);
 }
 
 .sw-page .card h2,
 .sw-page .section-heading h2,
 .sw-page .sw-panel > h2 {
   color: var(--sw-royal);
-  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  font-size: clamp(1.35rem, 2.1cqi, 1.85rem);
   letter-spacing: 0.02em;
 }
 
@@ -154,9 +154,9 @@
   position: relative;
   display: grid;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  min-height: clamp(15rem, 26vw, 21.5rem);
-  padding: clamp(1.6rem, 3.6vw, 3rem) clamp(1.25rem, 4vw, 3.5rem);
+  gap: clamp(1.25rem, 3cqi, 2.5rem);
+  min-height: clamp(15rem, 26cqi, 21.5rem);
+  padding: clamp(1.6rem, 3.6cqi, 3rem) clamp(1.25rem, 4cqi, 3.5rem);
 }
 
 .ah__copy {
@@ -195,7 +195,7 @@
 .ah__title-main {
   display: inline-block;
   padding-right: 0.12em;
-  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-size: clamp(2.4rem, 6cqi, 4.6rem);
   font-style: italic;
   color: #fffdf8;
 }
@@ -204,7 +204,7 @@
   display: block;
   width: fit-content;
   margin-top: 0.45rem;
-  font-size: clamp(1.05rem, 2.3vw, 1.8rem);
+  font-size: clamp(1.05rem, 2.3cqi, 1.8rem);
   letter-spacing: 0.03em;
   font-style: italic;
   color: #ffc400;
@@ -279,7 +279,7 @@
   .ah__title-main,
   .sw-sponsors .ah__title-main,
   .sw-faq .ah__title-main {
-    font-size: clamp(2.1rem, 10vw, 3.2rem);
+    font-size: clamp(2.1rem, 10cqi, 3.2rem);
   }
 }
 
@@ -415,7 +415,7 @@
 .sw-heading .sw-heading__title {
   margin: 0;
   color: var(--sw-royal);
-  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+  font-size: clamp(1.45rem, 2.3cqi, 2.05rem);
   letter-spacing: 0.02em;
 }
 
@@ -452,7 +452,7 @@
   border: 3px solid var(--sw-navy);
   border-radius: 1.15rem;
   box-shadow: none;
-  padding: clamp(1.1rem, 2.2vw, 1.75rem);
+  padding: clamp(1.1rem, 2.2cqi, 1.75rem);
   min-width: 0;
 }
 
@@ -569,7 +569,7 @@
   display: grid;
   place-items: center;
   width: min(100%, 22rem);
-  padding: clamp(0.9rem, 2vw, 1.4rem);
+  padding: clamp(0.9rem, 2cqi, 1.4rem);
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 0 4px rgba(255, 255, 255, 0.12);
@@ -587,7 +587,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem 2rem;
-  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3.5vw, 2.5rem);
+  padding: clamp(1.25rem, 3cqi, 2rem) clamp(1.25rem, 3.5cqi, 2.5rem);
   border-radius: var(--sw-radius);
   color: #fff;
   background:
@@ -605,7 +605,7 @@
 .sw-cta-band h2 {
   margin: 0 0 0.45rem;
   color: #fff;
-  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-size: clamp(1.35rem, 2.3cqi, 1.9rem);
 }
 
 .sw-cta-band p {
@@ -618,12 +618,12 @@
 
 .sw-club__coach-grid {
   display: grid;
-  gap: clamp(0.9rem, 1.6vw, 1.25rem);
+  gap: clamp(0.9rem, 1.6cqi, 1.25rem);
 }
 
 .sw-coach {
   min-width: 0;
-  padding: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2cqi, 1.5rem);
   border: 1px solid var(--sw-line);
   border-radius: var(--sw-radius);
   background: var(--sw-paper);
@@ -633,7 +633,7 @@
 .sw-coach__head {
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 2vw, 1.4rem);
+  gap: clamp(0.9rem, 2cqi, 1.4rem);
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--sw-line);
@@ -641,7 +641,7 @@
 
 .sw-coach__photo {
   flex: none;
-  width: clamp(6.5rem, 14vw, 9.5rem);
+  width: clamp(6.5rem, 14cqi, 9.5rem);
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
@@ -662,7 +662,7 @@
 .sw-coach h3 {
   margin: 0;
   color: var(--sw-navy);
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-size: clamp(1.4rem, 2.4cqi, 2rem);
   letter-spacing: 0.01em;
   text-transform: uppercase;
 }
@@ -677,17 +677,17 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: clamp(0.9rem, 1.6vw, 1.25rem);
+  margin-top: clamp(0.9rem, 1.6cqi, 1.25rem);
   padding-block: 0.9rem;
 }
 
 .sw-coach--admin h3 {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.2rem, 2cqi, 1.5rem);
 }
 
 .sw-club__info-grid {
   display: grid;
-  gap: clamp(0.9rem, 1.6vw, 1.25rem);
+  gap: clamp(0.9rem, 1.6cqi, 1.25rem);
 }
 
 .sw-page .sw-club__info p,
@@ -806,7 +806,7 @@
 .sw-page .sw-faq-panel h2,
 .sw-page .sw-tournaments__note > h2 {
   color: var(--sw-royal);
-  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+  font-size: clamp(1.45rem, 2.3cqi, 2.05rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
@@ -841,7 +841,7 @@
 
 .sw-practices__grid {
   display: grid;
-  gap: clamp(0.9rem, 1.6vw, 1.25rem);
+  gap: clamp(0.9rem, 1.6cqi, 1.25rem);
 }
 
 .sw-practices__location {
@@ -862,7 +862,7 @@
   margin-bottom: 0.25rem;
   color: var(--sw-navy);
   font-family: var(--display);
-  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-size: clamp(1.4rem, 2.4cqi, 1.9rem);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -915,7 +915,7 @@
 
 /* Practice board: vintage alley schedule board in a navy band, cream panels inside. */
 .sw-board {
-  padding: clamp(0.9rem, 2vw, 1.5rem);
+  padding: clamp(0.9rem, 2cqi, 1.5rem);
   border: 3px solid #e9b23c;
   border-radius: 1.15rem;
   background:
@@ -926,14 +926,14 @@
 
 .sw-board__title {
   width: fit-content;
-  margin: 0 auto clamp(0.9rem, 2vw, 1.25rem);
+  margin: 0 auto clamp(0.9rem, 2cqi, 1.25rem);
   padding: 0.4rem 1.4rem;
   border: 2px solid #e9b23c;
   border-radius: 999px;
   background: var(--sw-red);
   color: #fff;
   font-family: var(--display);
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(1rem, 2cqi, 1.3rem);
   font-style: italic;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -947,7 +947,7 @@
 
 .sw-board__panels {
   display: grid;
-  gap: clamp(0.75rem, 1.6vw, 1.1rem);
+  gap: clamp(0.75rem, 1.6cqi, 1.1rem);
 }
 
 .sw-page .sw-board .card {
@@ -979,7 +979,7 @@
   margin: 0 0 0.4rem;
   color: #ffc400;
   font-family: var(--display);
-  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-size: clamp(1.15rem, 2.2cqi, 1.45rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1242,16 +1242,16 @@
 }
 
 .sw-sponsors .ah__title-main {
-  font-size: clamp(3rem, 9vw, 7.25rem);
+  font-size: clamp(3rem, 9cqi, 7.25rem);
 }
 
 .sw-sponsors__options {
   display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
 }
 
 .sw-sponsors__qr-note {
-  margin: clamp(0.75rem, 1.4vw, 1.25rem) 0 0;
+  margin: clamp(0.75rem, 1.4cqi, 1.25rem) 0 0;
   font-size: 0.95rem;
 }
 
@@ -1270,7 +1270,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 2vw, 1.5rem);
+  gap: clamp(0.9rem, 2cqi, 1.5rem);
   overflow: hidden;
 }
 
@@ -1287,8 +1287,8 @@
 }
 
 .sw-sponsors__option .sw-icon-disc {
-  width: clamp(3.6rem, 6vw, 4.6rem);
-  height: clamp(3.6rem, 6vw, 4.6rem);
+  width: clamp(3.6rem, 6cqi, 4.6rem);
+  height: clamp(3.6rem, 6cqi, 4.6rem);
 }
 
 .sw-sponsors__option .sw-icon-disc svg {
@@ -1305,7 +1305,7 @@
 .sw-sponsors__option h2 {
   margin: 0;
   color: var(--sw-royal);
-  font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+  font-size: clamp(1.45rem, 2.4cqi, 2.1rem);
   letter-spacing: 0.02em;
 }
 
@@ -1316,14 +1316,14 @@
 
 .sw-sponsors__grid {
   display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
-  margin-top: clamp(0.75rem, 1.4vw, 1.25rem);
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
+  margin-top: clamp(0.75rem, 1.4cqi, 1.25rem);
   align-items: start;
 }
 
 .sw-sponsors__side {
   display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
   min-width: 0;
 }
 
@@ -1334,7 +1334,7 @@
 .sw-sponsors .community-sponsor-grid__intro h2 {
   margin: 0;
   color: var(--sw-royal);
-  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+  font-size: clamp(1.4rem, 2.2cqi, 1.95rem);
   letter-spacing: 0.02em;
 }
 
@@ -1461,7 +1461,7 @@
 
 .sw-sponsors .sponsor-recognition__card h3 {
   color: var(--sw-royal);
-  font-size: clamp(1.1rem, 1.35vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.35cqi, 1.3rem);
   font-style: italic;
   letter-spacing: 0.05em;
   text-align: center;
@@ -1488,7 +1488,7 @@
   border-radius: 6px;
   background: var(--sw-red);
   color: #fff;
-  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-size: clamp(1.4rem, 2cqi, 1.8rem);
   line-height: 1;
 }
 
@@ -1512,7 +1512,7 @@
 
 /* Ways to contribute: payment destinations stay visibly disconnected */
 .sw-sponsors .sponsor-contribute {
-  margin-top: clamp(0.75rem, 1.4vw, 1.25rem);
+  margin-top: clamp(0.75rem, 1.4cqi, 1.25rem);
   background: var(--sw-paper);
 }
 
@@ -1545,7 +1545,7 @@
 
 .sw-sponsors .sponsor-contribute .pay-options strong {
   color: var(--sw-royal);
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-size: clamp(1rem, 1.2cqi, 1.15rem);
 }
 
 .sw-sponsors .sponsor-contribute .pay-options strong::after {
@@ -1566,18 +1566,18 @@
 .sw-sponsors .connect-block--nested h2 {
   margin: 0;
   color: var(--sw-royal);
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-size: clamp(1.15rem, 1.6cqi, 1.4rem);
 }
 
 /* Lakeshore + community supporters */
 .sw-sponsors__community-grid {
   display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
   align-items: stretch;
 }
 
 .sw-sponsors .community-lakeshore__panel {
-  padding: clamp(1.1rem, 2vw, 1.6rem);
+  padding: clamp(1.1rem, 2cqi, 1.6rem);
   border-radius: var(--sw-radius);
 }
 
@@ -1697,7 +1697,7 @@
 }
 
 .sw-fundraisers .fundraiser-layout {
-  gap: clamp(0.9rem, 2vw, 1.75rem);
+  gap: clamp(0.9rem, 2cqi, 1.75rem);
   align-items: stretch;
 }
 
@@ -1716,7 +1716,7 @@
 .sw-fundraiser__ticket {
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 2vw, 1.4rem);
+  gap: clamp(0.9rem, 2cqi, 1.4rem);
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 2px dashed var(--sw-line);
@@ -1729,14 +1729,14 @@
 .sw-fundraiser__ticket h2 {
   margin: 0 0 0.35rem;
   color: var(--sw-royal);
-  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.4cqi, 2.8rem);
   letter-spacing: 0.01em;
 }
 
 .sw-fundraisers .fundraiser-when {
   margin: 0 0 0.2rem;
   color: var(--sw-ink);
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.05rem, 1.5cqi, 1.3rem);
 }
 
 .sw-fundraisers .fundraiser-time {
@@ -1748,7 +1748,7 @@
   display: grid;
   place-items: center;
   flex: none;
-  width: clamp(4.6rem, 8vw, 6rem);
+  width: clamp(4.6rem, 8cqi, 6rem);
   aspect-ratio: 1;
   border-radius: 12px;
   color: #fff;
@@ -1763,7 +1763,7 @@
 
 .sw-fundraiser__date span {
   align-self: end;
-  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  font-size: clamp(0.85rem, 1.3cqi, 1rem);
   font-weight: 600;
   letter-spacing: 0.12em;
 }
@@ -1771,7 +1771,7 @@
 .sw-fundraiser__date strong {
   align-self: start;
   margin-top: 0.3rem;
-  font-size: clamp(2rem, 3.6vw, 2.7rem);
+  font-size: clamp(2rem, 3.6cqi, 2.7rem);
 }
 
 .sw-fundraiser__facts {
@@ -1872,7 +1872,7 @@
   display: grid;
   align-content: start;
   justify-items: center;
-  padding: clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1rem, 2.4cqi, 2rem);
   border-radius: var(--sw-radius);
   background:
     radial-gradient(70% 50% at 50% 0%, rgba(255, 255, 255, 0.16), transparent 70%),
@@ -1994,11 +1994,11 @@
 /* ---------- FAQ ---------- */
 
 .sw-faq .ah__title-main {
-  font-size: clamp(2.3rem, 5.4vw, 4.6rem);
+  font-size: clamp(2.3rem, 5.4cqi, 4.6rem);
 }
 
 .sw-faq .faq-section {
-  padding: clamp(0.6rem, 1.2vw, 1rem) 0;
+  padding: clamp(0.6rem, 1.2cqi, 1rem) 0;
   background: none;
 }
 
@@ -2026,7 +2026,7 @@
   margin-top: 0.75rem;
   color: transparent;
   font-family: var(--display);
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: clamp(3rem, 6cqi, 5.5rem);
   font-weight: 700;
   line-height: 1;
   -webkit-text-stroke: 2px rgba(20, 60, 148, 0.18);
@@ -2081,7 +2081,7 @@
   display: grid;
   gap: 1.25rem 2.5rem;
   align-items: start;
-  padding: clamp(1.25rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 3cqi, 2.25rem);
   border-radius: var(--sw-radius);
   color: #fff;
   background:
@@ -2094,7 +2094,7 @@
 .sw-faq .sw-faq__ask-intro h2 {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.6rem, 3cqi, 2.4rem);
 }
 
 .sw-faq .sw-faq__ask-intro h2::after {
@@ -2136,7 +2136,7 @@
 
 .sw-resources__trio {
   display: grid;
-  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
   align-items: stretch;
 }
 
@@ -2149,7 +2149,7 @@
 }
 
 .sw-resources__category .section-heading h2 {
-  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-size: clamp(1.25rem, 1.8cqi, 1.6rem);
 }
 
 .sw-resources__category .section-heading p {
@@ -2293,7 +2293,7 @@
 
 .sw-contact__email-card .contact-page__email a {
   color: #fff;
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-size: clamp(1.1rem, 1.8cqi, 1.35rem);
 }
 
 .sw-contact__social {
@@ -2499,7 +2499,7 @@
 
 .sw-safety__split {
   display: grid;
-  gap: clamp(0.9rem, 1.8vw, 1.5rem);
+  gap: clamp(0.9rem, 1.8cqi, 1.5rem);
   align-items: start;
 }
 
@@ -2511,7 +2511,7 @@
 
 .sw-safety__stack {
   display: grid;
-  gap: clamp(0.9rem, 1.8vw, 1.5rem);
+  gap: clamp(0.9rem, 1.8cqi, 1.5rem);
   min-width: 0;
 }
 
@@ -2581,14 +2581,14 @@
 
 /* Six steps board */
 .sw-steps__heading {
-  margin: 0 0 clamp(0.9rem, 2vw, 1.25rem);
+  margin: 0 0 clamp(0.9rem, 2cqi, 1.25rem);
   color: #fff;
   text-align: center;
 }
 
 .sw-steps__list {
   display: grid;
-  gap: clamp(0.75rem, 1.6vw, 1.1rem);
+  gap: clamp(0.75rem, 1.6cqi, 1.1rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2611,7 +2611,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 0.9rem;
   min-width: 0;
-  padding: clamp(1rem, 2vw, 1.3rem);
+  padding: clamp(1rem, 2cqi, 1.3rem);
   border: 2px solid #e9b23c;
   border-top: 5px solid var(--sw-red);
   border-radius: 12px;
@@ -2650,7 +2650,7 @@
 .sw-page .sw-steps__body h3 {
   margin: 0.15rem 0 0.5rem;
   color: var(--sw-navy);
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.5cqi, 1.3rem);
 }
 
 .sw-page .sw-steps__body p,
@@ -2756,7 +2756,7 @@
 }
 
 .sw-safety__videos {
-  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+  padding: clamp(1.1rem, 2.4cqi, 1.75rem);
   border: 3px solid var(--sw-navy);
   border-radius: 1.15rem;
   background: var(--sw-paper);
@@ -2770,7 +2770,7 @@
 .sw-page .sw-safety__videos h3 {
   margin: 0.4rem 0;
   color: var(--sw-red-dark);
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.05rem, 1.5cqi, 1.25rem);
 }
 
 .sw-page .sw-safety__videos > p {
@@ -2841,7 +2841,7 @@
 
 /* Reporting band stays high-contrast and easy to find. */
 .sw-safety__report {
-  padding: clamp(1.25rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 3cqi, 2.25rem);
   border: 3px solid #e9b23c;
   border-left: 12px solid var(--sw-red);
   border-radius: 1.15rem;
@@ -2876,7 +2876,7 @@
 .sw-page .sw-safety__report .sw-safety__closing {
   color: #ffc400;
   font-family: var(--display);
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-size: clamp(1.1rem, 1.8cqi, 1.35rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -2900,8 +2900,8 @@
 
 .sw-families__grid {
   display: grid;
-  gap: clamp(0.9rem, 1.6vw, 1.25rem);
-  margin-top: clamp(1rem, 2vw, 1.5rem);
+  gap: clamp(0.9rem, 1.6cqi, 1.25rem);
+  margin-top: clamp(1rem, 2cqi, 1.5rem);
 }
 
 @media (min-width: 820px) {
@@ -2920,7 +2920,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: clamp(1rem, 2vw, 1.35rem);
+  padding: clamp(1rem, 2cqi, 1.35rem);
   border: 3px solid var(--sw-navy);
   border-top: 8px solid var(--sw-red);
   border-radius: 1.15rem;
@@ -2935,7 +2935,7 @@
 .sw-page .sw-families__card h3 {
   margin: 0 0 0.6rem;
   color: var(--sw-navy);
-  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  font-size: clamp(1.2rem, 1.6cqi, 1.4rem);
   font-style: italic;
 }
 
@@ -2955,11 +2955,11 @@
 }
 
 .sw-page .sw-families__closing {
-  margin: clamp(1.25rem, 2.5vw, 1.75rem) auto 0.75rem;
+  margin: clamp(1.25rem, 2.5cqi, 1.75rem) auto 0.75rem;
   max-width: 48rem;
   color: var(--sw-navy);
   font-family: var(--display);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-size: clamp(1.15rem, 2cqi, 1.5rem);
   font-style: italic;
   text-align: center;
   text-transform: uppercase;
@@ -3020,12 +3020,12 @@
 
 .sw-bowlers__grid {
   display: grid;
-  gap: clamp(0.9rem, 1.6vw, 1.25rem);
+  gap: clamp(0.9rem, 1.6cqi, 1.25rem);
 }
 
 .sw-bowler {
   min-width: 0;
-  padding: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2cqi, 1.5rem);
   border: 1px solid var(--sw-line);
   border-radius: var(--sw-radius);
   background: var(--sw-paper);
@@ -3132,7 +3132,7 @@
   display: grid;
   justify-items: center;
   gap: 1.1rem;
-  padding: clamp(1.4rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.4rem, 3cqi, 2.5rem) clamp(1rem, 3cqi, 2.5rem);
   border: 3px solid #e9b23c;
   border-radius: 1.15rem;
   background:
@@ -3160,7 +3160,7 @@
 
 .sw-campaign__marquee {
   width: min(100%, 42rem);
-  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+  padding: clamp(1.1rem, 2.4cqi, 1.75rem);
   border: 2px solid #e9b23c;
   border-radius: 12px;
   background: var(--sw-paper);
@@ -3204,7 +3204,7 @@
 .sw-donate__grid,
 .sw-donate__more {
   display: grid;
-  gap: clamp(0.9rem, 1.8vw, 1.5rem);
+  gap: clamp(0.9rem, 1.8cqi, 1.5rem);
   align-items: start;
 }
 
@@ -3233,7 +3233,7 @@
   justify-items: start;
   gap: 0.6rem;
   margin-bottom: 1.4rem;
-  padding: clamp(0.95rem, 2vw, 1.3rem);
+  padding: clamp(0.95rem, 2cqi, 1.3rem);
   border: 2px solid #e9b23c;
   border-left: 6px solid var(--sw-navy);
   border-radius: 12px;
@@ -3264,7 +3264,7 @@
   display: grid;
   gap: 0.9rem;
   min-width: 0;
-  padding: clamp(1.1rem, 2.2vw, 1.75rem);
+  padding: clamp(1.1rem, 2.2cqi, 1.75rem);
   border: 3px solid #e9b23c;
   border-radius: 1.15rem;
   background:
@@ -3277,7 +3277,7 @@
   margin: 0;
   color: #ffc400;
   font-family: var(--display);
-  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-size: clamp(1.15rem, 1.6cqi, 1.4rem);
   font-style: italic;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3389,7 +3389,7 @@
   display: grid;
   gap: 1.5rem;
   overflow: hidden;
-  padding: clamp(1.4rem, 3vw, 2.4rem);
+  padding: clamp(1.4rem, 3cqi, 2.4rem);
   border: 3px solid #e9b23c;
   border-radius: 1.15rem;
   background:
@@ -3427,7 +3427,7 @@
 .sw-page .sw-join h2 {
   margin: 0.6rem 0 1rem;
   color: #fff;
-  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.6cqi, 2.8rem);
   font-style: italic;
   line-height: 1;
 }

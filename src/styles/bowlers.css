@@ -59,7 +59,7 @@
 /* Directory panel and filters */
 
 .meet-directory {
-  padding: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2cqi, 1.5rem);
   border: 3px solid var(--sw-navy);
   border-radius: 1.15rem;
   background: var(--sw-paper);
@@ -219,7 +219,7 @@
 .meet-summary,
 .meet-table-wrap,
 .meet-bowlers > section:not([class]) {
-  padding: clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2cqi, 1.5rem);
   border: 3px solid var(--sw-navy);
   border-radius: 1.15rem;
   background: var(--sw-paper);
@@ -267,7 +267,7 @@
 
 .meet-profile h1 {
   margin: 0;
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(2rem, 6cqi, 4rem);
   font-style: italic;
   line-height: 0.95;
 }

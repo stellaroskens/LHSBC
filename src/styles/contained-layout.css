@@ -1,0 +1,151 @@
+/*
+ * LAYOUT-01 balanced contained layout (Option B).
+ * Only the outer frame, margins, side padding, and section spacing change.
+ * Homepage sizing formulas are unchanged; they measure the content frame (cqi) instead of the window (vw).
+ */
+
+html[data-layout] {
+  --lo-max: 1280px;
+  --lo-gutter: clamp(16px, 2.5vw, 32px);
+  --lo-x: clamp(24px, 2.5cqi, 48px);
+  --lo-join-top: clamp(1.5rem, 3cqi, 2.75rem);
+  --lo-section: clamp(2rem, 4cqi, 3.25rem);
+  --lo-last: clamp(2.5rem, 5cqi, 4rem);
+}
+
+html[data-layout] body {
+  background: #e6e0d3;
+}
+
+html[data-layout] .site {
+  width: min(var(--lo-max), calc(100% - 2 * var(--lo-gutter)));
+  margin: var(--lo-gutter) auto;
+  box-shadow: 0 0 0 1px rgba(8, 31, 70, 0.14), 0 18px 44px rgba(8, 31, 70, 0.16);
+  overflow-x: clip;
+  container-type: inline-size;
+}
+
+html[data-layout] main {
+  container-type: inline-size;
+}
+
+@media (max-width: 760px) {
+  html[data-layout] .site {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+html[data-layout] .club-hero__grid {
+  gap: 1.25rem clamp(1.5rem, 3cqi, 3rem);
+  padding: clamp(1.25rem, 2cqi, 2rem) var(--lo-x);
+}
+
+html[data-layout] .club-hero__title {
+  font-size: clamp(2.7rem, 4.6cqi, 5.15rem);
+}
+
+html[data-layout] .club-hero__tracker h2 {
+  font-size: clamp(1.05rem, 1.4cqi, 1.25rem);
+}
+
+html[data-layout] .club-hero__status {
+  font-size: clamp(1.15rem, 1.5cqi, 1.4rem);
+}
+
+html[data-layout] .support-banner__inner {
+  gap: 0.75rem clamp(0.75rem, 1.6cqi, 1.5rem);
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+  padding-left: var(--lo-x);
+}
+
+html[data-layout] .support-banner__title {
+  font-size: clamp(2.35rem, 3.3cqi, 3.55rem);
+}
+
+html[data-layout] .support-banner__offer strong {
+  font-size: clamp(1.15rem, 1.45cqi, 1.55rem);
+}
+
+html[data-layout] .support-banner__motif {
+  width: min(16rem, 28cqi);
+}
+
+html[data-layout] .club-join {
+  padding: var(--lo-join-top) var(--lo-x) var(--lo-section);
+}
+
+html[data-layout] .club-join__grid {
+  gap: clamp(1rem, 2cqi, 1.75rem);
+}
+
+html[data-layout] .club-join__ribbon {
+  font-size: clamp(1.45rem, 2.1cqi, 2.15rem);
+}
+
+html[data-layout] .club-join__list a {
+  font-size: clamp(1.15rem, 1.55cqi, 1.6rem);
+}
+
+html[data-layout] .home-events {
+  padding: 0 var(--lo-x) var(--lo-section);
+}
+
+html[data-layout] .home-events__ribbon {
+  font-size: clamp(1.35rem, 2.2cqi, 2rem);
+}
+
+html[data-layout] .home-events__row {
+  gap: clamp(1rem, 2cqi, 2rem);
+}
+
+html[data-layout] .home-events__list {
+  font-size: clamp(1.15rem, 1.6cqi, 1.55rem);
+}
+
+html[data-layout] .quick-links {
+  padding: 0.25rem var(--lo-x) var(--lo-section);
+}
+
+html[data-layout] .quick-links ul {
+  gap: clamp(0.75rem, 1.4cqi, 1.25rem);
+}
+
+html[data-layout] .quick-links a {
+  font-size: clamp(1.05rem, 1.25cqi, 1.35rem);
+}
+
+html[data-layout] .home-sponsors {
+  padding: 0.5rem var(--lo-x) var(--lo-last);
+}
+
+html[data-layout] .home-sponsors h2 {
+  font-size: clamp(1.35rem, 2.4cqi, 2rem);
+}
+
+html[data-layout] .home-sponsors__panel {
+  gap: clamp(1rem, 3cqi, 2.5rem);
+  padding: clamp(1.1rem, 2cqi, 1.6rem);
+}
+
+html[data-layout] .home-sponsors__intro p {
+  font-size: clamp(1.15rem, 1.8cqi, 1.55rem);
+}
+
+html[data-layout] .home-sponsors li {
+  font-size: clamp(1.02rem, 1.3cqi, 1.2rem);
+}
+
+@media (min-width: 981px) {
+  html[data-layout] .support-banner__inner {
+    padding-right: clamp(8.5rem, 16cqi, 13rem);
+  }
+}
+
+@media (max-width: 980px) {
+  html[data-layout] .support-banner__inner {
+    padding-right: var(--lo-x);
+  }
+}
